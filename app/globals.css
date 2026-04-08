@@ -90,12 +90,12 @@
   --font-serif: "Great Vibes", "Great Vibes Fallback";
 
   /* ─── Motif palette — edit here, affects every component ─── */
-  --color-motif-deep:    #015B97;  /* main brand blue */
-  --color-motif-medium:  #3A7CA5;  /* softened blue for UI */
-  --color-motif-accent:  #7FB3D5;  /* light airy accent */
-  --color-motif-cream:   #F4F8FB;  /* very light bluish white */
-  --color-motif-soft:    #E3EEF6;  /* soft section background */
-  --color-motif-silver:  #C9D6E2;  /* cool neutral divider */  /* neutral divider */
+  --color-motif-deep:    #0C3B3C;  /* emerald deep - primary headings */
+  --color-motif-medium:  #2F5972;  /* muted teal-blue - body text */
+  --color-motif-accent:  #BE8400;  /* gold - highlights / buttons */
+  --color-motif-cream:   #F5EFE6;  /* beige / barong-inspired background */
+  --color-motif-soft:    #B76E79;  /* subtle rose - romantic touch */
+  --color-motif-silver:  #D6D6D6;  /* neutral border / divider */
   /* ─────────────────────────────────────────────────────────── */
   --font-imperial-script: "Imperial Script", cursive;
   --color-background: var(--background);
@@ -188,6 +188,39 @@ html {
   font-family: "BrittanySignature";
   src: url("/fonts/BrittanySignatureScript.ttf") format("truetype");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Westonia ── */
+@font-face {
+  font-family: "Westonia";
+  src: url("/fonts/Westonia.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fahkwang";
+  src: url("/fonts/Fahkwang-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fahkwang";
+  src: url("/fonts/Fahkwang-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fahkwang";
+  src: url("/fonts/Fahkwang-Bold.ttf") format("truetype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

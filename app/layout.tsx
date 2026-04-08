@@ -8,10 +8,10 @@ import { ClientLayout } from "@/components/client-layout"
 
 //sheenly-and-gero
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sheenly-and-gero.weddinginvitationrsvp.com/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aubrey-and-alex.weddinginvitationrsvp.com/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
-const desktopHero = "/Details/PreviewImage.jpg"
-const mobileHero = "/Details/PreviewImage.jpg"
+const desktopHero = "/Details/linkPreview.png"
+const mobileHero = "/Details/linkPreview.png"
 
 const OG_IMAGE = `${canonicalUrl}${desktopHero}`
 

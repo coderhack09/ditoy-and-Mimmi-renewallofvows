@@ -97,7 +97,7 @@ export function Details() {
   const formattedCeremonyDate = siteConfig.ceremony.date
   const formattedReceptionDate = siteConfig.ceremony.date // reception follows ceremony on same day
 
-  const DECO_FILTER = "brightness(0) saturate(100%) invert(22%) sepia(88%) saturate(1800%) hue-rotate(185deg) brightness(90%) contrast(105%)"
+  const DECO_FILTER = "brightness(0) saturate(100%) invert(35%) sepia(45%) saturate(800%) hue-rotate(130deg) brightness(105%) contrast(95%)"
 
   const openInMaps = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer')
@@ -131,7 +131,7 @@ export function Details() {
           width={300}
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65 scale-y-[-1]"
-          // style={{ filter: DECO_FILTER }}
+          style={{ filter: DECO_FILTER ,opacity: 0.4}}
           priority={false}
         />
       </div>
@@ -144,7 +144,7 @@ export function Details() {
           width={300}
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65 scale-x-[-1] scale-y-[-1]"
-          // style={{ filter: DECO_FILTER }}
+          style={{ filter: DECO_FILTER ,opacity: 0.4}}
           priority={false}
         />
       </div>
@@ -157,7 +157,7 @@ export function Details() {
           width={300}
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65"
-          // style={{ filter: DECO_FILTER }}
+          style={{ filter: DECO_FILTER ,opacity: 0.4}}
           priority={false}
         />
       </div>
@@ -170,7 +170,7 @@ export function Details() {
           width={300}
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65 scale-x-[-1]"
-          // style={{ filter: DECO_FILTER }}
+          style={{ filter: DECO_FILTER ,opacity: 0.4}}
           priority={false}
         />
       </div>
@@ -333,7 +333,7 @@ export function Details() {
         </div>
 
         {/* Reception Card */}
-        <div className="relative group">
+        {/* <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-br from-motif-silver/22 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
 
           <div className="relative elegant-card bg-motif-cream rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.18)] border border-motif-deep/25 premium-shadow hover:border-motif-deep/45 transition-all duration-300">
@@ -360,9 +360,9 @@ export function Details() {
               
           
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-6 md:left-6 right-3 sm:right-4 md:right-6 z-20">
-                {/* <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-ephesis)] text-[#FFF7F6] mb-1 sm:mb-2 drop-shadow-lg">
+                <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-ephesis)] text-[#FFF7F6] mb-1 sm:mb-2 drop-shadow-lg">
                   Reception
-                </p> */}
+                </p>
                 <h3 className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight" style={{ color: 'var(--color-motif-cream)' }}>
                   {siteConfig.reception.location}
                 </h3>
@@ -450,7 +450,7 @@ export function Details() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Attire Information */}
@@ -527,7 +527,7 @@ export function Details() {
                 <div className="flex items-start gap-2">
                   <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed">
                     <span className="font-semibold tracking-wide">Ladies:</span>{" "}
-                    <span className="italic">Formal long dress in champagne color</span>
+                    <span className="italic">Formal long dress in beige color</span>
                   </p>
                 </div>
                 {/* <p className="text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed mb-2">
@@ -595,7 +595,7 @@ export function Details() {
                 <div className="flex items-start gap-2">
                   <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed">
                     <span className="font-semibold tracking-wide">Ladies:</span>{" "}
-                    <span className="italic">Long or cocktail dress in shades of blue</span>
+                    <span className="italic">Long or cocktail dress in shades of beige or emerald green</span>
                   </p>
                   </div>
                   <div className="flex items-center gap-2 mt-3 pt-3 border-t border-motif-silver/40">

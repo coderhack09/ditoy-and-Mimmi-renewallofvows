@@ -40,7 +40,7 @@ const BOOK_DARK = "var(--color-motif-deep)"      // headings / names
 const BOOK_DARKER = "var(--color-motif-deep)"  // body text (steel blue depth)
 const BOOK_CREAM = "var(--color-motif-cream)"    // card surfaces
 const DECO_FILTER_BOOK =
-  "brightness(0) saturate(100%) invert(22%) sepia(88%) saturate(1800%) hue-rotate(185deg) brightness(90%) contrast(105%)"
+  "brightness(0) saturate(100%) invert(35%) sepia(45%) saturate(800%) hue-rotate(130deg) brightness(105%) contrast(95%)"
 
 export function BookOfGuests() {
   const [totalGuests, setTotalGuests] = useState(0)
@@ -199,7 +199,7 @@ export function BookOfGuests() {
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-70 scale-y-[-1]"
           priority={false}
-          // style={{ filter: DECO_FILTER_BOOK }}
+          style={{ filter: DECO_FILTER_BOOK  ,opacity: 0.4}}
         />
       </div>
       <div className="absolute right-0 top-0 z-0 pointer-events-none">
@@ -210,7 +210,7 @@ export function BookOfGuests() {
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-70 scale-x-[-1] scale-y-[-1]"
           priority={false}
-          // style={{ filter: DECO_FILTER_BOOK }}
+          style={{ filter: DECO_FILTER_BOOK ,opacity: 0.4}}
         />
       </div>
       <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
@@ -221,7 +221,7 @@ export function BookOfGuests() {
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-70"
           priority={false}
-          // style={{ filter: DECO_FILTER_BOOK }}
+          style={{ filter: DECO_FILTER_BOOK ,opacity: 0.4}}
         />
       </div>
       <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
@@ -232,7 +232,7 @@ export function BookOfGuests() {
           height={300}
           className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-70 scale-x-[-1]"
           priority={false}
-          // style={{ filter: DECO_FILTER_BOOK }}
+          style={{ filter: DECO_FILTER_BOOK ,opacity: 0.4}}
         />
       </div>
 

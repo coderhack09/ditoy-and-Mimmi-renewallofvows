@@ -1,36 +1,36 @@
 export const siteConfig = {
   couple: {
-    bride: "Sheenly Amor Delprado", //Noenyl Bryle M. Gonzaga
-    brideNickname: "Sheenly", //Ltryl
-    groom: "Gero Genada", //Ltryl B. Benitez
-    groomNickname: "Gero",
-    monogram:"/monogram/monogram.png" ,//Ltryl
-    backgroundMusic:"/background_music/ZAHEEN - NAHALAL KAWIN (ENGLISH VERSION).mp3"
+    bride: "Aubrey", //Noenyl Bryle M. Gonzaga
+    brideNickname: "Aubrey", //Ltryl
+    groom: "Alex", //Ltryl B. Benitez
+    groomNickname: "Alex",
+    monogram:"/monogram/newMonogram.png" ,//Ltryl
+    backgroundMusic:"/background_music/Kahit Maputi na Ang Buhok Ko [Moira dela Torre version] piano cover  sheet music.mp3"
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSdPZF19eDFEuIJ4szHAwxEFzFPn5BLQNoLmga5TekcFAufqlg/formResponse", //done
-    message: "https://script.google.com/macros/s/AKfycbzT9sI8AOJaPPNlpPlUORtCtOwxA9ldMRzaMxnCe5gbqYDaEQIoPbhNJsOhcRe84JqQ/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbzcvj1Ew__cZY3NfPf2NoKg6ip_dqBI6kX4GElqr0gEYiamlRa4LPCk6cVzqDTaQnXB/exec", //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbyMQOByTM61JyQeoMcpqvS0QZcX9TlZFxrl-ivU5fRVI96_zXaM0VMQIWKFIpwRfsuK/exec", //done
-    entourage: "https://script.google.com/macros/s/AKfycbzKtb2jlOlZa5k1x2oVVwggyZzXEJkRwf8df6VSdC1e0SGvO9c8mR6EvqH8qotqw2jS/exec", //done
-    sponsors: "https://script.google.com/macros/s/AKfycbzGY-SbLnr1Q63neiE3O21n4kZGUgH_Wpo3ReSHdJlAQYDe0oguWxbdospXoM0xFhlO/exec", //done
-    weddingDetails: "https://script.google.com/macros/s/AKfycbxmYCGF9ovADWLWVQqOi3K1TPuKxYgHiRZD_NcsDgfElqC12Zql8yXl6BqgqDQbrJKp/exec", //done
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSc6L0BNM76dwO74X5M-MOBpUIRAdfUJlWjvfxaDvoPe5lmYew/formResponse", //done
+    message: "https://script.google.com/macros/s/AKfycbwNyrJGIxoCWVPWkjA2YMwHciCDt9BNAB95efsAzZBmKgSQ7-XRrqAcPFWR-Ikd7VoK/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbyFanCKkvPBQuhLHVBQsG8R9uiFGgZKZC4RQC8xXBG7-ngm7RlcMkommQ9CvI0rcFWTlQ/exec", //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbzqzWvflm77LwxSvz9omwNMVb4cfdUAV3tYTqoQ3-WCCvOMBu4TsIkq0EOptgwctwkePg/exec", //done
+    entourage: "https://script.google.com/macros/s/AKfycbxqESMCAgnUm0tu7kFExq0AZG4DP6ARhg1Ty6bd9vVLoNLmzTiPfr0McoHHkFd07BSkJQ/exec", //done
+    sponsors: "https://script.google.com/macros/s/AKfycbx-HKJ129-WZz24yOJXbIu0Te-9iX7Rdy_WYmfdjFGKqa5_g9jjh4aBFftctsHPWtXZ8w/exec", //done
+    weddingDetails: "https://script.google.com/macros/s/AKfycbwK14QVdwF6c_RwoYIoG0A3iPJTCNGFbxUeG1TTh3oL64_KgwqH9rdewrOsP6vpA7imEw/exec",  //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/1RAMcRhStUKsElP9CvcZzP1lNizPxQ9uWGMeoJwA8sGM/edit?usp=sharing",
+    googleShare: "https://docs.google.com/spreadsheets/d/1KEEivJE5gYiXdR6Bi3vLzqwoGkxrnbLG2nKXZwyUfag/edit?usp=sharing",
   },
   wedding: {
-    date: "May 10,2026",
-    time: "1:00 PM",
-    venue: "San Antonio Abad Church",
+    date: "June 21, 2026",
+    time: "3:00 PM",
+    venue: "Adriano's Events Place and Prayer Garden Tagaytay",
     tagline: "are getting married!",
     theme: "Our wedding palette is inspired by timeless elegance and warmth.Motif Colors: Champagne Gold, Soft Beige, Warm Soft Brown",
     motif: "#001F4B, #04396D, #015B97, #6497B2, #B2CDE0",
   },
   details: {
     rsvp: {
-      deadline: "APRIL 15, 2026",
-      contact: "Sheenly Amor Delprado",
-      phone: "09 270 658 559",
+      deadline: "June 10, 2026",
+      contact: "Aubrey",
+      phone: "to follow",
     },
   },
   giftRegistry: {
@@ -38,30 +38,30 @@ export const siteConfig = {
     id: "Gcash",
     src: "/QR/pleaseProvideQR.png",
     label: "Gcash",
-    accountNumber: "Gcash: Sheenly Amor Delprado",
+    accountNumber: "Gcash: Aubrey Gonzaga",
     },
     QR_2:{
     id: "Landbank",
     src: "/QR/pleaseProvideQR.png",
     label: "Landbank",
-    accountNumber: "Landbank: Sheenly Amor Delprado",
+    accountNumber: "Landbank: Aubrey Gonzaga",
     }
   },
   ceremony: {
-    location: "San Antonio Abad Church",
-    venue: "Lacson Ext, Bacolod City",
-    date: "May 10, 2026",
+    location: "Adriano's Events Place and Prayer Garden Tagaytay",
+    venue: "Tagaytay City",
+    date: "June 21, 2026",
     day: "Sunday",
-    time: "1:00 PM",
-    entourageTime: "12:00 PM",
-    guestsTime: "12:30 PM",
-    image: "/Details/ceremony.png",
+    time: "3:00 PM",
+    entourageTime: "2:00 PM",
+    guestsTime: "2:30 PM",
+    image: "/Details/reception.png",
   },
   reception: {
-    location: "Sugarland (Sugarbowl)",
-    venue: "Singcang, Bacolod City",
-    date: "May 10, 2026",
-    time: "6 :00 PM",
+    location: "Adriano's Events Place and Prayer Garden Tagaytay",
+    venue: "Tagaytay City",
+    date: "June 21, 2026",
+    time: "4:00 PM",
     image: ["/Details/reception1.png","/Details/reception2.png"],
   },                          
   dressCode: {
@@ -70,16 +70,16 @@ export const siteConfig = {
     sponsors: {
       male: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
       female: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
-      notes: "We kindly request our guests to wear:\n Champagne-colored dresses for ladies \n Traditional Barong Tagalog for gentlemen",
+      notes: "We kindly request our guests to wear:\n Beige-colored dresses for ladies \n Traditional Barong Tagalog for gentlemen",
       photo: "/Details/sponsor.png",
-      palette: "#B58B72, #CEAA8F, #ECD5BC, #F9E0C1, #F8EBD7",
+      palette: " #ECD5BC, #F9E0C1, #F8EBD7",
     },
     guests: {
       gents: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
       ladies: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
       notes: "We'd love for everyone to come dressed in FORMAL Attire, Your presence in our colors will make our day even more beautiful!",
-      photo: "/Details/neguest.png",
-      palette: "#001F4B, #04396D, #015B97, #6497B2, #B2CDE0",
+      photo: "/Details/guestnew.png",
+      palette: "#0C3B3C, #F5EFE6",
     },
     note: "We kindly request our guests to dress in attire following our wedding palette."
   },
@@ -112,7 +112,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink: "https://drive.google.com/drive/folders/1ALay-pIjfX6JAd1JUhCnCvKy-Kr3FeA8?usp=sharing",
-    hashtag: ["#SheenlyandGero"],
+    hashtag: ["#AubreyandAlex"],
     instructions: "Please scan this QR Code, create a folder with your name and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
 }

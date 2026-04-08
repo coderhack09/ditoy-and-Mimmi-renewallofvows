@@ -406,7 +406,7 @@ export function GuestList() {
     <Section id="guest-list" className="relative z-30 py-6 sm:py-10 md:py-12 lg:py-16">
       {/* Corner floral decoration */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-        <CloudinaryImage
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -414,8 +414,8 @@ export function GuestList() {
           className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleY(-1)" }}
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -423,16 +423,16 @@ export function GuestList() {
           className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleX(-1) scaleY(-1)" }}
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
           height={300}
           className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -440,7 +440,7 @@ export function GuestList() {
           className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleX(-1)" }}
           priority={false}
-        />
+        /> */}
       </div>
 
       {/* Header */}

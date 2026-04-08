@@ -328,7 +328,7 @@ export function Messages() {
     >
       {/* Corner floral decoration */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-        <CloudinaryImage
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -336,8 +336,8 @@ export function Messages() {
           className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleY(-1)" }}
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -345,16 +345,16 @@ export function Messages() {
           className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleX(-1) scaleY(-1)" }}
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
           height={300}
           className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -362,7 +362,7 @@ export function Messages() {
           className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleX(-1)" }}
           priority={false}
-        />
+        /> */}
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">

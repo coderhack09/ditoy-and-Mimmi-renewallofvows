@@ -27,7 +27,7 @@ const palette = {
 } as const
 
 const DECO_FILTER =
-  "brightness(0) saturate(100%) invert(22%) sepia(88%) saturate(1800%) hue-rotate(185deg) brightness(90%) contrast(105%)"
+  "brightness(0) saturate(100%) invert(24%) sepia(65%) saturate(1200%) hue-rotate(135deg) brightness(85%) contrast(105%)"
 
 // Helper function to convert text to title case (first letter of each word uppercase)
 const toTitleCase = (str: string) => {
@@ -142,16 +142,16 @@ export function Footer() {
         // style={{ filter: DECO_FILTER }} 
         />
       </div> */}
-      <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
+      {/* <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
         <CloudinaryImage src="/decoration/corner-left-bottom.png" alt="" width={300} height={300} className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px]" priority={false} 
         // style={{ filter: DECO_FILTER }} 
         />
-      </div>
-      <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
+      </div> */}
+      {/* <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
         <CloudinaryImage src="/decoration/corner-left-bottom.png" alt="" width={300} height={300} className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] scale-x-[-1]" priority={false} 
         // style={{ filter: DECO_FILTER }} 
         />
-      </div>
+      </div> */}
       
       {/* Monogram / Couple Illustration - centered at top */}
       <div className="relative z-10 flex flex-col items-center pt-6 sm:pt-8 md:pt-10 mb-5 sm:mb-6 md:mb-8">

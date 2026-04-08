@@ -21,7 +21,7 @@ const cinzel = Cinzel({
 
 // QRCodeCanvas renders to <canvas> which cannot resolve CSS variables.
 // This hex must match --color-motif-deep defined in globals.css.
-const MOTIF_DEEP_HEX = "#015B97"
+const MOTIF_DEEP_HEX = "#0C3B3C"
 
 export function SnapShare() {
   const [copiedHashtagIndex, setCopiedHashtagIndex] = useState<number | null>(null)
@@ -143,7 +143,7 @@ export function SnapShare() {
     >
       {/* Corner floral decoration */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-        <CloudinaryImage
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -151,8 +151,8 @@ export function SnapShare() {
           className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleY(-1)" }}
           priority={false}
-        />
-        <CloudinaryImage
+        /> */}
+        {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
           width={300}
@@ -160,7 +160,7 @@ export function SnapShare() {
           className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
           style={{ transform: "scaleX(-1) scaleY(-1)" }}
           priority={false}
-        />
+        /> */}
         {/* <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
