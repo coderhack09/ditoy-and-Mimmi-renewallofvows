@@ -1,11 +1,12 @@
 export const siteConfig = {
   couple: {
-    bride: "Aubrey", //Noenyl Bryle M. Gonzaga
-    brideNickname: "Aubrey", //Ltryl
-    groom: "Alex", //Ltryl B. Benitez
-    groomNickname: "Alex",
-    monogram:"/monogram/newMonogram.png" ,//Ltryl
+    bride: "Ivy", //Noenyl Bryle M. Gonzaga
+    brideNickname: "Ivy", //Ltryl
+    groom: "Ken", //Ltryl B. Benitez
+    groomNickname: "Ken",
+    monogram:"/monogram/monogramn.png" ,//Ltryl
     backgroundMusic:"/background_music/Kahit Maputi na Ang Buhok Ko [Moira dela Torre version] piano cover  sheet music.mp3"
+  //https://www.canva.com/design/DAHGXenDxnQ/n5Iay96t8f0MXMhXI_GG0g/edit?ui=eyJBIjp7fX0&referrer=https%3A%2F%2Fwww.canva.com%2Fs%2Ftemplates%3Fquery%3Dsketch%2Bstyle%2Bwedding%2Binvitation
   },
   googleAPI:{
     messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSc6L0BNM76dwO74X5M-MOBpUIRAdfUJlWjvfxaDvoPe5lmYew/formResponse", //done
@@ -19,50 +20,56 @@ export const siteConfig = {
     googleShare: "https://docs.google.com/spreadsheets/d/1KEEivJE5gYiXdR6Bi3vLzqwoGkxrnbLG2nKXZwyUfag/edit?usp=sharing",
   },
   wedding: {
-    date: "June 21, 2026",
-    time: "3:00 PM",
-    venue: "Adriano's Events Place and Prayer Garden Tagaytay",
+    date: "July 18, 2026",
+    time: "2:00 PM",
+    venue: "St. Catherine of Alexandria Parish - The Shrine of Our Lady of Namacpacan",
     tagline: "are getting married!",
     theme: "Our wedding palette is inspired by timeless elegance and warmth.Motif Colors: Champagne Gold, Soft Beige, Warm Soft Brown",
     motif: "#001F4B, #04396D, #015B97, #6497B2, #B2CDE0",
   },
   details: {
     rsvp: {
-      deadline: "June 10, 2026",
+      deadline: "June 30, 2026",
       contact: "Aubrey",
       phone: "to follow",
     },
   },
   giftRegistry: {
     QR_1:{
-    id: "Gcash",
-    src: "/QR/pleaseProvideQR.png",
-    label: "Gcash",
-    accountNumber: "Gcash: Aubrey Gonzaga",
+    id: "BDO",
+    src: "/QR/BDO.png",
+    label: "BDO",
+    accountNumber: "BDO: **** **** 2071",
     },
     QR_2:{
-    id: "Landbank",
-    src: "/QR/pleaseProvideQR.png",
-    label: "Landbank",
-    accountNumber: "Landbank: Aubrey Gonzaga",
-    }
+    id: "Gcash",
+    src: "/QR/Gcash.png",
+    label: "Gcash",
+    accountNumber: "Gcash: **** **** 2071",
+    },
+    QR_3:{
+    id: "MariBank",
+    src: "/QR/MariBank.png",
+    label: "MariBank",
+    accountNumber: "MariBank: **** **** 2071",
+    },
   },
   ceremony: {
-    location: "Adriano's Events Place and Prayer Garden Tagaytay",
-    venue: "Tagaytay City",
-    date: "June 21, 2026",
-    day: "Sunday",
-    time: "3:00 PM",
-    entourageTime: "2:00 PM",
-    guestsTime: "2:30 PM",
-    image: "/Details/reception.png",
+    location: "St. Catherine of Alexandria Parish - The Shrine of Our Lady of Namacpacan",
+    venue: "Namacpacan Road, Luna, 2518 La Union",
+    date: "July 18, 2026",
+    day: "Saturday",
+    time: "2:00 PM",
+    entourageTime: "1:00 PM",
+    guestsTime: "1:30 PM",
+    image: "/Details/ceremony.png",
   },
   reception: {
-    location: "Adriano's Events Place and Prayer Garden Tagaytay",
-    venue: "Tagaytay City",
-    date: "June 21, 2026",
-    time: "4:00 PM",
-    image: ["/Details/reception1.png","/Details/reception2.png"],
+    location: "Paraiso del Bacnotan Resort",
+    venue: "Pandan, Bacnotan, 2515 La Union",
+    date: "July 18, 2026",
+    time: "5:00 PM",
+    image: ["/Details/reception.png","/Details/reception2.png"],
   },                          
   dressCode: {
       theme: "SEMI-FORMAL",
