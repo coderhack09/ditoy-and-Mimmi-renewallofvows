@@ -21,7 +21,7 @@ const cinzel = Cinzel({
 
 // QRCodeCanvas renders to <canvas> which cannot resolve CSS variables.
 // This hex must match --color-motif-deep defined in globals.css.
-const MOTIF_DEEP_HEX = "#0C3B3C"
+const MOTIF_DEEP_HEX = "#8A1C1C"
 
 export function SnapShare() {
   const [copiedHashtagIndex, setCopiedHashtagIndex] = useState<number | null>(null)
@@ -141,6 +141,14 @@ export function SnapShare() {
       className="relative overflow-hidden"
       style={{ paddingBottom: 0 }}
     >
+      {/* White gradient overlay for readability */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
+        }}
+      />
+
       {/* Corner floral decoration */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         {/* <CloudinaryImage
@@ -269,15 +277,13 @@ export function SnapShare() {
             Share your memories
           </div>
           <h2
-            className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight text-motif-cream mt-2 sm:mt-4"
-            style={{ color: 'var(--color-motif-cream)' }}
- 
+            className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mt-2 sm:mt-4"
+            style={{ color: 'var(--color-motif-deep)' }}
           >
             Capture & Share the Celebration
           </h2>
           <p
-  className="text-xs sm:text-sm md:text-base text-motif-cream max-w-2xl mx-auto mt-2 sm:mt-4 leading-relaxed px-2"
-  style={{ color: 'var(--color-motif-cream)' }}
+  className="text-xs sm:text-sm md:text-base text-motif-deep/80 max-w-2xl mx-auto mt-2 sm:mt-4 leading-relaxed px-2"
 >
   Because you have been part of our journey through our friendship and love, we, <b>{brideNickname} & {groomNickname}</b>, joyfully invite you to witness one of the most meaningful moments of our lives.
   <br />

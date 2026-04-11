@@ -5,7 +5,7 @@ export const siteConfig = {
     groom: "Ken", //Ltryl B. Benitez
     groomNickname: "Ken",
     monogram:"/monogram/monogramn.png" ,//Ltryl
-    backgroundMusic:"/background_music/Kahit Maputi na Ang Buhok Ko [Moira dela Torre version] piano cover  sheet music.mp3"
+    backgroundMusic:"/background_music/Palm Tree Shadow Free White Background Videos, Motion Graphics, No Copyright All Background Videos - All Background Videos (720p, h264) (online-video-cutter.com).mp4"
   //https://www.canva.com/design/DAHGXenDxnQ/n5Iay96t8f0MXMhXI_GG0g/edit?ui=eyJBIjp7fX0&referrer=https%3A%2F%2Fwww.canva.com%2Fs%2Ftemplates%3Fquery%3Dsketch%2Bstyle%2Bwedding%2Binvitation
   },
   googleAPI:{

@@ -90,12 +90,12 @@
   --font-serif: "Great Vibes", "Great Vibes Fallback";
 
   /* ─── Motif palette — edit here, affects every component ─── */
-  --color-motif-deep:    #0C3B3C;  /* emerald deep - primary headings */
-  --color-motif-medium:  #2F5972;  /* muted teal-blue - body text */
-  --color-motif-accent:  #BE8400;  /* gold - highlights / buttons */
-  --color-motif-cream:   #F5EFE6;  /* beige / barong-inspired background */
-  --color-motif-soft:    #B76E79;  /* subtle rose - romantic touch */
-  --color-motif-silver:  #D6D6D6;  /* neutral border / divider */
+  --color-motif-deep:    #111111;  /* near-black - primary headings */
+  --color-motif-medium:  #333333;  /* dark gray - body text */
+  --color-motif-accent:  #8A1C1C;  /* subtle deep red - minimal highlights */
+  --color-motif-cream:   #FFFFFF;  /* pure white - main background */
+  --color-motif-soft:    #F5F5F5;  /* very light gray - sections/cards */
+  --color-motif-silver:  #BDBDBD;  /* neutral gray - borders/dividers */
   /* ─────────────────────────────────────────────────────────── */
   --font-imperial-script: "Imperial Script", cursive;
   --color-background: var(--background);
@@ -196,6 +196,24 @@ html {
 @font-face {
   font-family: "Westonia";
   src: url("/fonts/Westonia.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Le Jour Serif ── */
+@font-face {
+  font-family: "LeJourSerif";
+  src: url("/fonts/LeJourSerif.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Le Jour Script ── */
+@font-face {
+  font-family: "LeJourScript";
+  src: url("/fonts/LeJourScript.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

@@ -22,15 +22,13 @@ const cinzel = Cinzel({
 const ceremonyTime = siteConfig.ceremony.time
 const guestsTime = siteConfig.ceremony.guestsTime ?? "1:30 PM"
 const ceremonyVenue = siteConfig.ceremony.location
-const receptionVenue = siteConfig.ceremony.location
+const receptionVenue = siteConfig.reception.location
 
 // Colors sourced from globals.css @theme inline — edit there to update everywhere
-// This section sits on a darker background, so render timeline text/icons in white.
-const TIMELINE_TEXT = "var(--color-motif-cream)"
+const TIMELINE_TEXT = "var(--color-motif-deep)"
 // SVG stroke — CSS vars are not valid SVG attributes
-const TIMELINE_SVG_STROKE = "#FFFFFF"
-// White tint for corner florals — section sits on dark background
-const DECO_FILTER_WHITE = "brightness(0) saturate(100%) invert(1)"
+const TIMELINE_SVG_STROKE = "#111111"
+const DECO_FILTER_WHITE = "brightness(0)"
 
 type TimelineIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
@@ -46,57 +44,43 @@ interface TimelineEvent {
 
 const timelineEvents: TimelineEvent[] = [
   {
-    time: "2:00 PM",
-    title: "Arrival",
-    // description: "Please arrive on time to find your seat, settle in, and get ready for the celebration.",
+    time: "1:30 PM",
+    title: "We Arrive",
     location: ceremonyVenue,
     icon: GuestsIcon,
     imageSrc: "/weddingtimeline/arrivalimage.png",
   },
   {
-    time: "3:00 PM",
-    title: "Wedding Ceremony",
-    // description: `Join us as ${groomNickname} & ${brideNickname} exchange vows and begin their life together.`,
+    time: "2:00 PM",
+    title: "We Do",
     location: ceremonyVenue,
     icon: RingsIcon,
     imageSrc: "/weddingtimeline/WeddingCeremony.png",
   },
   {
-    time: "4:30 PM",
-    title: "Photos",
-    // description: "We are having an unplugged ceremony, meaning we kindly ask all guests to put away their phones and cameras. We want everyone to be fully in the moment with us. Don't worry—our professional photographer will capture all the special moments, and we'll be happy to share them with you later!",
+    time: "3:30 PM",
+    title: "We Shoot",
     location: ceremonyVenue,
     icon: RingsIcon,
     imageSrc: "/weddingtimeline/PhotoSession.png",
   },
   {
-    time: "5:00 PM",
-    title: "Cocktail Hour",
-    // description: "Enjoy drinks and light bites as we transition into the reception and mingle with guests.",
+    time: "4:00 PM",
+    title: "We Celebrate",
     location: receptionVenue,
     icon: CocktailIcon,
     imageSrc: "/weddingtimeline/CockTailHour.png",
   },
   {
-    time: "6:00 PM",
-    title: "Program Starts",
-    // description: `Celebrate the grand entrance of ${groomNickname} & ${brideNickname} and the start of the evening festivities.`,
-    location: receptionVenue,
-    icon: FireworksIcon,
-    imageSrc: "/weddingtimeline/reception welcom.png",
-  },
-  {
-    time: "7:00 PM",
-    title: "Dinner Service",
-    // description: "Share a relaxed meal together as we continue the celebration.",
+    time: "5:00 PM",
+    title: "We Eat",
     location: receptionVenue,
     icon: DinnerIcon,
     imageSrc: "/weddingtimeline/DinnerService.png",
   },
   {
-    time: "8:00 PM",
-    title: "Party",
-    // description: "Let's dance the night away and celebrate this new chapter!",
+    time: "7:00 PM",
+    title: "We Party",
     location: receptionVenue,
     icon: DanceIcon,
     imageSrc: "/weddingtimeline/SendOff.png",
@@ -109,6 +93,14 @@ export function WeddingTimeline() {
       id="wedding-timeline"
       className="relative py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden"
     >
+      {/* White gradient overlay for readability */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
+        }}
+      />
+
       {/* Corner floral decoration */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         {/* <CloudinaryImage
@@ -151,15 +143,15 @@ export function WeddingTimeline() {
       {/* Header */}
       <div className="relative z-10 text-center mb-8 sm:mb-10 md:mb-12 px-3 sm:px-4">
         <p
-          className="text-[10px] sm:text-xs md:text-sm font-semibold text-motif-medium uppercase tracking-[0.2em] mb-1 sm:mb-1.5 mt-4 sm:mt-6 md:mt-8"
-          style={{ color: 'var(--color-motif-cream)' }}
+          className="text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] mb-1 sm:mb-1.5 mt-4 sm:mt-6 md:mt-8"
+          style={{ color: 'var(--color-motif-deep)' }}
         >
           Wedding Day
         </p>
 
         <h2
-          className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mb-2 drop-shadow"
-          style={{ color: 'var(--color-motif-cream)' }}
+          className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mb-2"
+          style={{ color: 'var(--color-motif-deep)' }}
         >
           Timeline
         </h2>
@@ -174,14 +166,14 @@ export function WeddingTimeline() {
         <div className="flex items-center justify-center gap-2 mt-4 sm:mt-5">
           <div
             className="w-10 sm:w-14 md:w-20 h-px opacity-50"
-            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 55%, transparent)" }}
+            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 55%, transparent)" }}
           />
           <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: TIMELINE_TEXT }} />
           <div className="w-1.5 h-1.5 rounded-full opacity-55" style={{ backgroundColor: TIMELINE_TEXT }} />
           <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: TIMELINE_TEXT }} />
           <div
             className="w-10 sm:w-14 md:w-20 h-px opacity-50"
-            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 55%, transparent)" }}
+            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 55%, transparent)" }}
           />
         </div>
       </div>
@@ -193,7 +185,7 @@ export function WeddingTimeline() {
           className="absolute left-1/2 -translate-x-1/2 inset-y-0 w-[2px] sm:w-px pointer-events-none opacity-80 z-0"
           style={{
             background:
-              "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-motif-cream) 60%, transparent), transparent)",
+              "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-motif-deep) 60%, transparent), transparent)",
           }}
         />
 
@@ -227,7 +219,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             {!isEven ? <TimelineText event={event} align="right" /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} />}
             <div
               className="hidden lg:block w-10 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
             />
           </div>
         </div>
@@ -242,7 +234,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
           <div className="flex items-center justify-start gap-4">
             <div
               className="hidden lg:block w-10 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
             />
             {isEven ? <TimelineText event={event} align="left" /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} />}
           </div>
@@ -257,7 +249,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             {!isEven ? <TimelineText event={event} align="right" mobile /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />}
             <div
               className="w-6 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
             />
           </div>
         </div>
@@ -272,7 +264,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
           <div className="flex items-center justify-start gap-3">
             <div
               className="w-6 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
             />
             {isEven ? <TimelineText event={event} align="left" mobile /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />}
           </div>
@@ -357,7 +349,7 @@ function IconMark({
         height={96}
         className={`${
           mobile ? "w-16 h-16" : "w-18 h-18 lg:w-22 lg:h-22"
-        } object-contain brightness-0 invert drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]`}
+        } object-contain brightness-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}
       />
     )
   }
@@ -366,8 +358,8 @@ function IconMark({
     <div
       className={`${
         mobile ? "w-14 h-14" : "w-16 h-16 lg:w-18 lg:h-18"
-      } rounded-full border bg-white/15 flex items-center justify-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]`}
-      style={{ borderColor: "color-mix(in srgb, var(--color-motif-cream) 45%, transparent)" }}
+      } rounded-full border bg-black/5 flex items-center justify-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.10)]`}
+      style={{ borderColor: "color-mix(in srgb, var(--color-motif-deep) 45%, transparent)" }}
     >
       <Icon className={`${mobile ? "w-7 h-7" : "w-8 h-8 lg:w-9 lg:h-9"}`} style={{ color: TIMELINE_TEXT }} />
     </div>

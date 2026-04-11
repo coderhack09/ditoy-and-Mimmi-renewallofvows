@@ -27,7 +27,7 @@ const palette = {
 } as const
 
 const DECO_FILTER =
-  "brightness(0) saturate(100%) invert(24%) sepia(65%) saturate(1200%) hue-rotate(135deg) brightness(85%) contrast(105%)"
+  "brightness(0) saturate(100%) invert(24%) sepia(65%) saturate(1200%) hue-rotate(0deg) brightness(90%) contrast(105%)"
 
 // Helper function to convert text to title case (first letter of each word uppercase)
 const toTitleCase = (str: string) => {
@@ -168,7 +168,7 @@ export function Footer() {
               fill
               className="object-contain"
               priority={false}
-              style={{ filter: DECO_FILTER }}
+              // style={{ filter: DECO_FILTER }}
             />
           </div>
         </motion.div>

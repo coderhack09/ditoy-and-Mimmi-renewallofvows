@@ -8,7 +8,7 @@ import { ClientLayout } from "@/components/client-layout"
 
 //sheenly-and-gero
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aubrey-and-alex.weddinginvitationrsvp.com/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ivy-and-ken.weddinginvitationrsvp.com/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
 const desktopHero = "/Details/linkPreview.png"
 const mobileHero = "/Details/linkPreview.png"

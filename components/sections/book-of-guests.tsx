@@ -191,7 +191,7 @@ export function BookOfGuests() {
       />
 
       {/* Flower decoration — warm brown tint */}
-      <div className="absolute left-0 top-0 z-0 pointer-events-none">
+      {/* <div className="absolute left-0 top-0 z-0 pointer-events-none">
         <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
@@ -201,8 +201,8 @@ export function BookOfGuests() {
           priority={false}
           style={{ filter: DECO_FILTER_BOOK  ,opacity: 0.4}}
         />
-      </div>
-      <div className="absolute right-0 top-0 z-0 pointer-events-none">
+      </div> */}
+      {/* <div className="absolute right-0 top-0 z-0 pointer-events-none">
         <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
@@ -212,8 +212,8 @@ export function BookOfGuests() {
           priority={false}
           style={{ filter: DECO_FILTER_BOOK ,opacity: 0.4}}
         />
-      </div>
-      <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
+      </div> */}
+      {/* <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
         <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
@@ -223,8 +223,8 @@ export function BookOfGuests() {
           priority={false}
           style={{ filter: DECO_FILTER_BOOK ,opacity: 0.4}}
         />
-      </div>
-      <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
+      </div> */}
+      {/* <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
         <CloudinaryImage
           src="/decoration/corner-left-bottom.png"
           alt=""
@@ -234,7 +234,7 @@ export function BookOfGuests() {
           priority={false}
           style={{ filter: DECO_FILTER_BOOK ,opacity: 0.4}}
         />
-      </div>
+      </div> */}
 
       {/* Section Header */}
       <div className="relative z-10 text-center mb-3 sm:mb-4 md:mb-6 px-2 sm:px-3 md:px-4">

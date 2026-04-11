@@ -81,10 +81,10 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
           <div className="absolute -inset-2 sm:-inset-3 rounded-full border-2 border-motif-deep/25 animate-ping" />
           <div className="absolute -inset-1.5 sm:-inset-2 rounded-full border border-motif-deep/40" />
         </div>
-        <h3 className={`${cormorant.className} text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 md:mb-4 text-motif-cream`}>
+        <h3 className={`${cormorant.className} text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 md:mb-4 text-motif-deep`}>
           No Messages Yet
         </h3>
-        <p className={`${cormorant.className} text-xs sm:text-sm md:text-base lg:text-lg max-w-md mx-auto leading-relaxed mb-4 sm:mb-5 md:mb-6 text-motif-cream`}>
+        <p className={`${cormorant.className} text-xs sm:text-sm md:text-base lg:text-lg max-w-md mx-auto leading-relaxed mb-4 sm:mb-5 md:mb-6 text-motif-deep/80`}>
           Be the first to share your heartfelt wishes for the happy couple!
         </p>
         <div className="mt-4 sm:mt-5 md:mt-6 lg:mt-8 flex justify-center">

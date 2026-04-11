@@ -26,23 +26,24 @@ export interface StaggeredMenuProps {
   onMenuClose?: () => void;
 }
 
-// Colors sourced from globals.css @theme inline — edit there to update everywhere
-const HERO_ACCENT = 'var(--color-motif-deep)';      // toggle + accent
-const HERO_CREAM = 'var(--color-motif-cream)';      // light surface
-const MENU_PANEL_BG = 'var(--color-motif-deep)';    // panel background
-const MENU_TEXT = 'var(--color-motif-cream)';       // menu text / links
+// Colors aligned with LoadingScreen.tsx paper theme
+const HERO_ACCENT  = '#1C1C1E';    // toggle button — near-black ink
+const HERO_CREAM   = '#FDFBF8';    // paper base surface
+const MENU_PANEL_BG = '#FDFBF8';  // panel — cream paper
+const MENU_TEXT    = '#1C1C1E';   // menu links — near-black ink
+const MENU_ACCENT  = '#B83232';   // red accent — matches LoadingScreen "and" / progress
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = 'right',
-  colors = [MENU_PANEL_BG, 'var(--color-motif-medium)', 'var(--color-motif-soft)', HERO_CREAM],
+  colors = [MENU_PANEL_BG, '#FAF6EF', '#F5EFE6'],
   items = [],
   socialItems = [],
   displaySocials = true,
   className,
   menuButtonColor = HERO_ACCENT,
   openMenuButtonColor = MENU_TEXT,
-  changeMenuColorOnOpen = true,
-  accentColor = HERO_ACCENT,
+  changeMenuColorOnOpen = false,
+  accentColor = MENU_ACCENT,
   isFixed = false,
   onMenuOpen,
   onMenuClose
@@ -389,7 +390,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           id="staggered-menu-panel"
           ref={panelRef}
           className="staggered-menu-panel absolute top-0 right-0 h-full flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10"
-          style={{ background: MENU_PANEL_BG, WebkitBackdropFilter: 'blur(12px)' }}
+          style={{
+            background: MENU_PANEL_BG,
+            WebkitBackdropFilter: 'blur(12px)',
+            borderLeft: '1px solid rgba(140, 110, 72, 0.12)',
+            boxShadow: '-8px 0 40px rgba(140, 110, 72, 0.10)',
+          }}
           aria-hidden={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-6">
@@ -505,6 +511,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; padding: 4.5em 1.5em 1.75em 1.5em; }
   .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); }
 }
+
+/* ── Paper theme overrides ── */
+.sm-scope .staggered-menu-panel { background: #FDFBF8 !important; border-left: 1px solid rgba(140,110,72,0.12); box-shadow: -8px 0 40px rgba(140,110,72,0.10); }
+.sm-scope .sm-panel-item { color: #1C1C1E !important; }
+.sm-scope .sm-panel-item:hover { color: #B83232 !important; }
+.sm-scope .sm-toggle { color: #1C1C1E !important; }
+.sm-scope .sm-socials-title { color: #B83232 !important; }
+.sm-scope .sm-socials-link { color: #1C1C1E !important; }
+.sm-scope .sm-socials-link:hover { color: #B83232 !important; }
+.sm-scope .sm-panel-title { color: #1C1C1E !important; }
       `}</style>
     </div>
   );

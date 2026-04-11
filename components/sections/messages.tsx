@@ -326,6 +326,14 @@ export function Messages() {
       id="messages"
       className="relative overflow-hidden"
     >
+      {/* White gradient overlay for readability */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
+        }}
+      />
+
       {/* Corner floral decoration */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         {/* <CloudinaryImage
@@ -369,14 +377,14 @@ export function Messages() {
         {/* Header Section */}
         <div className="text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
           <div className="space-y-2 sm:space-y-2.5">
-            <p className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-motif-cream`}>
+            <p className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-motif-deep`}>
               Messages for {coupleDisplayName}
             </p>
-            <h2 className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight" style={{ color: 'var(--color-motif-cream)' }}>
+            <h2 className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight" style={{ color: 'var(--color-motif-deep)' }}>
               Love notes &amp; prayers
             </h2>
           </div>
-          <p className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-3xl mx-auto leading-relaxed px-2 sm:px-4 mt-2 text-motif-cream`}>
+          <p className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-3xl mx-auto leading-relaxed px-2 sm:px-4 mt-2 text-motif-deep/80`}>
             Leave a short note for {coupleDisplayName}. Every wish and prayer becomes part of their forever story.
           </p>
         </div>
@@ -408,10 +416,10 @@ export function Messages() {
               </div>
               <div className="absolute -inset-2 rounded-full bg-motif-deep/20 blur-md opacity-0 hover:opacity-100 transition-opacity duration-300" />
             </div>
-            <h3 className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight" style={{ color: 'var(--color-motif-cream)' }}>
+            <h3 className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight" style={{ color: 'var(--color-motif-deep)' }}>
               Messages from Loved Ones
             </h3>
-            <p className={`${cormorant.className} text-xs sm:text-sm md:text-base max-w-2xl mx-auto px-2 sm:px-4 text-motif-cream`}>
+            <p className={`${cormorant.className} text-xs sm:text-sm md:text-base max-w-2xl mx-auto px-2 sm:px-4 text-motif-deep/80`}>
               Read the beautiful messages shared by family and friends
             </p>
           </div>

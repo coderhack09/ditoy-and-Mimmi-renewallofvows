@@ -37,15 +37,22 @@ export function Hero() {
             phase >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           style={{
-            background: "linear-gradient(155deg, #092E2F 0%, #0C3B3C 40%, #0F4546 65%, #0A3435 100%)",
-            border: "1px solid rgba(190, 132, 0, 0.18)",
-            borderRadius: "24px",
+            background: [
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 255, 255, 0.70) 0%, transparent 70%)",
+              "rgba(253, 251, 248, 0.92)",
+            ].join(", "),
+            border: "1px solid rgba(140, 110, 72, 0.14)",
+            borderRadius: "20px",
             padding: "clamp(2.5rem, 6vw, 4rem) clamp(1.75rem, 6vw, 3.5rem)",
-            boxShadow: "0 12px 64px rgba(5, 20, 20, 0.35), inset 0 1px 0 rgba(245, 239, 230, 0.04)",
+            boxShadow: [
+              "0 4px 32px rgba(140, 110, 72, 0.10)",
+              "0 1px 0 rgba(255, 255, 255, 0.80) inset",
+            ].join(", "),
+            backdropFilter: "blur(2px)",
           }}
         >
 
-          {/* ── Monogram ── */}
+          {/* ── Monogram — warm ink, matches LoadingScreen ── */}
           <div
             className={`flex justify-center mb-7 ${
               phase >= 1
@@ -54,12 +61,15 @@ export function Hero() {
             }`}
           >
             <CloudinaryImage
-              src="/monogram/newMonogram.png"
+              src={siteConfig.couple.monogram}
               alt={`${siteConfig.couple.brideNickname} & ${siteConfig.couple.groomNickname} monogram`}
               width={160}
               height={160}
-              className="h-20 w-20 sm:h-24 sm:w-24 object-contain object-center brightness-0 invert"
-              style={{ opacity: 0.88 }}
+              className="h-16 w-16 sm:h-20 sm:w-20 object-contain object-center"
+              style={{
+                filter: "brightness(0) sepia(1) saturate(0.8) hue-rotate(10deg)",
+                opacity: 0.72,
+              }}
               priority
             />
           </div>
@@ -70,35 +80,33 @@ export function Hero() {
             style={{
               fontFamily: '"BrittanySignature", cursive',
               fontSize: "clamp(1.5rem, 4vw, 2.1rem)",
-              color: "rgba(245, 239, 230, 0.72)",
+              color: "rgba(28, 28, 30, 0.72)",
               lineHeight: 1,
             }}
           >
             Together with their families
           </p>
 
-          {/* ── Gold rule + year ── */}
-          <div
-            className={`flex items-center gap-3 justify-center mt-5 mb-5 ${vis(2)}`}
-          >
+          {/* ── Hairline rule + year ── */}
+          <div className={`flex items-center gap-3 justify-center mt-5 mb-5 ${vis(2)}`}>
             <div
               className="h-px flex-1"
-              style={{ background: "linear-gradient(to left, rgba(190, 132, 0, 0.50), transparent)" }}
+              style={{ background: "linear-gradient(to left, rgba(140, 94, 4, 0.35), transparent)" }}
             />
             <span
               style={{
                 fontFamily: '"AgrandirWideBold", sans-serif',
-                fontSize: "0.44rem",
+                fontSize: "0.52rem",
                 letterSpacing: "0.55em",
                 textTransform: "uppercase",
-                color: "rgba(190, 132, 0, 0.80)",
+                color: "#B83232",
               }}
             >
               {new Date(siteConfig.wedding.date).getFullYear()}
             </span>
             <div
               className="h-px flex-1"
-              style={{ background: "linear-gradient(to right, rgba(190, 132, 0, 0.50), transparent)" }}
+              style={{ background: "linear-gradient(to right, rgba(140, 94, 4, 0.35), transparent)" }}
             />
           </div>
 
@@ -107,66 +115,82 @@ export function Hero() {
             className={vis(2)}
             style={{
               fontFamily: '"AgrandirWideBold", sans-serif',
-              fontSize: "clamp(0.44rem, 1.1vw, 0.54rem)",
-              letterSpacing: "0.38em",
+              fontSize: "clamp(0.52rem, 1.2vw, 0.62rem)",
+              letterSpacing: "0.34em",
               textTransform: "uppercase",
-              color: "rgba(245, 239, 230, 0.45)",
+              color: "rgba(28, 28, 30, 0.42)",
             }}
           >
             to celebrate the marriage of
           </p>
 
-          {/* ── Couple names ── */}
+          {/* ── Couple names — LeJourScript, matches LoadingScreen ── */}
           <h1
-            className={`mt-8 ${vis(3)}`}
-            style={{ transitionDelay: "40ms" }}
+            className={`mt-14 ${vis(3)}`}
+            style={{
+              transitionDelay: "40ms",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
+            {/* Bride — nudged left */}
             <span
-              className="block"
               style={{
-                fontFamily: '"Westonia", cursive',
+                fontFamily: '"LeJourScript", cursive',
                 fontSize: "clamp(3.6rem, 12vw, 6rem)",
-                color: "#F5EFE6",
-                lineHeight: 0.88,
-                textShadow: "0 4px 40px rgba(190, 132, 0, 0.25)",
+                color: "#1C1C1E",
+                lineHeight: 1.10,
+                letterSpacing: "0.02em",
+                display: "block",
+                alignSelf: "flex-start",
+                marginLeft: "clamp(0.5rem, 4vw, 2.5rem)",
               }}
             >
               {siteConfig.couple.brideNickname.trim()}
             </span>
 
+            {/* "and" — red accent, same as LoadingScreen */}
             <span
-              className="block"
               style={{
-                fontFamily: '"Westonia", cursive',
-                fontSize: "clamp(2rem, 6vw, 3.2rem)",
-                color: "rgba(183, 110, 121, 0.90)",
-                lineHeight: 1.1,
+                fontFamily: '"LeJourScript", cursive',
+                fontSize: "clamp(1.1rem, 3vw, 1.8rem)",
+                color: "#B83232",
+                lineHeight: 1,
+                letterSpacing: "0.02em",
+                display: "block",
+                alignSelf: "center",
+                marginTop: "clamp(0.4rem, 1.5vw, 0.8rem)",
+                marginBottom: "clamp(0.4rem, 1.5vw, 0.8rem)",
               }}
             >
-              +
+              and
             </span>
 
+            {/* Groom — nudged right */}
             <span
-              className="block"
               style={{
-                fontFamily: '"Westonia", cursive',
+                fontFamily: '"LeJourScript", cursive',
                 fontSize: "clamp(3.6rem, 12vw, 6rem)",
-                color: "#F5EFE6",
-                lineHeight: 0.88,
-                textShadow: "0 4px 40px rgba(190, 132, 0, 0.25)",
+                color: "#1C1C1E",
+                lineHeight: 1.10,
+                letterSpacing: "0.02em",
+                display: "block",
+                alignSelf: "flex-end",
+                marginRight: "clamp(0.5rem, 4vw, 2.5rem)",
               }}
             >
               {siteConfig.couple.groomNickname.trim()}
             </span>
           </h1>
 
-          {/* ── Gold hairline divider ── */}
+          {/* ── Hairline divider ── */}
           <div
             className={`mx-auto mt-9 mb-7 ${vis(4)}`}
             style={{
               width: "100px",
               height: "1px",
-              background: "linear-gradient(to right, transparent, rgba(190, 132, 0, 0.55), transparent)",
+              background: "linear-gradient(to right, transparent, rgba(140, 94, 4, 0.42), transparent)",
             }}
           />
 
@@ -175,12 +199,12 @@ export function Hero() {
 
             {/* Month */}
             <p style={{
-              fontFamily: '"Fahkwang", sans-serif',
+              fontFamily: '"AgrandirWideBold", sans-serif',
               fontWeight: 500,
-              fontSize: "clamp(0.55rem, 1.4vw, 0.68rem)",
+              fontSize: "clamp(0.58rem, 1.4vw, 0.70rem)",
               letterSpacing: "0.30em",
               textTransform: "uppercase",
-              color: "rgba(245, 239, 230, 0.75)",
+              color: "rgba(28, 28, 30, 0.55)",
             }}>
               {siteConfig.ceremony.date.split(" ")[0]}
             </p>
@@ -190,54 +214,51 @@ export function Hero() {
 
               {/* Day of week */}
               <p style={{
-                fontFamily: '"Fahkwang", sans-serif',
-                fontWeight: 400,
-                fontSize: "clamp(0.44rem, 1.1vw, 0.54rem)",
+                fontFamily: '"AgrandirWideBold", sans-serif',
+                fontSize: "clamp(0.50rem, 1.2vw, 0.60rem)",
                 letterSpacing: "0.20em",
                 textTransform: "uppercase",
-                color: "rgba(245, 239, 230, 0.60)",
+                color: "rgba(28, 28, 30, 0.48)",
                 paddingRight: "clamp(0.6rem, 2vw, 1rem)",
               }}>
                 {siteConfig.ceremony.day}
               </p>
 
-              {/* Gold vertical rule */}
+              {/* Vertical rule */}
               <div style={{
                 width: "1px",
                 height: "clamp(2.2rem, 6vw, 3.2rem)",
-                background: "linear-gradient(to bottom, transparent, rgba(190, 132, 0, 0.70), transparent)",
+                background: "linear-gradient(to bottom, transparent, rgba(28, 28, 30, 0.18), transparent)",
                 flexShrink: 0,
               }} />
 
-              {/* Day number */}
+              {/* Day number — red accent */}
               <p style={{
-                fontFamily: '"Fahkwang", sans-serif',
-                fontWeight: 700,
+                fontFamily: '"LeJourSerif", serif',
                 fontSize: "clamp(2.4rem, 8vw, 3.4rem)",
                 letterSpacing: "-0.01em",
-                color: "#BE8400",
+                color: "#B83232",
                 padding: "0 clamp(0.6rem, 2vw, 1rem)",
                 lineHeight: 1,
               }}>
                 {siteConfig.ceremony.date.split(" ")[1]?.replace(",", "")}
               </p>
 
-              {/* Gold vertical rule */}
+              {/* Vertical rule */}
               <div style={{
                 width: "1px",
                 height: "clamp(2.2rem, 6vw, 3.2rem)",
-                background: "linear-gradient(to bottom, transparent, rgba(190, 132, 0, 0.70), transparent)",
+                background: "linear-gradient(to bottom, transparent, rgba(28, 28, 30, 0.18), transparent)",
                 flexShrink: 0,
               }} />
 
               {/* Time */}
               <p style={{
-                fontFamily: '"Fahkwang", sans-serif',
-                fontWeight: 400,
-                fontSize: "clamp(0.44rem, 1.1vw, 0.54rem)",
+                fontFamily: '"AgrandirWideBold", sans-serif',
+                fontSize: "clamp(0.50rem, 1.2vw, 0.60rem)",
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "rgba(245, 239, 230, 0.60)",
+                color: "rgba(28, 28, 30, 0.48)",
                 paddingLeft: "clamp(0.6rem, 2vw, 1rem)",
               }}>
                 At {siteConfig.ceremony.time}
@@ -246,12 +267,11 @@ export function Hero() {
 
             {/* Year */}
             <p style={{
-              fontFamily: '"Fahkwang", sans-serif',
-              fontWeight: 400,
-              fontSize: "clamp(0.55rem, 1.4vw, 0.68rem)",
+              fontFamily: '"AgrandirWideBold", sans-serif',
+              fontSize: "clamp(0.58rem, 1.4vw, 0.70rem)",
               letterSpacing: "0.30em",
               textTransform: "uppercase",
-              color: "rgba(245, 239, 230, 0.55)",
+              color: "rgba(28, 28, 30, 0.42)",
             }}>
               {siteConfig.ceremony.date.split(" ")[2]}
             </p>
@@ -259,15 +279,14 @@ export function Hero() {
 
           {/* ── Ceremony & Reception ── */}
           <div className={`mt-8 flex flex-col items-center gap-6 ${vis(5)}`}>
-
             <div className="space-y-2">
               <p
                 style={{
                   fontFamily: '"AgrandirWideBold", sans-serif',
-                  fontSize: "clamp(0.42rem, 1.1vw, 0.50rem)",
-                  letterSpacing: "0.44em",
+                  fontSize: "clamp(0.50rem, 1.2vw, 0.60rem)",
+                  letterSpacing: "0.40em",
                   textTransform: "uppercase",
-                  color: "rgba(190, 132, 0, 0.82)",
+                  color: "#B83232",
                 }}
               >
                 Ceremony and Reception
@@ -275,10 +294,10 @@ export function Hero() {
               <p
                 style={{
                   fontFamily: '"AgrandirWideBold", sans-serif',
-                  fontSize: "clamp(0.50rem, 1.3vw, 0.60rem)",
-                  letterSpacing: "0.18em",
+                  fontSize: "clamp(0.54rem, 1.3vw, 0.64rem)",
+                  letterSpacing: "0.16em",
                   textTransform: "uppercase",
-                  color: "rgba(245, 239, 230, 0.58)",
+                  color: "rgba(28, 28, 30, 0.52)",
                   lineHeight: 1.6,
                 }}
               >
@@ -291,50 +310,24 @@ export function Hero() {
               style={{
                 width: "40px",
                 height: "1px",
-                background: "rgba(190, 132, 0, 0.30)",
+                background: "rgba(140, 94, 4, 0.28)",
               }}
             />
-
-            {/* <div className="space-y-2">
-              <p
-                style={{
-                  fontFamily: '"AgrandirWideBold", sans-serif',
-                  fontSize: "clamp(0.42rem, 1.1vw, 0.50rem)",
-                  letterSpacing: "0.44em",
-                  textTransform: "uppercase",
-                  color: "rgba(190, 132, 0, 0.82)",
-                }}
-              >
-                Reception to follow
-              </p>
-              <p
-                style={{
-                  fontFamily: '"AgrandirWideBold", sans-serif',
-                  fontSize: "clamp(0.50rem, 1.3vw, 0.60rem)",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "rgba(245, 239, 230, 0.58)",
-                  lineHeight: 1.6,
-                }}
-              >
-                {siteConfig.reception.location}
-              </p>
-            </div> */}
           </div>
 
           {/* ── RSVP button ── */}
           <div className={`mt-10 flex justify-center ${vis(5)}`}>
             <a
               href="#guest-list"
-              className="inline-flex items-center justify-center px-12 py-3.5 transition-all duration-300 hover:brightness-110 hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center px-12 py-3.5 transition-all duration-300 hover:brightness-90 hover:scale-105 active:scale-95"
               style={{
                 fontFamily: '"AgrandirWideBold", sans-serif',
-                fontSize: "0.52rem",
-                letterSpacing: "0.52em",
+                fontSize: "0.58rem",
+                letterSpacing: "0.48em",
                 textTransform: "uppercase",
-                color: "#0C3B3C",
-                background: "rgba(190, 132, 0, 0.92)",
-                border: "1px solid rgba(190, 132, 0, 0.40)",
+                color: "#FDFBF8",
+                background: "#B83232",
+                border: "1px solid rgba(184, 50, 50, 0.40)",
                 borderRadius: "2px",
               }}
             >

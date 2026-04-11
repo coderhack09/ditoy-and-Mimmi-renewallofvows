@@ -22,45 +22,53 @@ export function Registry() {
       id="registry"
       className="relative overflow-hidden py-10 sm:py-12 md:py-16 lg:py-20"
     >
+      {/* White gradient overlay for readability */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
+        }}
+      />
+
       <div className="relative z-10 text-center mb-6 sm:mb-8 md:mb-10 px-3 sm:px-4">
         <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-motif-cream/60" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/80 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/60 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/80 rounded-full" />
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-motif-cream/60" />
+          <div className="w-8 sm:w-12 md:w-16 h-px bg-motif-deep/25" />
+          <div className="w-1.5 h-1.5 bg-motif-deep/60 rounded-full" />
+          <div className="w-1.5 h-1.5 bg-motif-silver rounded-full" />
+          <div className="w-1.5 h-1.5 bg-motif-deep/60 rounded-full" />
+          <div className="w-8 sm:w-12 md:w-16 h-px bg-motif-deep/25" />
         </div>
         
         <h2 
-          className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight text-motif-cream mb-2 sm:mb-3 md:mb-4"
-          style={{ color: 'var(--color-motif-cream)' }}
+          className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mb-2 sm:mb-3 md:mb-4"
+          style={{ color: 'var(--color-motif-deep)' }}
         >
           Gift Guide
         </h2>
         
-        <p className="text-xs sm:text-sm md:text-base lg:text-lg text-motif-cream/90 font-light max-w-2xl mx-auto leading-relaxed px-2">
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg text-motif-deep/80 font-light max-w-2xl mx-auto leading-relaxed px-2">
         With hearts full of gratitude, we ask only for your presence and prayers as we celebrate together. Should you wish to bless us further, a gift toward our future would be a blessing we will always treasure. 
 
         </p>
         
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div className="w-1.5 h-1.5 bg-motif-cream/80 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/60 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/80 rounded-full" />
+          <div className="w-1.5 h-1.5 bg-motif-deep/60 rounded-full" />
+          <div className="w-1.5 h-1.5 bg-motif-silver rounded-full" />
+          <div className="w-1.5 h-1.5 bg-motif-deep/60 rounded-full" />
         </div>
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
   {/* GCASH QR toggle */}
   <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 mb-6 sm:mb-8">
-        <h3 className="lighten-regular text-[24px] sm:text-[30px] md:text-[35px] lg:text-[40px] xl:text-[45px] leading-tight text-motif-cream text-center mb-4 sm:mb-6"
-        style={{ color: 'var(--color-motif-cream)' }}
+        <h3 className="lighten-regular text-[24px] sm:text-[30px] md:text-[35px] lg:text-[40px] xl:text-[45px] leading-tight text-center mb-4 sm:mb-6"
+        style={{ color: 'var(--color-motif-deep)' }}
         >
           {activeItem?.label}
         </h3>
         <div className="flex flex-col items-center gap-4 sm:gap-6">
           {/* Toggle buttons */}
-          <div className="inline-flex rounded-lg border border-motif-cream/40 bg-motif-cream/5 p-1">
+          <div className="inline-flex rounded-lg border border-motif-deep/30 bg-white/60 p-1">
             {GCASH_QR.map((item) => (
               <button
                 key={item.id}
@@ -68,8 +76,8 @@ export function Registry() {
                 onClick={() => setActiveQr(item.id)}
                 className={`px-4 sm:px-6 py-2 rounded-md text-sm font-medium transition-all ${
                   activeQr === item.id
-                    ? "bg-motif-cream/20 text-motif-cream"
-                    : "text-motif-cream/80 hover:text-motif-cream hover:bg-motif-cream/10"
+                    ? "bg-motif-deep/10 text-motif-deep"
+                    : "text-motif-deep/70 hover:text-motif-deep hover:bg-motif-deep/5"
                 }`}
               >
                 {item.label}
@@ -88,10 +96,10 @@ export function Registry() {
             />
           </div>
             <div className="mt-3 sm:mt-4 w-full max-w-md text-center">
-              <p className="text-[11px] sm:text-xs tracking-[0.18em] uppercase text-motif-cream/70">
+              <p className="text-[11px] sm:text-xs tracking-[0.18em] uppercase text-motif-deep/60">
                 Account Number
               </p>
-              <p className={`${cinzel.className} mt-1 text-sm sm:text-base text-motif-cream drop-shadow-sm`}>
+              <p className={`${cinzel.className} mt-1 text-sm sm:text-base text-motif-deep`}>
                 {activeItem.accountNumber}
               </p>
             </div>
@@ -101,11 +109,11 @@ export function Registry() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
         <div className="text-center">
-          <p className="text-xs sm:text-sm text-motif-cream/90 italic">
+          <p className="text-xs sm:text-sm text-motif-deep/80 italic">
             Thank you from the bottom of our hearts.
           </p>
         </div>
-        <p className="text-xs sm:text-sm text-motif-cream/90 italic text-center">
+        <p className="text-xs sm:text-sm text-motif-deep/80 italic text-center">
             With love,
             <br />
             {siteConfig.couple.brideNickname} and {siteConfig.couple.groomNickname}
