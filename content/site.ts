@@ -5,19 +5,19 @@ export const siteConfig = {
     groom: "Ken", //Ltryl B. Benitez
     groomNickname: "Ken",
     monogram:"/monogram/monogramn.png" ,//Ltryl
-    // backgroundMusic:"/background_music/Kahit Maputi na Ang Buhok Ko [Moira dela Torre version] piano cover  sheet music.mp3"
+    backgroundMusic:"/background_music/Can't take my eyes of you  Aesthetic Lyrics.mp3"
   //https://www.canva.com/design/DAHGXenDxnQ/n5Iay96t8f0MXMhXI_GG0g/edit?ui=eyJBIjp7fX0&referrer=https%3A%2F%2Fwww.canva.com%2Fs%2Ftemplates%3Fquery%3Dsketch%2Bstyle%2Bwedding%2Binvitation
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSc6L0BNM76dwO74X5M-MOBpUIRAdfUJlWjvfxaDvoPe5lmYew/formResponse", //done
-    message: "https://script.google.com/macros/s/AKfycbwNyrJGIxoCWVPWkjA2YMwHciCDt9BNAB95efsAzZBmKgSQ7-XRrqAcPFWR-Ikd7VoK/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbyFanCKkvPBQuhLHVBQsG8R9uiFGgZKZC4RQC8xXBG7-ngm7RlcMkommQ9CvI0rcFWTlQ/exec", //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbzqzWvflm77LwxSvz9omwNMVb4cfdUAV3tYTqoQ3-WCCvOMBu4TsIkq0EOptgwctwkePg/exec", //done
-    entourage: "https://script.google.com/macros/s/AKfycbxqESMCAgnUm0tu7kFExq0AZG4DP6ARhg1Ty6bd9vVLoNLmzTiPfr0McoHHkFd07BSkJQ/exec", //done
-    sponsors: "https://script.google.com/macros/s/AKfycbx-HKJ129-WZz24yOJXbIu0Te-9iX7Rdy_WYmfdjFGKqa5_g9jjh4aBFftctsHPWtXZ8w/exec", //done
-    weddingDetails: "https://script.google.com/macros/s/AKfycbwK14QVdwF6c_RwoYIoG0A3iPJTCNGFbxUeG1TTh3oL64_KgwqH9rdewrOsP6vpA7imEw/exec",  //done
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLScbZ0daNBxWg4YfHmO-lWH9EKCcC0nFHWC3XlyioI0Wr1J9kQ/formResponse", //done
+    message: "https://script.google.com/macros/s/AKfycbxRXTwfS9HhlCznsJRBRSg0f7OY2uYE8Yy5luBMcZyVLi6AmQOEV0fTiahfoOumYTSH/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbwcg4aqIAwPHyA7b_TUQAM9s8GPithqHjfMoTsTTKncaDVTtWXbuQDNzJ1FY7NVfNxy/exec", //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbygOaW6RkNa5pQ6OAyg-H8n4rpdmWS8p6mgYn9hUivWIYwWCddBTC6BvjY5HfeIJAY/exec", //done
+    entourage: "https://script.google.com/macros/s/AKfycbzGBhvdeD2N8PZf4szgDnEeyleD-hWblW2g38LeUiyt1KHELMhNYpvXtZHTi0AJflNB/exec", //done
+    sponsors: "https://script.google.com/macros/s/AKfycby82Zk-CsoAuYtEmL1ZYk--YXOzFHVQtiKvXApFYVBMfHXkW2Rg50ha5BQIjDbCL11z/exec", //done
+    weddingDetails: "https://script.google.com/macros/s/AKfycbynmqdfoy7HR3Kn5Jnqc5DPTt6P5Yu29ujMdOHpuv3Ituy_yb2vM-2S8A1bo-TVN0Pq/exec",  //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/1KEEivJE5gYiXdR6Bi3vLzqwoGkxrnbLG2nKXZwyUfag/edit?usp=sharing",
+    googleShare: "https://docs.google.com/spreadsheets/d/1cB168xXmAd01a-ZvkbguVw53UHXJzC4N6hl4_jFRSL8/edit?usp=sharing",//done
   },
   wedding: {
     date: "July 18, 2026",
@@ -118,7 +118,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     secondary: "#F5F5DC",
   },
   snapShare: {
-    googleDriveLink: "https://drive.google.com/drive/folders/1ALay-pIjfX6JAd1JUhCnCvKy-Kr3FeA8?usp=sharing",
+    googleDriveLink: "https://drive.google.com/drive/folders/18X-b3wekWsMs_9m25TuGHvo0F9luen9A?usp=sharing",
     hashtag: ["#AubreyandAlex"],
     instructions: "Please scan this QR Code, create a folder with your name and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
