@@ -289,7 +289,7 @@ export function Hero() {
                   color: "#B83232",
                 }}
               >
-                Ceremony and Reception
+                Ceremony
               </p>
               <p
                 style={{
