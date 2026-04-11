@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 const BACKGROUND_VIDEO_SRC =
-  "/background_music/Video Project 1.mp4"
+  "/background_music/newVideoBackground.mp4"
 
 export function Hero({ onOpen, visible }: HeroProps) {
   const [contentVisible, setContentVisible] = useState(false)
