@@ -301,7 +301,7 @@ export function SnapShare() {
           animate="animate"
         >
           {/* Mobile order preserved: Website -> Hashtags -> Social -> Drive */}
-          <motion.div className="lg:col-start-1 lg:row-start-1" variants={fadeInUp}>
+          {/* <motion.div className="lg:col-start-1 lg:row-start-1" variants={fadeInUp}>
             <div className="bg-motif-cream/95 rounded-xl sm:rounded-[22px] p-3 sm:p-5 md:p-8 shadow-[0_18px_45px_rgba(0,0,0,0.25)] text-center flex flex-col border border-motif-deep">
               <h4
                 className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight text-motif-deep mb-2 sm:mb-3"
@@ -348,7 +348,7 @@ export function SnapShare() {
                 Scan with any camera app to open the full invitation and schedule.
               </p>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           <motion.div className="lg:col-start-2 lg:row-start-1" variants={fadeInUp}>
             <div className="bg-motif-cream/95 rounded-xl p-3 sm:p-4 shadow-[0_8px_24px_rgba(0,0,0,0.15)] border border-motif-deep/40 text-center">

@@ -45,7 +45,7 @@ const faqItems: FAQItem[] = [
   {
     question: "Where will the ceremony and reception take place?",
     answer:
-    `The ceremony and reception will be held at ${siteConfig.ceremony.location}, ${siteConfig.ceremony.venue}. You can find detailed directions, addresses, and maps in the Details Section above`
+    `The ceremony will be held at ${siteConfig.ceremony.location}, ${siteConfig.ceremony.venue}. You can find detailed directions, addresses, and maps in the Details Section above. The reception will be held at ${siteConfig.reception.location}, ${siteConfig.reception.venue}, 30 minute drive from the ceremony. You can find detailed directions, addresses, and maps in the Details Section above.`
   },
   {
     question: "Is there an entourage call time?",
@@ -60,7 +60,7 @@ const faqItems: FAQItem[] = [
   {
     question: "Are children allowed?",
     answer:
-    "While we love your little ones, in the spirit of celebration and intimacy, we kindly request that this special day occasion be reserved for adults only. "
+    "While we love your little ones, in the spirit of celebration and intimacy, we kindly request that this special day occasion be reserved for adults only. Our nieces and nephews from our immediate family will be the only little ones joining us."
   },
   {
     question: "Can I sit anywhere at the reception?",
