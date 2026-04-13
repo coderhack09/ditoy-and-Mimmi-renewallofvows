@@ -285,7 +285,7 @@ export function SnapShare() {
           <p
   className="text-xs sm:text-sm md:text-base text-motif-deep/80 max-w-2xl mx-auto mt-2 sm:mt-4 leading-relaxed px-2"
 >
-  Because you have been part of our journey through our friendship and love, we, <b>{brideNickname} & {groomNickname}</b>, joyfully invite you to witness one of the most meaningful moments of our lives.
+  Because you have been part of our journey through our friendship and love, we, <b>{groomNickname} & {brideNickname}</b>, joyfully invite you to witness one of the most meaningful moments of our lives.
   <br />
   Join us as we exchange our wedding vows on <b>{siteConfig.ceremony.day}, {siteConfig.wedding.date}, at {siteConfig.ceremony.location}</b> at {siteConfig.ceremony.time}, as we promise our hearts to one another and begin our forever.
   <br />
@@ -435,7 +435,7 @@ export function SnapShare() {
               <p
                 className={`${cormorant.className} text-motif-deep text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}
               >
-                Help spread the word about {brideNickname} & {groomNickname}&apos;s wedding celebration. Share the event across your favorite platforms.
+                Help spread the word about {groomNickname} & {brideNickname}&apos;s wedding celebration. Share the event across your favorite platforms.
               </p>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
                 <button
@@ -591,7 +591,7 @@ export function SnapShare() {
             <p
               className={`${cormorant.className} text-motif-deep text-sm sm:text-base md:text-lg leading-relaxed mb-3 sm:mb-4 px-2`}
             >
-              Thank you for helping make {brideNickname} & {groomNickname}&apos;s wedding celebration memorable. Your photos and messages create beautiful memories
+              Thank you for helping make {groomNickname} & {brideNickname}&apos;s wedding celebration memorable. Your photos and messages create beautiful memories
               that we will treasure for a lifetime.
             </p>
             <div

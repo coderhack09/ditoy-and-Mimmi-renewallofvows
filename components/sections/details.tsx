@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { QRCodeSVG } from "qrcode.react"
 import { siteConfig } from "@/content/site"
 import { CloudinaryImage } from "@/components/ui/cloudinary-image"
+import Image from "next/image"
 import { Cinzel, Cormorant_Garamond } from "next/font/google"
 import {
   Shirt,
@@ -479,52 +480,78 @@ export function Details() {
           {/* Principal Sponsors Card */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-br from-motif-silver/22 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
-            <div className="relative bg-motif-cream backdrop-blur-sm rounded-xl sm:rounded-2xl p-5 sm:p-7 md:p-9 border border-motif-deep/20 hover:shadow-[0_20px_48px_rgba(0,0,0,0.24)] hover:border-motif-deep/70 transition-all duration-300">
+            <div className="relative bg-motif-cream backdrop-blur-sm rounded-xl sm:rounded-2xl overflow-hidden border border-motif-deep/20 hover:shadow-[0_20px_48px_rgba(0,0,0,0.24)] hover:border-motif-deep/70 transition-all duration-300">
 
-              {/* Card title */}
-              <h4
-                className="lighten-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight text-center mb-6 sm:mb-8"
-                style={{ color: 'var(--color-motif-deep)' }}
-              >
-                For Principal Sponsors
-              </h4>
-
-              {/* Decorative divider */}
-              <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
-                <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
-                <div className="w-1.5 h-1.5 rounded-full bg-motif-silver/60" />
-                <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
+              {/* Card header */}
+              <div className="px-5 sm:px-7 md:px-9 pt-6 sm:pt-8 md:pt-10 pb-5 sm:pb-6 text-center">
+                <h4
+                  className="lighten-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight"
+                  style={{ color: 'var(--color-motif-deep)' }}
+                >
+                  For Principal Sponsors
+                </h4>
+                <div className="flex items-center justify-center gap-2 mt-4">
+                  <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-motif-silver/60" />
+                  <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
+                </div>
               </div>
 
-              {/* Gentlemen */}
-              <div className="mb-6 sm:mb-8">
-                <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium text-center mb-3`}>
-                  Gentlemen
-                </p>
-                <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed text-center`}>
-                  Kindly come in strictly{" "}
-                  <span className="font-semibold italic">White Barong Tagalog.</span>
-                </p>
-              </div>
+              {/* Gentlemen + Ladies — side-by-side on sm+, stacked on mobile */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-motif-silver/30">
 
-              {/* Horizontal rule between genders */}
-              <div className="border-t border-motif-silver/40 mb-6 sm:mb-8" />
+                {/* Gentlemen column */}
+                <div className="flex flex-col">
+                  {/* Image at the top, full bleed */}
+                  <Image
+                    src="/Details/gentlemen_sponsors.jpg"
+                    alt="Gentlemen Principal Sponsors — White Barong Tagalog reference"
+                    width={0}
+                    height={0}
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="w-full h-auto"
+                  />
+                  {/* Text below image */}
+                  <div className="px-5 sm:px-6 md:px-8 py-5 sm:py-6 text-center flex-1 flex flex-col justify-center">
+                    <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium mb-2`}>
+                      Gentlemen
+                    </p>
+                    <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed`}>
+                      Kindly come in strictly{" "}
+                      <span className="font-semibold italic">White Barong Tagalog.</span>
+                    </p>
+                  </div>
+                </div>
 
-              {/* Ladies */}
-              <div className="mb-7 sm:mb-9">
-                <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium text-center mb-3`}>
-                  Ladies
-                </p>
-                <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed text-center`}>
-                  Grace the celebration in{" "}
-                  <span className="font-semibold italic">Filipiniana-inspired attire,</span>
-                  <br />
-                  strictly in white.
-                </p>
+                {/* Ladies column */}
+                <div className="flex flex-col">
+                  {/* Image at the top, full bleed */}
+                  <Image
+                    src="/Details/ladies_sponsors.jpg"
+                    alt="Ladies Principal Sponsors — Filipiniana-inspired attire reference"
+                    width={0}
+                    height={0}
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="w-full h-auto"
+                  />
+                  {/* Text below image */}
+                  <div className="px-5 sm:px-6 md:px-8 py-5 sm:py-6 text-center flex-1 flex flex-col justify-center">
+                    <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium mb-2`}>
+                      Ladies
+                    </p>
+                    <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed`}>
+                      Grace the celebration in{" "}
+                      <span className="font-semibold italic">Filipiniana-inspired attire,</span>
+                      {" "}strictly in white.
+                    </p>
+                  </div>
+                </div>
+
               </div>
 
               {/* Closing note */}
-              <div className="bg-motif-deep/5 border border-motif-deep/15 rounded-xl px-5 py-4 sm:px-7 sm:py-5 text-center">
+              <div className="border-t border-motif-silver/30 mx-5 sm:mx-7 md:mx-9 mt-1 mb-5 sm:mb-7 md:mb-9" />
+              <div className="px-5 sm:px-7 md:px-9 pb-6 sm:pb-8 md:pb-10 text-center">
                 <p className={`${cormorant.className} text-base sm:text-lg md:text-xl font-semibold text-motif-deep leading-snug mb-1`}>
                   Come in your best <span className="uppercase tracking-wide">Formal Attire.</span>
                 </p>
@@ -532,56 +559,70 @@ export function Details() {
                   Let's create a timeless and elegant atmosphere together.
                 </p>
               </div>
+
             </div>
           </div>
 
           {/* Guests Card */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-br from-motif-silver/22 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
-            <div className="relative bg-motif-cream backdrop-blur-sm rounded-xl sm:rounded-2xl p-5 sm:p-7 md:p-9 border border-motif-deep/20 hover:shadow-[0_20px_48px_rgba(0,0,0,0.24)] hover:border-motif-deep/70 transition-all duration-300">
+            <div className="relative bg-motif-cream backdrop-blur-sm rounded-xl sm:rounded-2xl overflow-hidden border border-motif-deep/20 hover:shadow-[0_20px_48px_rgba(0,0,0,0.24)] hover:border-motif-deep/70 transition-all duration-300">
+                {/* Card title */}
+                <h4
+                  className="lighten-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight text-center mb-4 mt-4"
+                  style={{ color: 'var(--color-motif-deep)' }}
+                >
+                  For Guests
+                </h4>
+                <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
+                  <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-motif-silver/60" />
+                  <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
+                </div>
+              {/* Guest attire image — full bleed at the very top */}
+              <Image
+                src="/Details/guest_attire.jpg"
+                alt="Guest Attire Reference — Elegant white formal wear"
+                width={0}
+                height={0}
+                sizes="(max-width: 1024px) 100vw, 1280px"
+                className="w-full h-auto"
+              />
 
-              {/* Card title */}
-              <h4
-                className="lighten-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight text-center mb-6 sm:mb-8"
-                style={{ color: 'var(--color-motif-deep)' }}
-              >
-                For Guests
-              </h4>
+              {/* Card content below image */}
+              <div className="px-5 sm:px-7 md:px-9 pt-6 sm:pt-8 pb-6 sm:pb-8 md:pb-10">
 
-              {/* Decorative divider */}
-              <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
-                <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
-                <div className="w-1.5 h-1.5 rounded-full bg-motif-silver/60" />
-                <div className="h-px flex-1 max-w-[60px] bg-motif-silver/50" />
-              </div>
 
-              {/* Gentlemen */}
-              <div className="mb-6 sm:mb-8">
-                <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium text-center mb-3`}>
-                  Gentlemen
-                </p>
-                <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed text-center`}>
-                  Please come in your best{" "}
-                  <span className="font-semibold italic">white formal attire /</span>
-                  <br />
-                  <span className="italic">white polo / white long-sleeved shirt.</span>
-                </p>
-              </div>
 
-              {/* Horizontal rule between genders */}
-              <div className="border-t border-motif-silver/40 mb-6 sm:mb-8" />
+                {/* Gentlemen */}
+                <div className="mb-6 sm:mb-8">
+                  <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium text-center mb-3`}>
+                    Gentlemen
+                  </p>
+                  <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed text-center`}>
+                    Please come in your best{" "}
+                    <span className="font-semibold italic">white formal attire /</span>
+                    <br />
+                    <span className="italic">white polo / white long-sleeved shirt.</span>
+                  </p>
+                </div>
 
-              {/* Ladies */}
-              <div>
-                <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium text-center mb-3`}>
-                  Ladies
-                </p>
-                <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed text-center`}>
-                  We invite you to wear an{" "}
-                  <span className="font-semibold italic">elegant white long dress.</span>
-                  <br />
-                  Kindly avoid cocktail dresses.
-                </p>
+                {/* Horizontal rule */}
+                <div className="border-t border-motif-silver/40 mb-6 sm:mb-8" />
+
+                {/* Ladies */}
+                <div>
+                  <p className={`${cinzel.className} text-xs sm:text-sm tracking-[0.2em] uppercase font-semibold text-motif-medium text-center mb-3`}>
+                    Ladies
+                  </p>
+                  <p className={`${cormorant.className} text-base sm:text-lg md:text-xl text-motif-deep/85 leading-relaxed text-center`}>
+                    We invite you to wear an{" "}
+                    <span className="font-semibold italic">elegant white long dress.</span>
+                    <br />
+                    Kindly avoid cocktail dresses.
+                  </p>
+                </div>
+
               </div>
             </div>
           </div>
@@ -669,7 +710,7 @@ export function Details() {
                 Arrival
                 </h4>
                 <p className={`${cormorant.className} text-sm sm:text-base md:text-lg text-motif-deep/80 leading-relaxed`}>
-                To ensure everything runs smoothly, please arrive at least 30 minutes before the ceremony starts. The program will begin at 3:30 PM, so we kindly ask everyone to arrive by 2:30 PM. This will give you time to find your seat, take in the beautiful setup, and be fully present for our special moment
+                To ensure everything runs smoothly, please arrive at least 30 minutes before the ceremony starts. The program will begin at 4:00 PM, so we kindly ask everyone to arrive by 3:30 PM. This will give you time to find your seat, take in the beautiful setup, and be fully present for our special moment
                 </p>
               </div>
 

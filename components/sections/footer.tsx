@@ -176,7 +176,7 @@ export function Footer() {
         {/* Names & Date below illustration — dark text on white */}
         <div className="mt-3 sm:mt-4 md:mt-5 text-center">
           <p className={`${cormorant.className} tracking-[0.25em] sm:tracking-[0.3em] text-xs sm:text-sm md:text-base uppercase`} style={{ color: palette.deep }}>
-            {brideNickname} & {groomNickname}
+            {groomNickname} & {brideNickname}
           </p>
           <p className={`${cormorant.className} text-sm sm:text-base md:text-lg mt-1 sm:mt-2`} style={{ color: palette.deep }}>
             {ceremonyDate}

@@ -262,7 +262,7 @@ export function Entourage() {
           className={`relative text-[10px] sm:text-[11.5px] md:text-[12.5px] lg:text-[13.5px] font-semibold ${textAlign} transition-all duration-300`}
           style={{ color: palette.deep }}
         >
-          {member.Name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
+          {member.Name}
         </p>
         {showRole && member.RoleTitle && (
           <p

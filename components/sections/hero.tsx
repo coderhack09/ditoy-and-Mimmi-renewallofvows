@@ -147,7 +147,7 @@ export function Hero() {
                 marginLeft: "clamp(0.5rem, 4vw, 2.5rem)",
               }}
             >
-              {siteConfig.couple.brideNickname.trim()}
+              {siteConfig.couple.groomNickname.trim()}
             </span>
 
             {/* "and" — red accent, same as LoadingScreen */}
@@ -180,7 +180,7 @@ export function Hero() {
                 marginRight: "clamp(0.5rem, 4vw, 2.5rem)",
               }}
             >
-              {siteConfig.couple.groomNickname.trim()}
+              {siteConfig.couple.brideNickname.trim()}
             </span>
           </h1>
 

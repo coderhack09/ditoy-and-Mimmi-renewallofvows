@@ -119,7 +119,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink: "https://drive.google.com/drive/folders/18X-b3wekWsMs_9m25TuGHvo0F9luen9A?usp=sharing",
-    hashtag: ["#IvyKeniparin"],
+    hashtag: ["#IvyKenparin"],
     instructions: "Please scan this QR Code, create a folder with your name and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
 }
