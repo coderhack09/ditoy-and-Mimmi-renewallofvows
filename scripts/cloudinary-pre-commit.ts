@@ -20,7 +20,7 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env.local") })
 // Constants — must match lib/cloudinary.ts PROJECT_PREFIX
 // ---------------------------------------------------------------------------
 
-const PROJECT_PREFIX = "wedding-projects/sheenly-and-gero"
+const PROJECT_PREFIX = "wedding-projects/ivy-and-ken"
 
 const IMAGE_EXTENSIONS = new Set([
   ".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".svg",
