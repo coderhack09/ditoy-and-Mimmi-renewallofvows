@@ -37,19 +37,19 @@ export const siteConfig = {
   giftRegistry: {
     QR_1:{
     id: "BDO",
-    src: "/QR/BDO.png",
+    src: "/QR/newBDO.png",
     label: "BDO",
     accountNumber: "BDO: **** **** 2071",
     },
     QR_2:{
     id: "Gcash",
-    src: "/QR/Gcash.png",
+    src: "/QR/newGcash.png",
     label: "Gcash",
     accountNumber: "Gcash: **** **** 2071",
     },
     QR_3:{
     id: "MariBank",
-    src: "/QR/MariBank.png",
+    src: "/QR/newMariBank.png",
     label: "MariBank",
     accountNumber: "MariBank: **** **** 2071",
     },
