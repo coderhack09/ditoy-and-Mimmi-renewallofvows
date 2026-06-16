@@ -9,15 +9,15 @@ export const siteConfig = {
   //https://www.canva.com/design/DAHGXenDxnQ/n5Iay96t8f0MXMhXI_GG0g/edit?ui=eyJBIjp7fX0&referrer=https%3A%2F%2Fwww.canva.com%2Fs%2Ftemplates%3Fquery%3Dsketch%2Bstyle%2Bwedding%2Binvitation
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLScbZ0daNBxWg4YfHmO-lWH9EKCcC0nFHWC3XlyioI0Wr1J9kQ/formResponse", //done
-    message: "https://script.google.com/macros/s/AKfycbxRXTwfS9HhlCznsJRBRSg0f7OY2uYE8Yy5luBMcZyVLi6AmQOEV0fTiahfoOumYTSH/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbwcg4aqIAwPHyA7b_TUQAM9s8GPithqHjfMoTsTTKncaDVTtWXbuQDNzJ1FY7NVfNxy/exec", //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbygOaW6RkNa5pQ6OAyg-H8n4rpdmWS8p6mgYn9hUivWIYwWCddBTC6BvjY5HfeIJAY/exec", //done
-    entourage: "https://script.google.com/macros/s/AKfycbzGBhvdeD2N8PZf4szgDnEeyleD-hWblW2g38LeUiyt1KHELMhNYpvXtZHTi0AJflNB/exec", //done
-    sponsors: "https://script.google.com/macros/s/AKfycby82Zk-CsoAuYtEmL1ZYk--YXOzFHVQtiKvXApFYVBMfHXkW2Rg50ha5BQIjDbCL11z/exec", //done
-    weddingDetails: "https://script.google.com/macros/s/AKfycbynmqdfoy7HR3Kn5Jnqc5DPTt6P5Yu29ujMdOHpuv3Ituy_yb2vM-2S8A1bo-TVN0Pq/exec",  //done
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSc_7GGfZdEusPpbNk8LWk-q6_YiRkmRvHvrF8di11ekhnAezA/formResponse", //done
+    message: "https://script.google.com/macros/s/AKfycby1-EnqOEJdyd8Qx-7DugkbynvbntMhw3Uj_snsLHZd7WH23LQDSU-NvXTJTEDeaP7pNA/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbxh979wNIWUW-clCgxkGvpZnhmp497JRHqFNuRGBBB-nWUV9Ikw3P1EDvMc-24MRPTYXQ/exec", //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbwx358zWxyh5HW3-LhxwLyZFOt_XvSWTece2KTLiyJ9NoYR0uUUouzQQgwQFk9VsI1Gug/exec", //done
+    entourage: "https://script.google.com/macros/s/AKfycbwN_wDKKt-QBV38GJ7QrKgzvmbPWo2gHCXzBzFhpPJPTkUBB1sNpV9z5Cka27oZkM5DtQ/exec", //done
+    sponsors: "https://script.google.com/macros/s/AKfycbx13JOVmp9GCQqUpIWJjPYp2h8IoyRAIBG6liP3lQMq_nfkYrCUCtvpmn0o7RU-_n2f7Q/exec", //done
+    weddingDetails: "https://script.google.com/macros/s/AKfycbxfBV2i2Ge6sb3dQqXvImj1gkTPzXuu0TVGSEv6gz-1j-c06JazJMjCyzGB5rCZVYD6vg/exec",  //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/1cB168xXmAd01a-ZvkbguVw53UHXJzC4N6hl4_jFRSL8/edit?usp=sharing",//done
+    googleShare: "https://docs.google.com/spreadsheets/d/1GSNWOe9s6SorbcU0yS4h32MhyFAdWioHU9qbokIW6m8/edit?usp=sharing",//done
   },
   wedding: {
     date: "August 15, 2026",
@@ -118,8 +118,8 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     secondary: "#F5F5DC",
   },
   snapShare: {
-    googleDriveLink: "https://drive.google.com/drive/folders/18X-b3wekWsMs_9m25TuGHvo0F9luen9A?usp=sharing",
-    hashtag: ["#IvyKenparin"],
+    googleDriveLink: "https://drive.google.com/drive/folders/19L8CW3gA6gsUbczUufZPiU4G8y1XZnYY?usp=sharing",
+    hashtag: ["#DitoyMimmirenewallofvows"],
     instructions: "Please scan this QR Code, create a folder with your name and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
 }

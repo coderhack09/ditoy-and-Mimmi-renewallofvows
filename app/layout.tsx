@@ -8,7 +8,7 @@ import { ClientLayout } from "@/components/client-layout"
 
 //sheenly-and-gero
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ivy-and-ken.weddinginvitationrsvp.com/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ditoy-and-Mimmi-renewallofvows.weddinginvitationrsvp.com/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
 const desktopHero = "/Details/LinkPreview.png"
 const mobileHero = "/Details/LinkPreview.png"
@@ -16,13 +16,13 @@ const mobileHero = "/Details/LinkPreview.png"
 const OG_IMAGE = `${canonicalUrl}${desktopHero}`
 
 const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`
-const eventTitle = `${coupleNames} - Wedding Invitation`
-const eventDescription = `Celebrate the wedding of ${siteConfig.couple.groomNickname} and ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date} at ${siteConfig.ceremony.venue}. RSVP, explore their story, and find everything you need to join the celebration.`
+const eventTitle = `${coupleNames} - Renewal of Vows`
+const eventDescription = `Celebrate the Renewal of Vows of ${siteConfig.couple.groomNickname} and ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date} at ${siteConfig.ceremony.venue}. RSVP, explore their story, and find everything you need to join the celebration.`
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Wedding`,
+  name: `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Renewal of Vows`,
   startDate: "2026-04-18T14:00:00+08:00",
   endDate: "2026-04-18T22:00:00+08:00",
   eventStatus: "https://schema.org/EventScheduled",
@@ -53,12 +53,12 @@ const jsonLd = {
   ],
   image: [OG_IMAGE],
   description:
-    `You're invited to celebrate the wedding of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}. Discover ceremony and reception details, RSVP, and explore their story.`,
+    `You're invited to celebrate the Renewal of Vows of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}. Discover ceremony and reception details, RSVP, and explore their story.`,
   organizer: {
     "@type": "Person",
     name: coupleNames,
   },
-  eventHashtag: `#${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}SayIDo`,
+  eventHashtag: `#${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}Renewallofvows`,
 }
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -74,8 +74,8 @@ export const metadata: Metadata = {
   },
   description: eventDescription,
   keywords:
-    `${siteConfig.couple.groomNickname} ${siteConfig.couple.brideNickname} wedding, ${siteConfig.ceremony.venue} wedding, ${siteConfig.reception.venue} wedding, wedding invitation, RSVP, wedding gallery, message wall, love story, #${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}SayIDo`,
-  applicationName: `${coupleNames} Wedding Invitation`,
+    `${siteConfig.couple.groomNickname} ${siteConfig.couple.brideNickname} renewal of vows, ${siteConfig.ceremony.venue} renewal of vows, ${siteConfig.reception.venue} renewal of vows, renewal of vows invitation, RSVP, renewal of vows gallery, message wall, love story, #${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}Renewallofvows`,
+  applicationName: `${coupleNames} Renewal of Vows`,
   authors: [
     { name: siteConfig.couple.groomNickname },
     { name: siteConfig.couple.brideNickname },
@@ -107,9 +107,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${coupleNames} | ${siteConfig.wedding.date}`,
     description:
-      `Celebrate the union of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date}. Discover their story, RSVP, and find important details for the ceremony and reception.`,
+      `Celebrate the Renewal of Vows of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date}. Discover their story, RSVP, and find important details for the ceremony and reception.`,
     url: canonicalUrl,
-    siteName: `${coupleNames} Wedding`,
+    siteName: `${coupleNames} Renewal of Vows`,
     locale: "en_PH",
     type: "website",
     images: [
@@ -119,15 +119,15 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/jpeg",
-        alt: `${coupleNames} Wedding Invitation - ${siteConfig.wedding.date}`,
+        alt: `${coupleNames} Renewal of Vows - ${siteConfig.wedding.date}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${coupleNames} Wedding Invitation`,
+    title: `${coupleNames} Renewal of Vows`,
     description:
-      `You're invited to the wedding of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date}. RSVP, explore their story, and get all the details for the big day! #${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}SayIDo`,
+      `You're invited to the Renewal of Vows of ${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} on ${siteConfig.wedding.date}. RSVP, explore their story, and get all the details for the big day! #${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}Renewallofvows`,
     images: [OG_IMAGE],
     creator: `@${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}`,
     site: `@${siteConfig.couple.groomNickname}And${siteConfig.couple.brideNickname}`,
