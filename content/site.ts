@@ -5,7 +5,7 @@ export const siteConfig = {
     groom: "Ditoy", //Ltryl B. Benitez
     groomNickname: "Ditoy",
     monogram:"/monogram/new-monogram.png" ,//Ltryl
-    backgroundMusic:"/background_music/Wedding Memories.mp3"
+    backgroundMusic:"/background_music/Ewan.mp3"
   //https://www.canva.com/design/DAHGXenDxnQ/n5Iay96t8f0MXMhXI_GG0g/edit?ui=eyJBIjp7fX0&referrer=https%3A%2F%2Fwww.canva.com%2Fs%2Ftemplates%3Fquery%3Dsketch%2Bstyle%2Bwedding%2Binvitation
   },
   googleAPI:{
