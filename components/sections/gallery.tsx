@@ -1,43 +1,33 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import Link from "next/link"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
-import { Cormorant_Garamond, Cinzel } from "next/font/google"
+import { Cormorant_Garamond } from "next/font/google"
 import { Section } from "@/components/section"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
-import { getCloudinaryUrl } from "@/lib/cloudinary"
+import Image from "next/image"
 // Removed circular gallery in favor of a responsive masonry layout
-
-// Palette lives in globals.css → @theme inline → --color-motif-*
-// Edit there once to update every component.
-
-// CSS filter approximation of --color-motif-deep (sage green). Tune if needed.
-const GALLERY_DECO_FILTER = ""
-  // "brightness(0) saturate(100%) invert(37%) sepia(20%) saturate(500%) hue-rotate(80deg) brightness(88%) contrast(92%)"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400"],
 })
 
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-})
+const COLORS = {
+  deep: "#1C1C1E",
+  medium: "rgba(28, 28, 30, 0.68)",
+  muted: "rgba(28, 28, 30, 0.42)",
+  accent: "#B83232",
+  gold: "rgba(140, 94, 4, 0.45)",
+  parchment: "rgba(250, 244, 232, 1)",
+  border: "rgba(160, 122, 68, 0.25)",
+  borderHover: "rgba(184, 50, 50, 0.35)",
+} as const
 
 const galleryItems = [
-  { image: "/Album/couple (1).jpg", text: " " },
-  { image: "/Album/couple (2).jpg", text: " " },
-  { image: "/Album/couple (3).jpg", text: " " },
-  { image: "/Album/couple (4).jpg", text: " " },
-  { image: "/Album/couple (5).jpg", text: " " },
-  { image: "/Album/couple (6).jpg", text: " " },
-  { image: "/Album/couple (7).jpg", text: " " },
-  { image: "/Album/couple (8).jpg", text: " " },
-  { image: "/Album/couple (9).jpg", text: " " },
-  { image: "/Album/couple (10).jpg", text: " " },
-
+  { image: "/couple/couple3.jpg", text: " " },
+  { image: "/couple/couple1.webp", text: " " },
+  { image: "/couple/couple2.webp", text: " " },
+  { image: "/couple/couple4.webp", text: " " },
 ]
 
 export function Gallery() {
@@ -101,9 +91,9 @@ export function Gallery() {
   useEffect(() => {
     if (selectedImage) {
       const next = new window.Image()
-      next.src = getCloudinaryUrl(galleryItems[(currentIndex + 1) % galleryItems.length].image, { width: 1200 })
+      next.src = galleryItems[(currentIndex + 1) % galleryItems.length].image
       const prev = new window.Image()
-      prev.src = getCloudinaryUrl(galleryItems[(currentIndex - 1 + galleryItems.length) % galleryItems.length].image, { width: 1200 })
+      prev.src = galleryItems[(currentIndex - 1 + galleryItems.length) % galleryItems.length].image
     }
   }, [selectedImage, currentIndex])
 
@@ -115,98 +105,91 @@ export function Gallery() {
   }
 
   return (
-    <div
-      className="relative w-full"
-      style={{ backgroundColor: 'var(--color-motif-cream)' }}
-    >
-      {/* Full-bleed layered background — same as hero (inline styles so it always applies) */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+    <div className="relative w-full bg-transparent">
+      {/* Vintage parchment overlay */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden>
         <div
-          className="absolute inset-0 opacity-[0.25]"
+          className="absolute inset-0"
           style={{
-            background: 'linear-gradient(165deg, var(--color-motif-cream) 0%, color-mix(in srgb, var(--color-motif-soft) 13%, transparent) 35%, color-mix(in srgb, var(--color-motif-medium) 6%, transparent) 70%, color-mix(in srgb, var(--color-motif-deep) 5%, transparent) 100%)',
+            background: [
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+              "rgba(250, 244, 232, 0.94)",
+            ].join(", "),
           }}
         />
         <div
-          className="absolute inset-0 opacity-[0.08]"
-          style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 15%, var(--color-motif-soft) 0%, transparent 55%)' }}
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 60% 40% at 20% 20%, rgba(210, 168, 110, 0.10) 0%, transparent 70%)",
+              "radial-gradient(ellipse 50% 35% at 80% 75%, rgba(170, 130, 80, 0.08) 0%, transparent 65%)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+            mixBlendMode: "multiply",
+            opacity: 0.55,
+          }}
         />
       </div>
 
       <Section
         id="gallery"
-        className="relative z-10 py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
+        className="relative z-10 py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-transparent"
       >
-      {/* Corner floral decoration - aligned with Details section */}
-      <div className="absolute inset-0 pointer-events-none z-[1]">
-        <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleY(-1)", filter: GALLERY_DECO_FILTER }}
-          priority={false}
-        />
-        <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1) scaleY(-1)", filter: GALLERY_DECO_FILTER }}
-          priority={false}
-        />
-        <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ filter: GALLERY_DECO_FILTER }}
-          priority={false}
-        />
-        <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1)", filter: GALLERY_DECO_FILTER }}
-          priority={false}
-        />
+      {/* Corner decorations */}
+      <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden>
+        <Image src="/decoration/left-top-corner.png" alt="" width={320} height={320} className="absolute top-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-top-corner.png" alt="" width={320} height={320} className="absolute top-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/left-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
       </div>
 
-      {/* Header — wedding palette & copy */}
+      {/* Header */}
       <div className="relative z-10 text-center mb-12 sm:mb-16 md:mb-20 px-4 sm:px-6">
         <p
-          className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2`}
-          style={{ color: 'var(--color-motif-medium)' }}
+          style={{
+            fontFamily: '"AgrandirWideBold", sans-serif',
+            fontSize: "clamp(0.50rem, 1.1vw, 0.60rem)",
+            letterSpacing: "0.38em",
+            textTransform: "uppercase",
+            color: COLORS.muted,
+            marginBottom: "0.75rem",
+          }}
         >
           Our Story in Frames
         </p>
         <h2
-          className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight"
-          style={{ color: 'var(--color-motif-deep)' }}
+          className="parisienne-regular leading-tight"
+          style={{
+            fontSize: "clamp(2.4rem, 7.5vw, 4.2rem)",
+            color: COLORS.deep,
+            lineHeight: 1.15,
+          }}
         >
           Gallery
         </h2>
         <p
-          className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed px-2 mb-3 sm:mb-4`}
-          style={{ color: 'var(--color-motif-medium)' }}
+          className={`${cormorant.className} max-w-xl mx-auto leading-relaxed px-2 mb-3 sm:mb-4`}
+          style={{ fontSize: "clamp(0.90rem, 2.1vw, 1.08rem)", color: COLORS.medium }}
         >
           From our first chapter to this beautiful season of commitment, every moment has been a testament to love, faith, and grace. We share these memories with heartfelt gratitude as we look forward to the lifetime that awaits us.
         </p>
 
-        {/* Decorative element — motif accent dividers */}
+        {/* Decorative divider */}
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <span className="h-px w-10 sm:w-14 rounded-full bg-motif-accent/60" />
+          <span className="h-px w-10 sm:w-14" style={{ background: COLORS.gold }} />
           <div className="flex gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full opacity-80 bg-motif-accent" />
-            <span className="w-1.5 h-1.5 rounded-full opacity-50 bg-motif-accent" />
-            <span className="w-1.5 h-1.5 rounded-full opacity-80 bg-motif-accent" />
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ background: COLORS.accent }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-45" style={{ background: COLORS.accent }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ background: COLORS.accent }} />
           </div>
-          <span className="h-px w-10 sm:w-14 rounded-full bg-motif-accent/60" />
+          <span className="h-px w-10 sm:w-14" style={{ background: COLORS.gold }} />
         </div>
       </div>
 
@@ -216,7 +199,10 @@ export function Gallery() {
           <div className="max-w-6xl w-full">
             {isLoading ? (
               <div className="flex items-center justify-center h-64 sm:h-80 md:h-96">
-                <div className="w-12 h-12 border-[3px] border-motif-accent/30 border-t-motif-accent rounded-full animate-spin" />
+                <div
+                  className="w-12 h-12 border-[3px] rounded-full animate-spin"
+                  style={{ borderColor: "rgba(184,50,50,0.25)", borderTopColor: COLORS.accent }}
+                />
               </div>
             ) : (
               <>
@@ -230,7 +216,10 @@ export function Gallery() {
                       <button
                         key={item.image + index}
                         type="button"
-                        className="group relative snap-center shrink-0 w-[82%] overflow-hidden rounded-lg bg-motif-cream/90 backdrop-blur-sm border border-motif-accent/40 transition-all duration-300 active:border-motif-accent/60"
+                        className="group relative snap-center shrink-0 w-[82%] overflow-hidden rounded-lg backdrop-blur-sm transition-all duration-300"
+                        style={{ backgroundColor: "rgba(250,244,232,0.92)", border: `1px solid ${COLORS.border}` }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.borderHover }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border }}
                         onClick={() => {
                           setSelectedImage(item)
                           setCurrentIndex(index)
@@ -238,11 +227,11 @@ export function Gallery() {
                         aria-label={`Open image ${index + 1}`}
                       >
                         {/* Subtle glow on active (mobile) */}
-                        <div className="absolute -inset-0.5 rounded-lg opacity-0 group-active:opacity-100 transition-opacity duration-300 blur-sm" style={{ background: 'linear-gradient(to bottom right, color-mix(in srgb, var(--color-motif-accent) 30%, transparent), color-mix(in srgb, var(--color-motif-deep) 15%, transparent))' }} />
+                        <div className="absolute -inset-0.5 rounded-lg opacity-0 group-active:opacity-100 transition-opacity duration-300 blur-sm" style={{ background: "linear-gradient(to bottom right, rgba(184,50,50,0.18), rgba(140,94,4,0.10))" }} />
 
                         <div className="relative aspect-[3/4] overflow-hidden">
                           <img
-                            src={getCloudinaryUrl(item.image, { width: 600, quality: "auto" })}
+                            src={item.image}
                             alt={item.text || `Gallery image ${index + 1}`}
                             loading="lazy"
                             decoding="async"
@@ -266,7 +255,10 @@ export function Gallery() {
                     <button
                       key={item.image + index}
                       type="button"
-                      className="group relative w-full overflow-hidden rounded-xl bg-motif-cream/90 backdrop-blur-sm border border-motif-accent/40 transition-all duration-300 hover:border-motif-accent/60"
+                      className="group relative w-full overflow-hidden rounded-xl backdrop-blur-sm transition-all duration-300"
+                      style={{ backgroundColor: "rgba(250,244,232,0.92)", border: `1px solid ${COLORS.border}` }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.borderHover }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border }}
                       onClick={() => {
                         setSelectedImage(item)
                         setCurrentIndex(index)
@@ -274,11 +266,11 @@ export function Gallery() {
                       aria-label={`Open image ${index + 1}`}
                     >
                       {/* Subtle glow on hover */}
-                      <div className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" style={{ background: 'linear-gradient(to bottom right, color-mix(in srgb, var(--color-motif-accent) 25%, transparent), color-mix(in srgb, var(--color-motif-deep) 12%, transparent))' }} />
+                      <div className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" style={{ background: "linear-gradient(to bottom right, rgba(184,50,50,0.15), rgba(140,94,4,0.08))" }} />
 
                       <div className="relative aspect-[3/4] md:aspect-square overflow-hidden">
                         <img
-                          src={getCloudinaryUrl(item.image, { width: 500, quality: "auto" })}
+                          src={item.image}
                           alt={item.text || `Gallery image ${index + 1}`}
                           loading="lazy"
                           decoding="async"
@@ -392,8 +384,16 @@ export function Gallery() {
             {/* Top bar with counter and close */}
             <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-4 sm:p-6">
               {/* Image counter */}
-              <div className="backdrop-blur-md rounded-full px-4 py-2 border" style={{ backgroundColor: "rgba(0,0,0,0.4)", borderColor: 'color-mix(in srgb, var(--color-motif-accent) 50%, transparent)' }}>
-                <span className="text-sm sm:text-base font-medium text-motif-cream">
+              <div className="backdrop-blur-md rounded-full px-4 py-2 border" style={{ backgroundColor: "rgba(0,0,0,0.4)", borderColor: "rgba(184,50,50,0.35)" }}>
+                <span
+                  style={{
+                    fontFamily: '"AgrandirWideBold", sans-serif',
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    color: "#FDFBF8",
+                  }}
+                >
                   {currentIndex + 1} / {galleryItems.length}
                 </span>
               </div>
@@ -448,7 +448,7 @@ export function Gallery() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src={getCloudinaryUrl(selectedImage.image || "/placeholder.svg", { width: 1200, quality: "auto" })}
+                  src={selectedImage.image || "/placeholder.svg"}
                   alt={selectedImage.text || "Gallery image"}
                   style={{ 
                     transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoomScale})`, 

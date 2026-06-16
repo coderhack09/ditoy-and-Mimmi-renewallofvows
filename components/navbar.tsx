@@ -12,9 +12,22 @@ const cormorant = Cormorant_Garamond({
   weight: ["400"],
 })
 
-// Palette lives in globals.css → @theme inline → --color-motif-*
-// Edit there once to update every component.
-
+// Vintage palette — matches guest-list / details sections
+const COLORS = {
+  deep: "#1C1C1E",
+  medium: "rgba(28, 28, 30, 0.68)",
+  muted: "rgba(28, 28, 30, 0.42)",
+  accent: "#B83232",
+  accentSoft: "rgba(184, 50, 50, 0.06)",
+  accentBorder: "rgba(184, 50, 50, 0.18)",
+  accentUnderline: "rgba(184, 50, 50, 0.70)",
+  parchmentSoft: "rgba(255, 252, 244, 0.92)",
+  parchmentBase: "rgba(250, 244, 232, 0.97)",
+  parchmentScrolled: "rgba(250, 244, 232, 0.98)",
+  border: "rgba(160, 122, 68, 0.25)",
+  shadow: "rgba(120, 85, 35, 0.10)",
+  hoverLine: "rgba(28, 28, 30, 0.25)",
+} as const
 
 const navLinks = [
   { href: "#home", label: "Home" },
@@ -94,21 +107,17 @@ export function Navbar() {
           : "backdrop-blur-md"
       }`}
       style={{
-        background: isScrolled
-          ? "rgba(253, 251, 248, 0.97)"
-          : "rgba(253, 251, 248, 0.92)",
-        borderBottom: "1px solid rgba(140, 110, 72, 0.14)",
-        boxShadow: isScrolled
-          ? "0 4px 24px rgba(140, 110, 72, 0.10)"
-          : "none",
+        background: isScrolled ? COLORS.parchmentScrolled : COLORS.parchmentBase,
+        borderBottom: `1px solid ${COLORS.border}`,
+        boxShadow: isScrolled ? `0 4px 24px ${COLORS.shadow}` : "none",
       }}
     >
-      {/* Subtle warm center lift — matches LoadingScreen layer 2 */}
+      {/* Subtle warm center lift */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(255,255,255,0.40) 0%, transparent 100%)",
+            "linear-gradient(180deg, rgba(255, 252, 244, 0.45) 0%, transparent 100%)",
         }}
       />
 
@@ -141,10 +150,10 @@ export function Navbar() {
                   href={link.href}
                   className={`px-3 lg:px-4 py-2 text-xs lg:text-sm ${cormorant.className} font-medium rounded-md transition-all duration-300 relative group`}
                   style={{
-                    color: isActive ? "#B83232" : "rgba(28, 28, 30, 0.65)",
-                    background: isActive ? "rgba(184, 50, 50, 0.06)" : "transparent",
+                    color: isActive ? COLORS.accent : COLORS.medium,
+                    background: isActive ? COLORS.accentSoft : "transparent",
                     border: isActive
-                      ? "1px solid rgba(184, 50, 50, 0.18)"
+                      ? `1px solid ${COLORS.accentBorder}`
                       : "1px solid transparent",
                   }}
                 >
@@ -154,14 +163,14 @@ export function Navbar() {
                     className="absolute bottom-0 left-0 h-[1.5px] transition-all duration-400 rounded-full"
                     style={{
                       width: isActive ? "100%" : "0%",
-                      background: "#B83232",
+                      background: COLORS.accent,
                       opacity: 0.70,
                     }}
                   />
                   {/* Hover underline */}
                   <span
                     className="absolute bottom-0 left-0 h-[1.5px] w-0 group-hover:w-full transition-all duration-300 rounded-full"
-                    style={{ background: "rgba(28, 28, 30, 0.25)" }}
+                    style={{ background: COLORS.hoverLine }}
                   />
                 </Link>
               )
@@ -177,11 +186,11 @@ export function Navbar() {
                 socialItems={[]}
                 displaySocials={false}
                 displayItemNumbering={true}
-                menuButtonColor="#1C1C1E"
-                openMenuButtonColor="#1C1C1E"
+                menuButtonColor={COLORS.deep}
+                openMenuButtonColor={COLORS.deep}
                 changeMenuColorOnOpen={false}
-                colors={["#FDFBF8", "#FAF6EF", "#F5EFE6"]}
-                accentColor="#B83232"
+                colors={["rgba(250, 244, 232, 0.98)", COLORS.parchmentSoft, "rgba(245, 235, 215, 0.95)"]}
+                accentColor={COLORS.accent}
                 isFixed={true}
                 onMenuOpen={() => {}}
                 onMenuClose={() => {}}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Heart, RefreshCw, TrendingUp, Mail, Users, MapPin, Calendar, Crown } from "lucide-react"
 import { Cormorant_Garamond, Cinzel } from "next/font/google"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
+import Image from "next/image"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],

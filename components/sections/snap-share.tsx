@@ -3,25 +3,45 @@
 import { useEffect, useState } from "react"
 import { motion } from "motion/react"
 import { Instagram, Facebook, Twitter, Share2, Copy, Download, Check } from "lucide-react"
+import Image from "next/image"
 import { Section } from "@/components/section"
 import { QRCodeCanvas } from "qrcode.react"
 import { siteConfig } from "@/content/site"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
-import { Cormorant_Garamond, Cinzel } from "next/font/google"
+import { Cormorant_Garamond } from "next/font/google"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400"],
 })
 
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-})
+// Vintage palette
+const COLORS = {
+  deep: "#1C1C1E",
+  medium: "rgba(28, 28, 30, 0.68)",
+  muted: "rgba(28, 28, 30, 0.42)",
+  accent: "#B83232",
+  accentHover: "#a32d2d",
+  parchmentSoft: "rgba(255, 252, 244, 0.92)",
+  parchmentMuted: "rgba(255, 252, 244, 0.55)",
+  border: "rgba(160, 122, 68, 0.25)",
+  borderStrong: "rgba(160, 122, 68, 0.45)",
+  gold: "rgba(140, 94, 4, 0.45)",
+} as const
 
-// QRCodeCanvas renders to <canvas> which cannot resolve CSS variables.
-// This hex must match --color-motif-deep defined in globals.css.
-const MOTIF_DEEP_HEX = "#8A1C1C"
+const CARD_STYLE = {
+  background: [
+    "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+    COLORS.parchmentSoft,
+  ].join(", "),
+  border: `1px solid ${COLORS.border}`,
+  boxShadow: [
+    "0 4px 40px rgba(120, 85, 35, 0.14)",
+    "0 1px 0 rgba(255, 248, 230, 0.90) inset",
+    "inset 0 0 60px rgba(200, 160, 90, 0.05)",
+  ].join(", "),
+} as const
+
+const SEPARATOR_GRADIENT = `linear-gradient(to right, transparent, ${COLORS.gold}, transparent)`
 
 export function SnapShare() {
   const [copiedHashtagIndex, setCopiedHashtagIndex] = useState<number | null>(null)
@@ -37,10 +57,8 @@ export function SnapShare() {
   const allHashtagsText = hashtags.join(" ")
   const groomNickname = siteConfig.couple.groomNickname
   const brideNickname = siteConfig.couple.brideNickname
-  const sanitizedGroomName = groomNickname.replace(/\s+/g, "")
-  const sanitizedBrideName = brideNickname.replace(/\s+/g, "")
 
-  const shareText = `Celebrate ${brideNickname} & ${groomNickname}'s wedding! Explore the details and share your special memories: ${websiteUrl} ${allHashtagsText} ✨`
+  const shareText =`Celebrate ${groomNickname} & ${brideNickname}'s renewal of vows! Share your photos and memories from our celebration: ${websiteUrl} ${allHashtagsText}`
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
@@ -69,15 +87,6 @@ export function SnapShare() {
     if (target) {
       window.open(target, "_blank", "width=600,height=400")
     }
-  }
-
-  const downloadQRCode = () => {
-    const canvas = document.getElementById("snapshare-qr") as HTMLCanvasElement | null
-    if (!canvas) return
-    const link = document.createElement("a")
-    link.download = `${sanitizedGroomName.toLowerCase()}-${sanitizedBrideName.toLowerCase()}-wedding-qr.png`
-    link.href = canvas.toDataURL("image/png")
-    link.click()
   }
 
   const downloadDriveQRCode = () => {
@@ -138,132 +147,50 @@ export function SnapShare() {
   return (
     <Section
       id="snap-share"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden bg-transparent py-12 md:py-16 lg:py-20"
       style={{ paddingBottom: 0 }}
     >
-      {/* White gradient overlay for readability */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
-        }}
-      />
-
-      {/* Corner floral decoration */}
-      <div className="absolute inset-0 pointer-events-none z-[1]">
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1) scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1)" }}
-          priority={false}
-        /> */}
+      {/* Vintage parchment overlay */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+              "rgba(250, 244, 232, 0.94)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 60% 40% at 20% 20%, rgba(210, 168, 110, 0.10) 0%, transparent 70%)",
+              "radial-gradient(ellipse 50% 35% at 80% 75%, rgba(170, 130, 80, 0.08) 0%, transparent 65%)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+            mixBlendMode: "multiply",
+            opacity: 0.55,
+          }}
+        />
       </div>
 
-      {/* Background — align with gallery/details */}
-      {/* <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0 opacity-[0.24]"
-          style={{
-            background: "linear-gradient(145deg, var(--color-motif-cream) 0%, var(--color-motif-deep) 24%, var(--color-motif-medium) 70%, var(--color-motif-deep) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.16]"
-          style={{
-            background: "radial-gradient(circle at 50% 10%, var(--color-motif-deep) 0%, transparent 55%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(135deg, var(--color-motif-cream) 0, var(--color-motif-cream) 26px, var(--color-motif-medium) 27px, var(--color-motif-medium) 28px)",
-          }}
-        />
-      </div> */}
-      
-      {/* Flower decoration - top left corner */}
-      {/* <div className="absolute left-0 top-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt="Flower decoration"
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65 scale-y-[-1]"
-          priority={false}
-          style={{ filter: "brightness(0) invert(1)" }}
-        />
-      </div> */}
-      
-      {/* Flower decoration - top right corner */}
-      {/* <div className="absolute right-0 top-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt="Flower decoration"
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65 scale-x-[-1] scale-y-[-1]"
-          priority={false}
-          style={{ filter: "brightness(0) invert(1)" }}
-        />
-      </div> */}
-      
-      {/* Flower decoration - left bottom corner */}
-      {/* <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt="Flower decoration"
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65"
-          priority={false}
-          style={{ filter: "brightness(0) invert(1)" }}
-        />
-      </div> */}
-      
-      {/* Flower decoration - right bottom corner */}
-      {/* <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt="Flower decoration"
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] opacity-65 scale-x-[-1]"
-          priority={false}
-          style={{ filter: "brightness(0) invert(1)" }}
-        />
-      </div> */}
+      {/* Corner decorations */}
+      <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden>
+        <Image src="/decoration/left-top-corner.png" alt="" width={320} height={320} className="absolute top-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-top-corner.png" alt="" width={320} height={320} className="absolute top-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        {/* <Image src="/decoration/left-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} /> */}
+      </div>
 
-      <div className="relative max-w-6xl mx-auto px-3 sm:px-6 md:px-8">
+      <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 md:px-8">
         <motion.div
           className="text-center mb-5 sm:mb-10"
           initial={{ opacity: 0, y: 60 }}
@@ -271,27 +198,31 @@ export function SnapShare() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div
-            className={`${cormorant.className} inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] sm:text-xs uppercase`}
-            style={{ letterSpacing: "0.3em", borderColor: "var(--color-motif-accent)", backgroundColor: "var(--color-motif-accent)", color: "var(--color-motif-cream)" }}
+            className={`${cormorant.className} parisienne-regular inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] sm:text-xs uppercase`}
+            style={{ letterSpacing: "0.3em", borderColor: COLORS.accent, backgroundColor: COLORS.accent, color: "#fff" }}
           >
-            Share your memories
+            Share the celebration
           </div>
           <h2
-            className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mt-2 sm:mt-4"
-            style={{ color: 'var(--color-motif-deep)' }}
+            className="parisienne-regular text-[34px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] leading-tight mt-2 sm:mt-4"
+            style={{ color: COLORS.deep }}
           >
-            Capture & Share the Celebration
+            Capture & Share Our Renewal
           </h2>
           <p
-  className="text-xs sm:text-sm md:text-base text-motif-deep/80 max-w-2xl mx-auto mt-2 sm:mt-4 leading-relaxed px-2"
->
-  Because you have been part of our journey through our friendship and love, we, <b>{groomNickname} & {brideNickname}</b>, joyfully invite you to witness one of the most meaningful moments of our lives.
-  <br />
-  Join us as we exchange our wedding vows on <b>{siteConfig.ceremony.day}, {siteConfig.wedding.date}, at {siteConfig.ceremony.location}</b> at {siteConfig.ceremony.time}, as we promise our hearts to one another and begin our forever.
-  <br />
-  Your presence will mean so much to us as we celebrate <b>Love, Commitment, and a Lifetime of Togetherness</b>.
-</p>
-          <div className="mx-auto mt-3 sm:mt-5 h-px w-20 sm:w-24" style={{ backgroundColor: "var(--color-motif-accent)" }} />
+            className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-2 sm:mt-4 leading-relaxed px-2"
+            style={{ color: COLORS.medium }}
+          >
+            Love grows, and so do we. Because you have been part of our journey,{" "}
+            <b style={{ color: COLORS.deep }}>{groomNickname} & {brideNickname}</b> invite you to capture and share the
+            moments from our vow renewal on{" "}
+            <b style={{ color: COLORS.deep }}>
+              {siteConfig.ceremony.day}, {siteConfig.ceremony.date}, at {siteConfig.ceremony.location}
+            </b>{" "}
+            at {siteConfig.ceremony.time}. Your photos and messages help us treasure this next chapter of{" "}
+            <b style={{ color: COLORS.deep }}>love, commitment, and togetherness</b>.
+          </p>
+          <div className="mx-auto mt-3 sm:mt-5 h-px w-20 sm:w-24" style={{ background: SEPARATOR_GRADIENT }} />
         </motion.div>
 
         <motion.div
@@ -300,64 +231,14 @@ export function SnapShare() {
           initial="initial"
           animate="animate"
         >
-          {/* Mobile order preserved: Website -> Hashtags -> Social -> Drive */}
-          {/* <motion.div className="lg:col-start-1 lg:row-start-1" variants={fadeInUp}>
-            <div className="bg-motif-cream/95 rounded-xl sm:rounded-[22px] p-3 sm:p-5 md:p-8 shadow-[0_18px_45px_rgba(0,0,0,0.25)] text-center flex flex-col border border-motif-deep">
-              <h4
-                className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight text-motif-deep mb-2 sm:mb-3"
-                style={{ color: 'var(--color-motif-deep)' }}
-              >
-                Share Our Wedding Website
-              </h4>
-              <p
-                className={`${cormorant.className} text-motif-deep text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed px-1`}
-              >
-                Spread the word about {brideNickname} & {groomNickname}&apos;s wedding celebration. Share this QR code with friends and family so they can join the celebration.
-              </p>
-
-              <div className="mx-auto inline-flex flex-col items-center bg-white/90 backdrop-blur-sm p-2.5 sm:p-5 md:p-7 rounded-xl sm:rounded-2xl shadow-md border border-motif-cream/80 mb-3 sm:mb-4">
-                <div className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-motif-cream border border-motif-cream/80">
-                  <div className="bg-white p-1.5 sm:p-3 rounded-lg shadow-sm border border-motif-cream/80">
-                    <QRCodeCanvas
-                      id="snapshare-qr"
-                      value={websiteUrl}
-                      size={isMobile ? 140 : 220}
-                      includeMargin
-                      className="bg-white"
-                      fgColor={MOTIF_DEEP_HEX}
-                    />
-                  </div>
-                </div>
-                <button
-                  onClick={downloadQRCode}
-                  className="flex items-center gap-1.5 sm:gap-2 mx-auto px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-motif-deep text-motif-cream border border-motif-deep/80 shadow-[0_10px_28px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_38px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 transition-all duration-200 text-xs sm:text-sm font-semibold"
-                >
-                  <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span
-                    className={`${cormorant.className} uppercase font-semibold`}
-                    style={{ letterSpacing: "0.15em" }}
-                  >
-                    Download QR
-                  </span>
-                </button>
-              </div>
-
-              <p
-                className={`${cormorant.className} text-motif-deep text-xs sm:text-sm leading-relaxed`}
-              >
-                Scan with any camera app to open the full invitation and schedule.
-              </p>
-            </div>
-          </motion.div> */}
-
           <motion.div className="lg:col-start-2 lg:row-start-1" variants={fadeInUp}>
-            <div className="bg-motif-cream/95 rounded-xl p-3 sm:p-4 shadow-[0_8px_24px_rgba(0,0,0,0.15)] border border-motif-deep/40 text-center">
+            <div className="rounded-xl p-3 sm:p-4 text-center" style={CARD_STYLE}>
               <div className="flex items-center gap-2 mb-2.5 sm:mb-3 text-center">
                 <h5
-                  className="lighten-regular text-[24px] sm:text-[30px] md:text-[35px] lg:text-[40px] xl:text-[45px] leading-tight text-motif-deep text-center mx-auto"
-                  style={{ color: 'var(--color-motif-deep)' }}
+                  className="parisienne-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] leading-tight text-center mx-auto"
+                  style={{ color: COLORS.deep }}
                 >
-                  Wedding Hashtags
+                  Celebration Hashtags
                 </h5>
               </div>
 
@@ -366,26 +247,32 @@ export function SnapShare() {
                   <motion.button
                     key={index}
                     onClick={() => copyHashtag(hashtag, index)}
-                    className={`w-full flex items-center justify-between gap-2 px-3 py-2 sm:py-2.5 rounded-lg border transition-all duration-200 active:scale-[0.98] ${
-                      copiedHashtagIndex === index
-                        ? "bg-motif-accent/10 border-motif-accent"
-                        : "bg-white/70 border-motif-deep/25 hover:border-motif-deep/60 hover:bg-white/90"
-                    }`}
+                    className="w-full flex items-center justify-between gap-2 px-3 py-2 sm:py-2.5 rounded-lg border transition-all duration-200 active:scale-[0.98]"
+                    style={{
+                      background:
+                        copiedHashtagIndex === index
+                          ? "rgba(184, 50, 50, 0.10)"
+                          : COLORS.parchmentSoft,
+                      borderColor:
+                        copiedHashtagIndex === index ? COLORS.accent : COLORS.border,
+                    }}
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.08 }}
                   >
                     <span
-                      className={`${cormorant.className} font-semibold text-sm sm:text-base text-left truncate flex-1 ${
-                        copiedHashtagIndex === index ? "text-motif-accent" : "text-motif-deep"
-                      }`}
+                      className={`${cormorant.className} font-semibold text-sm sm:text-base text-left truncate flex-1`}
+                      style={{
+                        color: copiedHashtagIndex === index ? COLORS.accent : COLORS.deep,
+                      }}
                     >
                       {hashtag}
                     </span>
                     <span
-                      className={`flex items-center gap-1 flex-shrink-0 text-[10px] sm:text-xs font-semibold uppercase tracking-wider ${
-                        copiedHashtagIndex === index ? "text-motif-accent" : "text-motif-medium"
-                      }`}
+                      className="flex items-center gap-1 flex-shrink-0 text-[10px] sm:text-xs font-semibold uppercase tracking-wider"
+                      style={{
+                        color: copiedHashtagIndex === index ? COLORS.accent : COLORS.muted,
+                      }}
                     >
                       {copiedHashtagIndex === index ? (
                         <>
@@ -403,11 +290,12 @@ export function SnapShare() {
 
               <button
                 onClick={copyAllHashtags}
-                className={`w-full flex items-center justify-center gap-1.5 py-2 sm:py-2.5 rounded-lg border transition-all duration-200 active:scale-[0.98] ${
-                  copiedAllHashtags
-                    ? "bg-motif-accent/10 border-motif-accent text-motif-accent"
-                    : "bg-motif-deep/5 border-motif-deep/30 text-motif-deep hover:bg-motif-deep hover:text-motif-cream hover:border-motif-deep"
-                }`}
+                className="w-full flex items-center justify-center gap-1.5 py-2 sm:py-2.5 rounded-lg border transition-all duration-200 active:scale-[0.98]"
+                style={{
+                  background: copiedAllHashtags ? "rgba(184, 50, 50, 0.10)" : COLORS.parchmentMuted,
+                  borderColor: copiedAllHashtags ? COLORS.accent : COLORS.borderStrong,
+                  color: copiedAllHashtags ? COLORS.accent : COLORS.deep,
+                }}
               >
                 {copiedAllHashtags ? (
                   <Check className="w-3.5 h-3.5" />
@@ -425,108 +313,111 @@ export function SnapShare() {
           </motion.div>
 
           <motion.div className="lg:col-start-2 lg:row-start-2" variants={fadeInUp}>
-            <div className="bg-motif-cream/95 rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.25)] border border-motif-deep">
+            <div className="rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7" style={CARD_STYLE}>
               <h5
-                className="lighten-regular text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] leading-tight text-motif-deep mb-2 sm:mb-3 text-center"
-                style={{ color: 'var(--color-motif-deep)' }}
+                className="parisienne-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] leading-tight mb-2 sm:mb-3 text-center"
+                style={{ color: COLORS.deep }}
               >
                 Share on Social Media
               </h5>
               <p
-                className={`${cormorant.className} text-motif-deep text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}
+                className={`${cormorant.className} text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}
+                style={{ color: COLORS.medium }}
               >
-                Help spread the word about {groomNickname} & {brideNickname}&apos;s wedding celebration. Share the event across your favorite platforms.
+                Help spread the word about {groomNickname} & {brideNickname}&apos;s renewal of vows. Share the
+                celebration across your favorite platforms.
               </p>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
-                <button
-                  onClick={() => shareOnSocial("instagram")}
-                  className="group flex items-center justify-center gap-1.5 sm:gap-2 bg-white border border-motif-deep/80 text-motif-deep px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg hover:bg-motif-deep/10 transition-all duration-200 shadow-md hover:shadow-lg hover:border-motif-deep"
-                >
-                  <Instagram className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                  <span
-                    className={`${cormorant.className} font-semibold text-xs sm:text-sm uppercase text-motif-deep`}
-                    style={{ letterSpacing: "0.18em" }}
+                {(
+                  [
+                    { platform: "instagram" as const, icon: Instagram, label: "Instagram" },
+                    { platform: "facebook" as const, icon: Facebook, label: "Facebook" },
+                    { platform: "tiktok" as const, icon: Share2, label: "TikTok" },
+                    { platform: "twitter" as const, icon: Twitter, label: "Twitter" },
+                  ] as const
+                ).map(({ platform, icon: Icon, label }) => (
+                  <button
+                    key={platform}
+                    onClick={() => shareOnSocial(platform)}
+                    className="group flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                    style={{
+                      background: COLORS.parchmentSoft,
+                      border: `1px solid ${COLORS.borderStrong}`,
+                      color: COLORS.deep,
+                    }}
                   >
-                    Instagram
-                  </span>
-                </button>
-                <button
-                  onClick={() => shareOnSocial("facebook")}
-                  className="group flex items-center justify-center gap-1.5 sm:gap-2 bg-white border border-motif-deep/80 text-motif-deep px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg hover:bg-motif-deep/10 transition-all duration-200 shadow-md hover:shadow-lg hover:border-motif-deep"
-                >
-                  <Facebook className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                  <span
-                    className={`${cormorant.className} font-semibold text-xs sm:text-sm uppercase text-motif-deep`}
-                    style={{ letterSpacing: "0.18em" }}
-                  >
-                    Facebook
-                  </span>
-                </button>
-                <button
-                  onClick={() => shareOnSocial("tiktok")}
-                  className="group flex items-center justify-center gap-1.5 sm:gap-2 bg-white border border-motif-deep/80 text-motif-deep px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg hover:bg-motif-deep/10 transition-all duration-200 shadow-md hover:shadow-lg hover:border-motif-deep"
-                >
-                  <Share2 className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                  <span
-                    className={`${cormorant.className} font-semibold text-xs sm:text-sm uppercase text-motif-deep`}
-                    style={{ letterSpacing: "0.18em" }}
-                  >
-                    TikTok
-                  </span>
-                </button>
-                <button
-                  onClick={() => shareOnSocial("twitter")}
-                  className="group flex items-center justify-center gap-1.5 sm:gap-2 bg-white border border-motif-deep/80 text-motif-deep px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg hover:bg-motif-deep/10 transition-all duration-200 shadow-md hover:shadow-lg hover:border-motif-deep"
-                >
-                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                  <span
-                    className={`${cormorant.className} font-semibold text-xs sm:text-sm uppercase text-motif-deep`}
-                    style={{ letterSpacing: "0.18em" }}
-                  >
-                    Twitter
-                  </span>
-                </button>
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform flex-shrink-0" />
+                    <span
+                      className={`${cormorant.className} font-semibold text-xs sm:text-sm uppercase`}
+                      style={{ letterSpacing: "0.18em" }}
+                    >
+                      {label}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           </motion.div>
 
           {driveLink && (
             <motion.div className="lg:col-start-1 lg:row-start-2" variants={fadeInUp}>
-              <div className="bg-motif-cream/95 rounded-xl sm:rounded-[22px] p-3 sm:p-5 md:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.25)] text-center border border-motif-deep">
+              <div className="rounded-xl sm:rounded-[22px] p-3 sm:p-5 md:p-7 text-center" style={CARD_STYLE}>
                 <div
-                  className={`${cormorant.className} inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-motif-deep/60 bg-motif-deep px-2.5 py-1 text-[10px] sm:text-xs uppercase text-motif-cream mb-2 sm:mb-3`}
-                  style={{ letterSpacing: "0.28em" }}
+                  className={`${cormorant.className} inline-flex items-center gap-1.5 sm:gap-2 rounded-full border px-2.5 py-1 text-[10px] sm:text-xs uppercase mb-2 sm:mb-3`}
+                  style={{
+                    letterSpacing: "0.28em",
+                    borderColor: COLORS.borderStrong,
+                    backgroundColor: COLORS.deep,
+                    color: "#fff",
+                  }}
                 >
                   Upload Your Photos & Videos
                 </div>
                 <p
-                  className={`${cormorant.className} text-motif-deep text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 px-1`}
+                  className={`${cormorant.className} text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 px-1`}
+                  style={{ color: COLORS.medium }}
                 >
-                  Help us capture our special day! Scan the QR or use the actions below to drop your clips into our shared Drive.
+                  Help us capture our vow renewal celebration! Scan the QR or use the actions below to upload your
+                  photos and videos to our shared Drive.
                 </p>
-                <div className="mx-auto inline-flex flex-col items-center bg-white/90 backdrop-blur-sm p-2.5 sm:p-5 rounded-xl sm:rounded-2xl shadow-md border border-motif-cream/80 mb-3 sm:mb-4">
-                  <div className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-motif-cream border border-motif-cream/80">
-                    <div className="bg-white p-1.5 sm:p-3 rounded-lg shadow-sm border border-motif-cream/80">
+                <div
+                  className="mx-auto inline-flex flex-col items-center p-2.5 sm:p-5 rounded-xl sm:rounded-2xl shadow-md mb-3 sm:mb-4"
+                  style={{
+                    background: COLORS.parchmentSoft,
+                    border: `1px solid ${COLORS.border}`,
+                  }}
+                >
+                  <div
+                    className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl"
+                    style={{ background: COLORS.parchmentMuted, border: `1px solid ${COLORS.border}` }}
+                  >
+                    <div
+                      className="p-1.5 sm:p-3 rounded-lg shadow-sm"
+                      style={{ background: "#fff", border: `1px solid ${COLORS.border}` }}
+                    >
                       <QRCodeCanvas
                         id="drive-qr"
                         value={driveLink}
                         size={isMobile ? 130 : 200}
                         includeMargin
                         className="bg-white"
-                        fgColor={MOTIF_DEEP_HEX}
+                        fgColor={COLORS.deep}
                       />
                     </div>
                   </div>
-                  <p className={`${cormorant.className} text-motif-medium text-xs sm:text-sm`}>
+                  <p className={`${cormorant.className} text-xs sm:text-sm`} style={{ color: COLORS.muted }}>
                     Scan with your camera app
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-3">
                   <button
                     onClick={copyDriveLink}
-                    className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-motif-deep text-motif-cream border border-motif-deep/80 shadow-sm hover:shadow-md text-xs sm:text-sm transition-all ${
-                      copiedDriveLink ? "bg-motif-deep border-motif-deep text-white" : ""
-                    }`}
+                    className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-sm hover:shadow-md text-xs sm:text-sm transition-all"
+                    style={{
+                      background: copiedDriveLink ? COLORS.accentHover : COLORS.accent,
+                      color: "#fff",
+                      border: `1px solid ${COLORS.accent}`,
+                    }}
                   >
                     {copiedDriveLink ? (
                       <>
@@ -552,11 +443,16 @@ export function SnapShare() {
                   </button>
                   <button
                     onClick={downloadDriveQRCode}
-                    className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-motif-deep text-motif-cream border border-motif-deep/80 shadow-sm hover:shadow-md text-xs sm:text-sm transition-all font-semibold"
+                    className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-sm hover:shadow-md text-xs sm:text-sm transition-all font-semibold"
+                    style={{
+                      background: COLORS.accent,
+                      color: "#fff",
+                      border: `1px solid ${COLORS.accent}`,
+                    }}
                   >
                     <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span
-                      className={`${cormorant.className} uppercase font-semibold text-motif-cream`}
+                      className={`${cormorant.className} uppercase font-semibold`}
                       style={{ letterSpacing: "0.18em" }}
                     >
                       Download QR
@@ -566,18 +462,24 @@ export function SnapShare() {
                     href={driveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white border border-motif-deep/80 text-motif-deep shadow-sm hover:shadow-md hover:bg-motif-deep/10 text-xs sm:text-sm transition-all"
+                    className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg shadow-sm hover:shadow-md text-xs sm:text-sm transition-all"
+                    style={{
+                      background: COLORS.parchmentSoft,
+                      border: `1px solid ${COLORS.borderStrong}`,
+                      color: COLORS.deep,
+                    }}
                   >
                     <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span
-                      className={`${cormorant.className} tracking-[0.15em] sm:tracking-[0.18em] uppercase font-semibold text-motif-deep`}
+                      className={`${cormorant.className} tracking-[0.15em] sm:tracking-[0.18em] uppercase font-semibold`}
                     >
                       Open Drive
                     </span>
                   </a>
                 </div>
                 <p
-                  className={`${cormorant.className} text-motif-deep text-xs sm:text-sm mt-2 sm:mt-3 leading-relaxed`}
+                  className={`${cormorant.className} text-xs sm:text-sm mt-2 sm:mt-3 leading-relaxed`}
+                  style={{ color: COLORS.medium }}
                 >
                   or tap &quot;Open Google Drive Folder.&quot;
                 </p>
@@ -587,16 +489,17 @@ export function SnapShare() {
         </motion.div>
 
         <motion.div className="text-center mt-5 sm:mt-10" variants={fadeInUp}>
-          <div className="bg-motif-cream/95 rounded-xl sm:rounded-[22px] p-4 sm:p-6 md:p-7 shadow-[0_25px_80px_rgba(0,0,0,0.25)] border border-motif-cream/80 max-w-3xl mx-auto backdrop-blur-xl">
+          <div className="rounded-xl sm:rounded-[22px] p-4 sm:p-6 md:p-7 max-w-3xl mx-auto" style={CARD_STYLE}>
             <p
-              className={`${cormorant.className} text-motif-deep text-sm sm:text-base md:text-lg leading-relaxed mb-3 sm:mb-4 px-2`}
+              className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed mb-3 sm:mb-4 px-2`}
+              style={{ color: COLORS.medium }}
             >
-              Thank you for helping make {groomNickname} & {brideNickname}&apos;s wedding celebration memorable. Your photos and messages create beautiful memories
-              that we will treasure for a lifetime.
+              Thank you for helping make {groomNickname} & {brideNickname}&apos;s vow renewal celebration memorable.
+              Your photos and messages create beautiful memories that we will treasure for a lifetime.
             </p>
             <div
-                className={`${cormorant.className} flex items-center justify-center gap-2 text-motif-deep text-xs sm:text-sm uppercase text-motif-deep`}
-              style={{ letterSpacing: "0.25em" }}
+              className={`${cormorant.className} flex items-center justify-center gap-2 text-xs sm:text-sm uppercase`}
+              style={{ letterSpacing: "0.25em", color: COLORS.deep }}
             >
               <span>Thank you for sharing the joy</span>
             </div>

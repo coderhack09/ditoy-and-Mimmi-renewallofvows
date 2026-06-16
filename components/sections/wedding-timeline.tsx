@@ -5,8 +5,8 @@ import { Section } from "@/components/section"
 import { siteConfig } from "@/content/site"
 import { MapPin } from "lucide-react"
 import { motion } from "motion/react"
+import Image from "next/image"
 import { Cormorant_Garamond, Cinzel } from "next/font/google"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -24,11 +24,19 @@ const guestsTime = siteConfig.ceremony.guestsTime ?? "1:30 PM"
 const ceremonyVenue = siteConfig.ceremony.location
 const receptionVenue = siteConfig.reception.location
 
-// Colors sourced from globals.css @theme inline — edit there to update everywhere
-const TIMELINE_TEXT = "var(--color-motif-deep)"
-// SVG stroke — CSS vars are not valid SVG attributes
-const TIMELINE_SVG_STROKE = "#111111"
-const DECO_FILTER_WHITE = "brightness(0)"
+// Vintage palette — matches guest-list / details sections
+const COLORS = {
+  deep: "#1C1C1E",
+  medium: "rgba(28, 28, 30, 0.68)",
+  muted: "rgba(28, 28, 30, 0.42)",
+  accent: "#B83232",
+  accentHover: "#a32d2d",
+  parchmentSoft: "rgba(255, 252, 244, 0.92)",
+  parchmentMuted: "rgba(255, 252, 244, 0.55)",
+  border: "rgba(160, 122, 68, 0.25)",
+  borderStrong: "rgba(160, 122, 68, 0.45)",
+  gold: "rgba(140, 94, 4, 0.45)",
+} as const
 
 type TimelineIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
@@ -91,90 +99,77 @@ export function WeddingTimeline() {
   return (
     <Section
       id="wedding-timeline"
-      className="relative py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden"
+      className="relative py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden bg-transparent"
     >
-      {/* White gradient overlay for readability */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
-        }}
-      />
+      {/* Vintage parchment overlay */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+              "rgba(250, 244, 232, 0.94)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 60% 40% at 20% 20%, rgba(210, 168, 110, 0.10) 0%, transparent 70%)",
+              "radial-gradient(ellipse 50% 35% at 80% 75%, rgba(170, 130, 80, 0.08) 0%, transparent 65%)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+            mixBlendMode: "multiply",
+            opacity: 0.55,
+          }}
+        />
+      </div>
 
-      {/* Corner floral decoration */}
-      <div className="absolute inset-0 pointer-events-none z-[1]">
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1) scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1)" }}
-          priority={false}
-        /> */}
+      {/* Corner decorations */}
+      <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden>
+        <Image src="/decoration/left-top-corner.png" alt="" width={320} height={320} className="absolute top-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-top-corner.png" alt="" width={320} height={320} className="absolute top-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/left-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
       </div>
 
       {/* Header */}
       <div className="relative z-10 text-center mb-8 sm:mb-10 md:mb-12 px-3 sm:px-4">
         <p
           className="text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] mb-1 sm:mb-1.5 mt-4 sm:mt-6 md:mt-8"
-          style={{ color: 'var(--color-motif-deep)' }}
+          style={{ color: COLORS.deep }}
         >
           Wedding Day
         </p>
 
         <h2
-          className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mb-2"
-          style={{ color: 'var(--color-motif-deep)' }}
+          className="parisienne-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] leading-tight mb-2"
+          style={{ color: COLORS.deep }}
         >
           Timeline
         </h2>
 
         <p
-          className={`${cormorant.className} text-[11px] sm:text-sm md:text-base lg:text-lg max-w-xl mx-auto leading-relaxed px-2 opacity-90 drop-shadow-sm`}
-          style={{ color: TIMELINE_TEXT }}
+          className={`${cormorant.className} text-[11px] sm:text-sm md:text-base lg:text-lg max-w-xl mx-auto leading-relaxed px-2 drop-shadow-sm`}
+          style={{ color: COLORS.medium }}
         >
           A simple overview of the key moments of our day, from arrival to farewell.
         </p>
 
         <div className="flex items-center justify-center gap-2 mt-4 sm:mt-5">
-          <div
-            className="w-10 sm:w-14 md:w-20 h-px opacity-50"
-            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 55%, transparent)" }}
-          />
-          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: TIMELINE_TEXT }} />
-          <div className="w-1.5 h-1.5 rounded-full opacity-55" style={{ backgroundColor: TIMELINE_TEXT }} />
-          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: TIMELINE_TEXT }} />
-          <div
-            className="w-10 sm:w-14 md:w-20 h-px opacity-50"
-            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 55%, transparent)" }}
-          />
+          <div className="w-10 sm:w-14 md:w-20 h-px" style={{ background: `linear-gradient(to right, transparent, ${COLORS.gold}, transparent)` }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.accent }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.borderStrong }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.accent }} />
+          <div className="w-10 sm:w-14 md:w-20 h-px" style={{ background: `linear-gradient(to left, transparent, ${COLORS.gold}, transparent)` }} />
         </div>
       </div>
 
@@ -182,10 +177,10 @@ export function WeddingTimeline() {
       <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-5 lg:px-8">
         {/* Center line */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 inset-y-0 w-[2px] sm:w-px pointer-events-none opacity-80 z-0"
+          className="absolute left-1/2 -translate-x-1/2 inset-y-0 w-[2px] sm:w-px pointer-events-none z-0"
           style={{
-            background:
-              "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-motif-deep) 60%, transparent), transparent)",
+            background: `linear-gradient(to bottom, transparent, ${COLORS.gold}, ${COLORS.accent}, ${COLORS.gold}, transparent)`,
+            opacity: 0.75,
           }}
         />
 
@@ -219,14 +214,14 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             {!isEven ? <TimelineText event={event} align="right" /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} />}
             <div
               className="hidden lg:block w-10 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
+              style={{ backgroundColor: COLORS.gold }}
             />
           </div>
         </div>
 
         {/* Center dot */}
         <div className="relative flex items-center justify-center">
-          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: TIMELINE_TEXT }} />
+          <div className="w-2 h-2 rounded-full ring-2 ring-white/80" style={{ backgroundColor: COLORS.accent }} />
         </div>
 
         {/* Right side */}
@@ -234,7 +229,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
           <div className="flex items-center justify-start gap-4">
             <div
               className="hidden lg:block w-10 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
+              style={{ backgroundColor: COLORS.gold }}
             />
             {isEven ? <TimelineText event={event} align="left" /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} />}
           </div>
@@ -249,14 +244,14 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
             {!isEven ? <TimelineText event={event} align="right" mobile /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />}
             <div
               className="w-6 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
+              style={{ backgroundColor: COLORS.gold }}
             />
           </div>
         </div>
 
         {/* Center dot */}
         <div className="relative flex items-center justify-center">
-          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: TIMELINE_TEXT }} />
+          <div className="w-2 h-2 rounded-full ring-2 ring-white/80" style={{ backgroundColor: COLORS.accent }} />
         </div>
 
         {/* Right side */}
@@ -264,7 +259,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
           <div className="flex items-center justify-start gap-3">
             <div
               className="w-6 h-px opacity-70"
-              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-deep) 65%, transparent)" }}
+              style={{ backgroundColor: COLORS.gold }}
             />
             {isEven ? <TimelineText event={event} align="left" mobile /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />}
           </div>
@@ -290,7 +285,7 @@ function TimelineText({
         className={`${cinzel.className} ${
           mobile ? "text-[0.7rem]" : "text-[0.75rem] lg:text-sm"
         } tracking-[0.22em] uppercase drop-shadow-sm`}
-        style={{ color: TIMELINE_TEXT }}
+        style={{ color: COLORS.deep }}
       >
         {event.title}
       </p>
@@ -298,7 +293,7 @@ function TimelineText({
         className={`${cormorant.className} ${
           mobile ? "text-[0.75rem]" : "text-sm lg:text-base"
         } mt-0.5 opacity-95 drop-shadow-sm`}
-        style={{ color: TIMELINE_TEXT }}
+        style={{ color: COLORS.deep }}
       >
         at {event.time}
       </p>
@@ -308,7 +303,7 @@ function TimelineText({
           className={`${cormorant.className} ${
             mobile ? "text-[10px]" : "text-xs lg:text-sm"
           } mt-1.5 leading-relaxed opacity-90 drop-shadow-sm`}
-          style={{ color: TIMELINE_TEXT }}
+          style={{ color: COLORS.deep }}
         >
           {event.description}
         </p>
@@ -318,10 +313,10 @@ function TimelineText({
         <div
           className={`mt-1.5 flex items-start gap-1.5 ${align === "right" ? "justify-end" : "justify-start"} opacity-90`}
         >
-          <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 drop-shadow-sm" style={{ color: TIMELINE_TEXT }} />
+          <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 drop-shadow-sm" style={{ color: COLORS.accent }} />
           <p
             className={`${cormorant.className} ${mobile ? "text-[10px]" : "text-xs lg:text-sm"} leading-relaxed drop-shadow-sm`}
-            style={{ color: TIMELINE_TEXT }}
+            style={{ color: COLORS.medium }}
           >
             {event.location}
           </p>
@@ -342,14 +337,15 @@ function IconMark({
 }) {
   if (imageSrc) {
     return (
-      <CloudinaryImage
+      <Image
         src={imageSrc}
         alt=""
         width={96}
         height={96}
         className={`${
           mobile ? "w-16 h-16" : "w-18 h-18 lg:w-22 lg:h-22"
-        } object-contain brightness-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}
+        } object-contain drop-shadow-[0_2px_8px_rgba(120,85,35,0.18)]`}
+        style={{ filter: "brightness(0) saturate(100%) invert(12%) sepia(5%) saturate(500%) hue-rotate(314deg) brightness(95%) contrast(95%)" }}
       />
     )
   }
@@ -358,17 +354,17 @@ function IconMark({
     <div
       className={`${
         mobile ? "w-14 h-14" : "w-16 h-16 lg:w-18 lg:h-18"
-      } rounded-full border bg-black/5 flex items-center justify-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.10)]`}
-      style={{ borderColor: "color-mix(in srgb, var(--color-motif-deep) 45%, transparent)" }}
+      } rounded-full border flex items-center justify-center drop-shadow-[0_2px_8px_rgba(120,85,35,0.12)]`}
+      style={{ borderColor: COLORS.borderStrong, backgroundColor: COLORS.parchmentMuted }}
     >
-      <Icon className={`${mobile ? "w-7 h-7" : "w-8 h-8 lg:w-9 lg:h-9"}`} style={{ color: TIMELINE_TEXT }} />
+      <Icon className={`${mobile ? "w-7 h-7" : "w-8 h-8 lg:w-9 lg:h-9"}`} style={{ color: COLORS.accent }} />
     </div>
   )
 }
 
 /* Hand-drawn–style timeline icons */
 
-const iconStroke = TIMELINE_SVG_STROKE
+const iconStroke = COLORS.deep
 
 function GuestsIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

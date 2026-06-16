@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 const BACKGROUND_VIDEO_SRC =
-  "/background_music/newVideoBackground.mp4"
+  "/background_music/Flowers - Video Background HD 1080p.mp4"
 
 export function Hero({ onOpen, visible }: HeroProps) {
   const [contentVisible, setContentVisible] = useState(false)
@@ -134,9 +134,9 @@ export function Hero({ onOpen, visible }: HeroProps) {
             }`}
             style={{
               fontFamily: '"AgrandirWideBold", sans-serif',
-              background: "#B83232",
+              background: "#BFC170",
               color: "#FDFBF8",
-              border: "1px solid rgba(184, 50, 50, 0.40)",
+              border: "1px solid rgb(191, 193, 112, 0.40)",
               letterSpacing: "0.18em",
             }}
             onMouseEnter={e => (e.currentTarget.style.background = "#982828")}

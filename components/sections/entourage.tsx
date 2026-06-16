@@ -4,8 +4,8 @@ import React from "react"
 import { useState, useEffect, useMemo, useRef } from "react"
 import { siteConfig, entourage as staticEntourage, principalSponsors as staticSponsors } from "@/content/site"
 import { Loader2, Users } from "lucide-react"
+import Image from "next/image"
 import { Cormorant_Garamond, Cinzel } from "next/font/google"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -29,16 +29,35 @@ interface PrincipalSponsor {
   FemalePrincipalSponsor: string
 }
 
-// Colors sourced from globals.css @theme inline — edit there to update everywhere
-const palette = {
-  deep:          "var(--color-motif-deep)",
-  medium:        "var(--color-motif-medium)",   // role title text
-  softBrown:     "var(--color-motif-medium)",
-  background:    "var(--color-motif-cream)",
-  champagneGold: "var(--color-motif-silver)",
-  champagneLight:"var(--color-motif-cream)",
-  sage:          "var(--color-motif-medium)",   // separator lines (was undefined)
+// Vintage palette — matches guest-list / details sections
+const COLORS = {
+  deep: "#1C1C1E",
+  medium: "rgba(28, 28, 30, 0.68)",
+  muted: "rgba(28, 28, 30, 0.42)",
+  accent: "#B83232",
+  accentHover: "#a32d2d",
+  parchmentSoft: "rgba(255, 252, 244, 0.92)",
+  parchmentMuted: "rgba(255, 252, 244, 0.55)",
+  border: "rgba(160, 122, 68, 0.25)",
+  borderStrong: "rgba(160, 122, 68, 0.45)",
+  gold: "rgba(140, 94, 4, 0.45)",
 } as const
+
+const CARD_STYLE = {
+  background: [
+    "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+    COLORS.parchmentSoft,
+  ].join(", "),
+  border: `1px solid ${COLORS.border}`,
+  boxShadow: [
+    "0 4px 40px rgba(120, 85, 35, 0.14)",
+    "0 1px 0 rgba(255, 248, 230, 0.90) inset",
+    "inset 0 0 60px rgba(200, 160, 90, 0.05)",
+  ].join(", "),
+} as const
+
+const SEPARATOR_GRADIENT = `linear-gradient(to right, transparent, ${COLORS.gold}, transparent)`
+const HOVER_HIGHLIGHT = "linear-gradient(to right, transparent, rgba(184, 50, 50, 0.08), transparent)"
 
 function mapStaticEntourage(): EntourageMember[] {
   const roleToCategory: Record<string, string> = {
@@ -229,7 +248,7 @@ export function Entourage() {
     return (
       <h3
         className={`relative ${cinzel.className} text-[0.7rem] sm:text-[0.85rem] md:text-base lg:text-lg tracking-[0.18em] uppercase mb-1 sm:mb-1.5 md:mb-2 ${textAlign} ${className} transition-all duration-300 whitespace-nowrap`}
-        style={{ color: palette.deep }}
+        style={{ color: COLORS.deep }}
       >
         {children}
       </h3>
@@ -256,18 +275,18 @@ export function Entourage() {
       >
         <div
           className="absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 rounded-md"
-          style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-silver) 21%, transparent), transparent)' }}
+          style={{ background: HOVER_HIGHLIGHT }}
         />
         <p
           className={`relative text-[10px] sm:text-[11.5px] md:text-[12.5px] lg:text-[13.5px] font-semibold ${textAlign} transition-all duration-300`}
-          style={{ color: palette.deep }}
+          style={{ color: COLORS.deep }}
         >
           {member.Name}
         </p>
         {showRole && member.RoleTitle && (
           <p
             className={`relative text-[9px] sm:text-[10px] md:text-[10px] lg:text-xs font-medium mt-0 leading-tight ${textAlign} tracking-wide uppercase transition-colors duration-300 opacity-80`}
-            style={{ color: palette.medium }}
+            style={{ color: COLORS.medium }}
           >
             {member.RoleTitle}
           </p>
@@ -319,29 +338,35 @@ export function Entourage() {
   }
 
   return (
-    <div className="relative w-full" style={{ backgroundColor: 'var(--color-motif-cream)' }}>
-      {/* Full-bleed layered background — champagne + beige with soft movement */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        {/* Soft diagonal wash */}
+    <div className="relative w-full bg-transparent">
+      {/* Vintage parchment overlay */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden>
         <div
-          className="absolute inset-0 opacity-[0.26]"
+          className="absolute inset-0"
           style={{
-            background: 'linear-gradient(145deg, var(--color-motif-cream) 0%, color-mix(in srgb, var(--color-motif-silver) 14%, transparent) 35%, color-mix(in srgb, var(--color-motif-medium) 6%, transparent) 70%, color-mix(in srgb, var(--color-motif-deep) 3%, transparent) 100%)',
+            background: [
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+              "rgba(250, 244, 232, 0.94)",
+            ].join(", "),
           }}
         />
-        {/* Gentle spotlight behind center card */}
         <div
-          className="absolute inset-0 opacity-[0.16]"
+          className="absolute inset-0"
           style={{
-            background: 'radial-gradient(circle at 50% 15%, var(--color-motif-silver) 0%, transparent 58%)',
+            background: [
+              "radial-gradient(ellipse 60% 40% at 20% 20%, rgba(210, 168, 110, 0.10) 0%, transparent 70%)",
+              "radial-gradient(ellipse 50% 35% at 80% 75%, rgba(170, 130, 80, 0.08) 0%, transparent 65%)",
+            ].join(", "),
           }}
         />
-        {/* Vertical soft stripes for subtle texture */}
         <div
-          className="absolute inset-0 opacity-[0.08]"
+          className="absolute inset-0"
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, rgba(255,255,255,0.0) 0, rgba(255,255,255,0.0) 32px, rgba(255,255,255,0.24) 33px, rgba(255,255,255,0.24) 34px)",
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+            mixBlendMode: "multiply",
+            opacity: 0.55,
           }}
         />
       </div>
@@ -351,67 +376,44 @@ export function Entourage() {
         id="entourage"
         className="relative z-10 py-8 md:py-10 lg:py-12 overflow-hidden"
       >
-      {/* Corner floral decoration */}
-      <div className="absolute inset-0 pointer-events-none z-[1]">
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1) scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1)" }}
-          priority={false}
-        /> */}
+      {/* Corner decorations */}
+      <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden>
+        <Image src="/decoration/left-top-corner.png" alt="" width={320} height={320} className="absolute top-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-top-corner.png" alt="" width={320} height={320} className="absolute top-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/left-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
       </div>
 
       {/* Section Header */}
       <div className={`relative z-30 text-center mb-4 sm:mb-5 md:mb-6 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}>
         <p
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2 mx-auto max-w-xs sm:max-w-sm md:max-w-md px-10 sm:px-14 md:px-0`}
-          style={{ color: palette.softBrown }}
+          style={{ color: COLORS.medium }}
         >
           Those who stand with {siteConfig.couple.groomNickname} &amp; {siteConfig.couple.brideNickname}
         </p>
 
         <h2
-          className="lighten-regular text-[40px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] leading-tight mb-1 sm:mb-2 md:mb-2.5"
-          style={{ color: 'var(--color-motif-deep)' }}
+          className="parisienne-regular text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] leading-tight mb-1 sm:mb-2 md:mb-2.5"
+          style={{ color: COLORS.deep }}
         >
           Wedding Entourage
         </h2>
 
         <p
-          className={`${cormorant.className} text-xs sm:text-sm md:text-base mb-2 sm:mb-2.5 md:mb-3 italic opacity-90 px-24 sm:px-36 md:px-48`}
-          style={{ color: palette.softBrown }}
+          className={`${cormorant.className} text-xs sm:text-sm md:text-base mb-2 sm:mb-2.5 md:mb-3 italic px-24 sm:px-36 md:px-48`}
+          style={{ color: COLORS.medium }}
         >
           Honoring those who share in our joy
         </p>
+
+        <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
+          <div className="h-px w-10 sm:w-14 md:w-20" style={{ background: SEPARATOR_GRADIENT }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.accent }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.borderStrong }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS.accent }} />
+          <div className="h-px w-10 sm:w-14 md:w-20" style={{ background: SEPARATOR_GRADIENT }} />
+        </div>
       </div>
 
       {/* Central Card Container */}
@@ -421,26 +423,26 @@ export function Entourage() {
         }`}
       >
         <div
-          className="relative bg-motif-cream/95 backdrop-blur-lg rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500 group"
-          style={{ boxShadow: '0 18px 40px color-mix(in srgb, var(--color-motif-deep) 13%, transparent)' }}
+          className="relative backdrop-blur-lg rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-500 group"
+          style={CARD_STYLE}
         >
           {/* Card content */}
           <div className="relative p-3 sm:p-4 md:p-5 z-10">
             {isLoading ? (
               <div className="flex items-center justify-center py-24 sm:py-28 md:py-32">
                 <div className="flex flex-col items-center gap-4">
-                  <Loader2 className="h-10 w-10 sm:h-12 sm:w-12 animate-spin opacity-70" style={{ color: palette.deep }} />
-                  <span className="font-serif text-base sm:text-lg opacity-80" style={{ color: palette.deep }}>Loading entourage...</span>
+                  <Loader2 className="h-10 w-10 sm:h-12 sm:w-12 animate-spin opacity-70" style={{ color: COLORS.accent }} />
+                  <span className="font-serif text-base sm:text-lg opacity-80" style={{ color: COLORS.deep }}>Loading entourage...</span>
                 </div>
               </div>
             ) : error ? (
               <div className="flex items-center justify-center py-24 sm:py-28 md:py-32">
                 <div className="text-center">
-                  <p className="font-serif text-base sm:text-lg mb-3" style={{ color: palette.deep }}>{error}</p>
+                  <p className="font-serif text-base sm:text-lg mb-3" style={{ color: COLORS.deep }}>{error}</p>
                   <button
                     onClick={fetchEntourage}
                     className="font-serif underline transition-colors duration-200 opacity-90 hover:opacity-100"
-                    style={{ color: palette.deep }}
+                    style={{ color: COLORS.deep }}
                   >
                     Try again
                   </button>
@@ -448,8 +450,8 @@ export function Entourage() {
               </div>
             ) : entourage.length === 0 ? (
               <div className="text-center py-24 sm:py-28 md:py-32">
-                <Users className="h-14 w-14 sm:h-16 sm:w-16 mx-auto mb-4 opacity-30" style={{ color: palette.deep }} />
-                <p className="font-serif text-base sm:text-lg opacity-60" style={{ color: palette.deep }}>No entourage members yet</p>
+                <Users className="h-14 w-14 sm:h-16 sm:w-16 mx-auto mb-4 opacity-30" style={{ color: COLORS.deep }} />
+                <p className="font-serif text-base sm:text-lg opacity-60" style={{ color: COLORS.deep }}>No entourage members yet</p>
               </div>
             ) : (
             <>
@@ -471,7 +473,7 @@ export function Entourage() {
                     <div key={category}>
                       {categoryIndex > 0 && (
                         <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                          <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                          <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                         </div>
                       )}
                       <TwoColumnLayout singleTitle="The Couple" centerContent={true}>
@@ -511,7 +513,7 @@ export function Entourage() {
                       <div key="Parents">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                            <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Groom’s Parents" rightTitle="Bride’s Parents">
@@ -620,7 +622,7 @@ export function Entourage() {
                       <div key="Family">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                            <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Family of the Groom" rightTitle="Family of the Bride">
@@ -663,7 +665,7 @@ export function Entourage() {
                       <div key="HonorAttendants">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                            <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Best Man" rightTitle="Maid of Honor">
@@ -706,7 +708,7 @@ export function Entourage() {
                       <div key="LittleOnes">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                            <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Little Groom" rightTitle="Little Bride">
@@ -751,7 +753,7 @@ export function Entourage() {
                         <div key="BridalParty">
                           {categoryIndex > 0 && (
                             <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                              <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                              <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                             </div>
                           )}
                           <TwoColumnLayout leftTitle="Groomsmen" rightTitle="Bridesmaids">
@@ -823,7 +825,7 @@ export function Entourage() {
                     <div key="SecondarySponsorBlock">
                       {categoryIndex > 0 && (
                         <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                          <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                          <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                         </div>
                       )}
                       {/* Parent heading */}
@@ -840,7 +842,7 @@ export function Entourage() {
                   <div key={category}>
                     {categoryIndex > 0 && (
                       <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                        <div className="w-full max-w-md h-px" style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-medium) 31%, transparent), transparent)' }}></div>
+                        <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
                       </div>
                     )}
                     <TwoColumnLayout singleTitle={category} centerContent={true}>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
+import Image from "next/image"
 import { siteConfig } from "@/content/site"
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -33,25 +33,100 @@ export function Hero() {
       {/* ── Content container ── */}
       <div className="relative z-10 w-full flex items-center justify-center px-4 sm:px-6 py-16 sm:py-20">
         <div
-          className={`w-full max-w-md sm:max-w-lg text-center transition-all duration-700 ease-out ${
+          className={`relative overflow-hidden w-full max-w-md sm:max-w-lg text-center transition-all duration-700 ease-out ${
             phase >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           style={{
             background: [
-              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 255, 255, 0.70) 0%, transparent 70%)",
-              "rgba(253, 251, 248, 0.92)",
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+              "rgba(250, 244, 232, 0.94)",
             ].join(", "),
-            border: "1px solid rgba(140, 110, 72, 0.14)",
+            border: "1px solid rgba(160, 122, 68, 0.22)",
             borderRadius: "20px",
             padding: "clamp(2.5rem, 6vw, 4rem) clamp(1.75rem, 6vw, 3.5rem)",
             boxShadow: [
-              "0 4px 32px rgba(140, 110, 72, 0.10)",
-              "0 1px 0 rgba(255, 255, 255, 0.80) inset",
+              "0 4px 40px rgba(120, 85, 35, 0.14)",
+              "0 1px 0 rgba(255, 248, 230, 0.90) inset",
+              "inset 0 0 60px rgba(200, 160, 90, 0.05)",
             ].join(", "),
             backdropFilter: "blur(2px)",
           }}
         >
+          {/* ── Vintage texture — Layer 1: warm parchment tone patches ── */}
+          <div
+            className="absolute inset-0 pointer-events-none z-0"
+            aria-hidden
+            style={{
+              background: [
+                "radial-gradient(ellipse 60% 40% at 20% 20%, rgba(210, 168, 110, 0.10) 0%, transparent 70%)",
+                "radial-gradient(ellipse 50% 35% at 80% 75%, rgba(170, 130, 80, 0.08) 0%, transparent 65%)",
+                "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(245, 232, 210, 0.18) 0%, transparent 80%)",
+              ].join(", "),
+            }}
+          />
 
+          {/* ── Vintage texture — Layer 2: CSS grain / noise ── */}
+          <div
+            className="absolute inset-0 pointer-events-none z-0"
+            aria-hidden
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E")`,
+              backgroundRepeat: "repeat",
+              backgroundSize: "200px 200px",
+              mixBlendMode: "multiply",
+              opacity: 0.55,
+            }}
+          />
+
+          {/* ── Vintage texture — Layer 3: inner vignette ── */}
+          <div
+            className="absolute inset-0 pointer-events-none z-0 rounded-[20px]"
+            aria-hidden
+            style={{
+              background: [
+                "radial-gradient(ellipse 90% 85% at 50% 50%, transparent 50%, rgba(120, 88, 42, 0.07) 100%)",
+                "linear-gradient(180deg, rgba(150, 110, 60, 0.04) 0%, transparent 18%, transparent 82%, rgba(130, 95, 48, 0.06) 100%)",
+              ].join(", "),
+            }}
+          />
+
+          {/* ── Corner decorations ── */}
+          <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden>
+            <Image
+              src="/decoration/left-top-corner.png"
+              alt=""
+              width={320}
+              height={320}
+              className="absolute top-0 left-0 w-auto h-auto max-w-[72px] sm:max-w-[96px] md:max-w-[112px]"
+              priority
+            />
+            <Image
+              src="/decoration/right-top-corner.png"
+              alt=""
+              width={320}
+              height={320}
+              className="absolute top-0 right-0 w-auto h-auto max-w-[72px] sm:max-w-[96px] md:max-w-[112px]"
+              priority
+            />
+            <Image
+              src="/decoration/left-down-corner.png"
+              alt=""
+              width={320}
+              height={320}
+              className="absolute bottom-0 left-0 w-auto h-auto max-w-[72px] sm:max-w-[96px] md:max-w-[112px]"
+              priority
+            />
+            <Image
+              src="/decoration/right-down-corner.png"
+              alt=""
+              width={320}
+              height={320}
+              className="absolute bottom-0 right-0 w-auto h-auto max-w-[72px] sm:max-w-[96px] md:max-w-[112px]"
+              priority
+            />
+          </div>
+
+          <div className="relative z-10">
           {/* ── Monogram — warm ink, matches LoadingScreen ── */}
           <div
             className={`flex justify-center mb-7 ${
@@ -60,7 +135,7 @@ export function Hero() {
                 : "opacity-0 scale-95 transition-all duration-700 ease-out"
             }`}
           >
-            <CloudinaryImage
+            <Image
               src={siteConfig.couple.monogram}
               alt={`${siteConfig.couple.brideNickname} & ${siteConfig.couple.groomNickname} monogram`}
               width={160}
@@ -74,17 +149,17 @@ export function Hero() {
             />
           </div>
 
-          {/* ── Together with their families ── */}
+          {/* ── Vow renewal invitation line ── */}
           <p
             className={vis(2)}
             style={{
-              fontFamily: '"BrittanySignature", cursive',
-              fontSize: "clamp(1.5rem, 4vw, 2.1rem)",
+              fontFamily: '"Parisienne", cursive',
+              fontSize: "clamp(1.25rem, 3.3vw, 2rem)",
               color: "rgba(28, 28, 30, 0.72)",
-              lineHeight: 1,
+              lineHeight: 1.35,
             }}
           >
-            Together with their families
+            Love grows, and so do we. Please join us as we renew our vows and celebrate the next chapter of our journey.
           </p>
 
           {/* ── Hairline rule + year ── */}
@@ -110,7 +185,7 @@ export function Hero() {
             />
           </div>
 
-          {/* ── to celebrate the marriage of ── */}
+          {/* ── Renewal of vows ── */}
           <p
             className={vis(2)}
             style={{
@@ -121,10 +196,10 @@ export function Hero() {
               color: "rgba(28, 28, 30, 0.42)",
             }}
           >
-            to celebrate the marriage of
+            renewal of vows between
           </p>
 
-          {/* ── Couple names — LeJourScript, matches LoadingScreen ── */}
+          {/* ── Couple names — Parisienne, matches LoadingScreen ── */}
           <h1
             className={`mt-14 ${vis(3)}`}
             style={{
@@ -136,9 +211,9 @@ export function Hero() {
           >
             {/* Bride — nudged left */}
             <span
+              className="parisienne-regular"
               style={{
-                fontFamily: '"LeJourScript", cursive',
-                fontSize: "clamp(3.6rem, 12vw, 6rem)",
+                fontSize: "clamp(4rem, 13vw, 6.5rem)",
                 color: "#1C1C1E",
                 lineHeight: 1.10,
                 letterSpacing: "0.02em",
@@ -152,9 +227,9 @@ export function Hero() {
 
             {/* "and" — red accent, same as LoadingScreen */}
             <span
+              className="parisienne-regular"
               style={{
-                fontFamily: '"LeJourScript", cursive',
-                fontSize: "clamp(1.1rem, 3vw, 1.8rem)",
+                fontSize: "clamp(1.25rem, 3.3vw, 2rem)",
                 color: "#B83232",
                 lineHeight: 1,
                 letterSpacing: "0.02em",
@@ -169,9 +244,9 @@ export function Hero() {
 
             {/* Groom — nudged right */}
             <span
+              className="parisienne-regular"
               style={{
-                fontFamily: '"LeJourScript", cursive',
-                fontSize: "clamp(3.6rem, 12vw, 6rem)",
+                fontSize: "clamp(4rem, 13vw, 6.5rem)",
                 color: "#1C1C1E",
                 lineHeight: 1.10,
                 letterSpacing: "0.02em",
@@ -289,7 +364,7 @@ export function Hero() {
                   color: "#B83232",
                 }}
               >
-                Ceremony
+                Renewal of Vows
               </p>
               <p
                 style={{
@@ -335,6 +410,7 @@ export function Hero() {
             </a>
           </div>
 
+          </div>
         </div>{/* end card */}
       </div>
     </section>

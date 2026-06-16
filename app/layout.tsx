@@ -10,8 +10,8 @@ import { ClientLayout } from "@/components/client-layout"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ivy-and-ken.weddinginvitationrsvp.com/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
-const desktopHero = "/Details/newimprovedLinkPreview.jpg"
-const mobileHero = "/Details/newimprovedLinkPreview.jpg"
+const desktopHero = "/Details/LinkPreview.png"
+const mobileHero = "/Details/LinkPreview.png"
 
 const OG_IMAGE = `${canonicalUrl}${desktopHero}`
 
@@ -177,6 +177,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet" />
         <link rel="preload" as="image" href={mobileHero} media="(max-width: 767px)" />
         <link rel="preload" as="image" href={desktopHero} media="(min-width: 768px)" />
         <link rel="preload" as="image" href="/Details/ceremony.png" />

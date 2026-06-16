@@ -165,6 +165,12 @@ html {
   font-style: normal;
 }
 
+.parisienne-regular {
+  font-family: "Parisienne", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* ── Lighten display font ── */
 @font-face {
   font-family: "LightenFree";

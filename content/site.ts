@@ -1,10 +1,10 @@
 export const siteConfig = {
   couple: {
-    bride: "Ivy", //Noenyl Bryle M. Gonzaga
-    brideNickname: "Ivy", //Ltryl
-    groom: "Ken", //Ltryl B. Benitez
-    groomNickname: "Ken",
-    monogram:"/monogram/monogramn.png" ,//Ltryl
+    bride: "Mimmi", //Noenyl Bryle M. Gonzaga
+    brideNickname: "Mimmi", //Ltryl
+    groom: "Ditoy", //Ltryl B. Benitez
+    groomNickname: "Ditoy",
+    monogram:"/monogram/new-monogram.png" ,//Ltryl
     backgroundMusic:"/background_music/Wedding Memories.mp3"
   //https://www.canva.com/design/DAHGXenDxnQ/n5Iay96t8f0MXMhXI_GG0g/edit?ui=eyJBIjp7fX0&referrer=https%3A%2F%2Fwww.canva.com%2Fs%2Ftemplates%3Fquery%3Dsketch%2Bstyle%2Bwedding%2Binvitation
   },
@@ -20,16 +20,16 @@ export const siteConfig = {
     googleShare: "https://docs.google.com/spreadsheets/d/1cB168xXmAd01a-ZvkbguVw53UHXJzC4N6hl4_jFRSL8/edit?usp=sharing",//done
   },
   wedding: {
-    date: "July 18, 2026",
+    date: "August 15, 2026",
     time: "2:00 PM",
-    venue: "St. Catherine of Alexandria Parish - The Shrine of Our Lady of Namacpacan",
+    venue: "St. James the Greater Church, Talisay City",
     tagline: "are getting married!",
     theme: "Our wedding palette is inspired by timeless elegance and warmth.Motif Colors: Champagne Gold, Soft Beige, Warm Soft Brown",
     motif: "#001F4B, #04396D, #015B97, #6497B2, #B2CDE0",
   },
   details: {
     rsvp: {
-      deadline: "June 30, 2026",
+      deadline: "August 15, 2026",
       contact: "Ivy",
       phone: "to follow",
     },
@@ -55,21 +55,21 @@ export const siteConfig = {
     },
   },
   ceremony: {
-    location: "St. Catherine of Alexandria Parish - The Shrine of Our Lady of Namacpacan",
-    venue: "Namacpacan Road, Luna, 2518 La Union",
-    date: "July 18, 2026",
+    location: "St. James the Greater Church, Talisay City",
+    venue: "St. James the Greater Church, Talisay City",
+    date: "August 15, 2026",
     day: "Saturday",
     time: "2:00 PM",
     entourageTime: "1:00 PM",
     guestsTime: "1:30 PM",
-    image: "/Details/ceremony.png",
+    image: "/Details/church.png",
   },
   reception: {
-    location: "Paraiso del Bacnotan Resort",
-    venue: "Pandan, Bacnotan, 2515 La Union",
-    date: "July 18, 2026",
-    time: "4:00 PM",
-    image: ["/Details/reception2a.png","/Details/receptiona.png"],
+    location: "Padre Pio, Nature's Village Resort",
+    venue: "Padre Pio, Nature's Village Resort",
+    date: "August 15, 2026",
+    time: "6:00 PM",
+    image: ["/Details/reception1.png","/Details/reception2.png"],
   },                          
   dressCode: {
       theme: "SEMI-FORMAL",

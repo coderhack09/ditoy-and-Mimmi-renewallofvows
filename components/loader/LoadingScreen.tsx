@@ -330,6 +330,42 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         }}
       />
 
+      {/* ── Layer 5: Corner decorations ── */}
+      <div className="absolute inset-0 pointer-events-none z-[5]" aria-hidden>
+        <CloudinaryImage
+          src="/decoration/left-top-corner.png"
+          alt=""
+          width={320}
+          height={320}
+          className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[240px]"
+          priority
+        />
+        <CloudinaryImage
+          src="/decoration/right-top-corner.png"
+          alt=""
+          width={320}
+          height={320}
+          className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[240px]"
+          priority
+        />
+        <CloudinaryImage
+          src="/decoration/left-down-corner.png"
+          alt=""
+          width={320}
+          height={320}
+          className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[240px]"
+          priority
+        />
+        <CloudinaryImage
+          src="/decoration/right-down-corner.png"
+          alt=""
+          width={320}
+          height={320}
+          className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[240px]"
+          priority
+        />
+      </div>
+
       {/* ── Ghost date watermark (right) ── */}
       <div
         className="absolute inset-0 pointer-events-none flex flex-col items-end justify-center pr-4 sm:pr-10 md:pr-16 select-none"
@@ -423,9 +459,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
       {/* ══════════════════════════════════════════════
           CENTER ZONE — Couple Names
-          NOTE: LeJourScript only contains a–z and A–Z.
-          Neither "+" nor "&" exist in this font and fall
-          back to the system font. "and" renders correctly.
       ══════════════════════════════════════════════ */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6">
         <h1
@@ -439,9 +472,9 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         >
           {/* Groom — nudged left */}
           <span
+            className="parisienne-regular"
             style={{
-              fontFamily: '"LeJourScript", cursive',
-              fontSize: "clamp(3.2rem, 10.5vw, 6rem)",
+              fontSize: "clamp(3.5rem, 11.5vw, 6.5rem)",
               color: "#1C1C1E",
               lineHeight: 1.10,
               letterSpacing: "0.02em",
@@ -455,9 +488,9 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
           {/* "and" — red accent, centered */}
           <span
+            className="parisienne-regular"
             style={{
-              fontFamily: '"LeJourScript", cursive',
-              fontSize: "clamp(1.1rem, 3vw, 1.8rem)",
+              fontSize: "clamp(1.25rem, 3.3vw, 2rem)",
               color: "#B83232",
               lineHeight: 1,
               letterSpacing: "0.02em",
@@ -472,9 +505,9 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
           {/* Bride — nudged right */}
           <span
+            className="parisienne-regular"
             style={{
-              fontFamily: '"LeJourScript", cursive',
-              fontSize: "clamp(3.2rem, 10.5vw, 6rem)",
+              fontSize: "clamp(3.5rem, 11.5vw, 6.5rem)",
               color: "#1C1C1E",
               lineHeight: 1.10,
               letterSpacing: "0.02em",

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { Section } from "@/components/section"
 import {
   Search,
@@ -20,7 +21,6 @@ import {
 } from "lucide-react"
 import { Cormorant_Garamond, Cinzel } from "next/font/google"
 import { siteConfig } from "@/content/site"
-import { CloudinaryImage } from "@/components/ui/cloudinary-image"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -31,6 +31,64 @@ const cinzel = Cinzel({
   subsets: ["latin"],
   weight: ["400"],
 })
+
+// Vintage palette — matches countdown section
+const COLORS = {
+  deep: "#1C1C1E",
+  medium: "rgba(28, 28, 30, 0.68)",
+  muted: "rgba(28, 28, 30, 0.42)",
+  accent: "#B83232",
+  accentHover: "#a32d2d",
+  light: "#FDFBF8",
+  parchment: "rgba(250, 244, 232, 1)",
+  parchmentSoft: "rgba(255, 252, 244, 0.92)",
+  parchmentMuted: "rgba(255, 252, 244, 0.55)",
+  border: "rgba(160, 122, 68, 0.25)",
+  borderStrong: "rgba(160, 122, 68, 0.45)",
+  gold: "rgba(140, 94, 4, 0.45)",
+} as const
+
+const CARD_STYLE = {
+  background: [
+    "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+    COLORS.parchmentSoft,
+  ].join(", "),
+  border: `1px solid ${COLORS.border}`,
+  boxShadow: [
+    "0 4px 40px rgba(120, 85, 35, 0.14)",
+    "0 1px 0 rgba(255, 248, 230, 0.90) inset",
+    "inset 0 0 60px rgba(200, 160, 90, 0.05)",
+  ].join(", "),
+} as const
+
+const DROPDOWN_STYLE = {
+  background: "rgba(250, 244, 232, 0.98)",
+  border: `1px solid ${COLORS.borderStrong}`,
+  boxShadow: "0 8px 32px rgba(120, 85, 35, 0.16)",
+} as const
+
+const MODAL_STYLE = {
+  background: COLORS.parchmentSoft,
+  border: `1px solid ${COLORS.borderStrong}`,
+  boxShadow: "0 8px 48px rgba(120, 85, 35, 0.22)",
+} as const
+
+const INPUT_CLASS =
+  "w-full border rounded-lg text-xs sm:text-sm font-sans transition-all duration-300 shadow-sm focus:shadow-md"
+
+const inputStyle = {
+  borderColor: COLORS.borderStrong,
+  color: COLORS.deep,
+  backgroundColor: COLORS.parchmentSoft,
+} as const
+
+const INNER_BOX_STYLE = {
+  background: COLORS.parchmentMuted,
+  border: `1px solid ${COLORS.border}`,
+} as const
+
+const SMALL_INPUT_CLASS =
+  `${INPUT_CLASS} px-2 sm:px-2.5 py-1.5 sm:py-2 text-[10px] sm:text-xs focus:ring-1 focus:ring-[#B83232]/20`
 
 interface ApiGuest {
   id: string | number
@@ -403,122 +461,130 @@ export function GuestList() {
   }
 
   return (
-    <Section id="guest-list" className="relative z-30 py-6 sm:py-10 md:py-12 lg:py-16">
-      {/* White gradient overlay for readability */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.70) 100%)",
-        }}
-      />
+    <Section id="guest-list" className="relative z-30 bg-transparent py-6 sm:py-10 md:py-12 lg:py-16">
+      {/* Vintage parchment overlay — matches countdown */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 252, 244, 0.72) 0%, transparent 70%)",
+              "rgba(250, 244, 232, 0.94)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 60% 40% at 20% 20%, rgba(210, 168, 110, 0.10) 0%, transparent 70%)",
+              "radial-gradient(ellipse 50% 35% at 80% 75%, rgba(170, 130, 80, 0.08) 0%, transparent 65%)",
+              "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(245, 232, 210, 0.18) 0%, transparent 80%)",
+            ].join(", "),
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+            mixBlendMode: "multiply",
+            opacity: 0.55,
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: [
+              "radial-gradient(ellipse 90% 85% at 50% 50%, transparent 50%, rgba(120, 88, 42, 0.07) 100%)",
+              "linear-gradient(180deg, rgba(150, 110, 60, 0.04) 0%, transparent 18%, transparent 82%, rgba(130, 95, 48, 0.06) 100%)",
+            ].join(", "),
+          }}
+        />
+      </div>
 
-      {/* Corner floral decoration */}
-      <div className="absolute inset-0 pointer-events-none z-[1]">
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute top-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1) scaleY(-1)" }}
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 left-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          priority={false}
-        /> */}
-        {/* <CloudinaryImage
-          src="/decoration/corner-left-bottom.png"
-          alt=""
-          width={300}
-          height={300}
-          className="absolute bottom-0 right-0 w-auto h-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]"
-          style={{ transform: "scaleX(-1)" }}
-          priority={false}
-        /> */}
+      {/* Corner decorations */}
+      <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden>
+        <Image src="/decoration/left-top-corner.png" alt="" width={320} height={320} className="absolute top-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-top-corner.png" alt="" width={320} height={320} className="absolute top-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/left-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 left-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
+        <Image src="/decoration/right-down-corner.png" alt="" width={320} height={320} className="absolute bottom-0 right-0 w-auto h-auto max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]" priority={false} />
       </div>
 
       {/* Header */}
       <div className="relative z-10 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10 px-2 sm:px-3 md:px-4">
-        {/* Small label */}
         <p
-          className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-motif-deep mb-2`}
+          className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2`}
+          style={{ color: COLORS.deep }}
         >
           Confirm Your Attendance
         </p>
         
         <h2
-          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-motif-deep mb-1.5 sm:mb-3 md:mb-4`}
+          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-1.5 sm:mb-3 md:mb-4`}
+          style={{ color: COLORS.deep }}
         >
           RSVP
         </h2>
         
-        <p className={`${cormorant.className} text-xs sm:text-sm md:text-base text-motif-deep/80 font-light max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3`}>
+        <p className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3`} style={{ color: COLORS.medium }}>
           Please search for your name below to confirm your presence at our special day
         </p>
-        <p className={`${cormorant.className} text-sm sm:text-base md:text-lg lg:text-xl text-motif-deep font-bold max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3`}>
+        <p className={`${cormorant.className} text-sm sm:text-base md:text-lg lg:text-xl font-bold max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3`} style={{ color: COLORS.deep }}>
           RSVP Deadline: {siteConfig.details.rsvp.deadline}
         </p>
         
-        {/* Decorative element below subtitle */}
         <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
-          <div className="w-6 sm:w-8 md:w-12 lg:w-16 h-px bg-gradient-to-r from-transparent via-motif-deep/80 to-transparent" />
-          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-motif-deep/90 rounded-full" />
-          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-motif-silver rounded-full" />
-          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-motif-deep/90 rounded-full" />
-          <div className="w-6 sm:w-8 md:w-12 lg:w-16 h-px bg-gradient-to-l from-transparent via-motif-deep/80 to-transparent" />
+          <div className="w-6 sm:w-8 md:w-12 lg:w-16 h-px" style={{ background: `linear-gradient(to right, transparent, ${COLORS.gold}, transparent)` }} />
+          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full" style={{ backgroundColor: COLORS.accent }} />
+          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full" style={{ backgroundColor: COLORS.borderStrong }} />
+          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full" style={{ backgroundColor: COLORS.accent }} />
+          <div className="w-6 sm:w-8 md:w-12 lg:w-16 h-px" style={{ background: `linear-gradient(to left, transparent, ${COLORS.gold}, transparent)` }} />
         </div>
       </div>
 
       {/* Search Section */}
       <div className="relative z-10 max-w-2xl mx-auto px-2 sm:px-4 md:px-6 overflow-visible">
         {/* Card with elegant border */}
-        <div className="relative bg-white/60 backdrop-blur-md border border-motif-deep/60 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg overflow-visible">
+        <div
+          className="relative backdrop-blur-md rounded-lg sm:rounded-xl md:rounded-2xl overflow-visible"
+          style={CARD_STYLE}
+        >
           {/* Card content */}
           <div className="relative p-2.5 sm:p-4 md:p-5 lg:p-6 overflow-visible">
             <div className="relative z-10 space-y-3 sm:space-y-4 overflow-visible">
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="bg-motif-deep p-1.5 sm:p-2 rounded-lg shadow-md">
+                <div className="p-1.5 sm:p-2 rounded-lg shadow-md" style={{ backgroundColor: COLORS.accent }}>
                   <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
                 </div>
                 <div>
-                  <label className="block text-xs sm:text-sm md:text-base font-semibold text-motif-deep font-sans mb-0.5 sm:mb-1">
+                  <label className="block text-xs sm:text-sm md:text-base font-semibold font-sans mb-0.5 sm:mb-1" style={{ color: COLORS.deep }}>
                     Find Your Name
                   </label>
-                  <p className="text-[10px] sm:text-xs text-motif-deep/70 font-sans">
+                  <p className="text-[10px] sm:text-xs font-sans" style={{ color: COLORS.muted }}>
                     Type as you search to see instant results
                   </p>
                 </div>
               </div>
               <div ref={searchRef} className="relative z-[100]">
                 <div className="relative">
-                  <Search className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep/70 pointer-events-none transition-colors duration-200" />
+                  <Search className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 pointer-events-none transition-colors duration-200" style={{ color: COLORS.muted }} />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Type your name..."
-                    className="w-full pl-8 sm:pl-10 pr-2.5 sm:pr-3 py-2 sm:py-2.5 md:py-3 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 hover:border-motif-deep/70 focus:ring-2 focus:ring-motif-deep/20 bg-motif-cream shadow-sm focus:shadow-md"
+                    className={`${INPUT_CLASS} pl-8 sm:pl-10 pr-2.5 sm:pr-3 py-2 sm:py-2.5 md:py-3 focus:ring-2 focus:ring-[#B83232]/20`}
+                    style={inputStyle}
                   />
                 </div>
                 {/* Autocomplete dropdown */}
                 {isSearching && filteredGuests.length > 0 && (
                   <div 
-                    className="absolute z-[9999] w-full mt-1 sm:mt-1.5 md:mt-2 bg-motif-cream/95 backdrop-blur-lg border border-motif-deep/70 rounded-lg sm:rounded-xl shadow-xl overflow-hidden" 
+                    className="absolute z-[9999] w-full mt-1 sm:mt-1.5 md:mt-2 backdrop-blur-lg rounded-lg sm:rounded-xl overflow-hidden" 
                     style={{ 
+                      ...DROPDOWN_STYLE,
                       position: 'absolute', 
                       top: '100%',
                       left: 0,
@@ -529,24 +595,27 @@ export function GuestList() {
                       <button
                         key={index}
                         onClick={() => handleSearchSelect(guest)}
-                        className="w-full px-2.5 sm:px-3 py-2 sm:py-2.5 text-left hover:bg-motif-cream/40 active:bg-motif-deep/40 transition-all duration-200 flex items-center gap-2 sm:gap-3 border-b border-motif-deep/40 last:border-b-0 group"
+                        className="w-full px-2.5 sm:px-3 py-2 sm:py-2.5 text-left transition-all duration-200 flex items-center gap-2 sm:gap-3 last:border-b-0 group"
+                        style={{ borderBottom: `1px solid ${COLORS.border}` }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(210, 168, 110, 0.12)" }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
                       >
                         <div className="relative flex-shrink-0">
-                          <div className="bg-motif-deep p-1 sm:p-1.5 rounded-full shadow-sm group-hover:shadow-md transition-all duration-300">
+                          <div className="p-1 sm:p-1.5 rounded-full shadow-sm group-hover:shadow-md transition-all duration-300" style={{ backgroundColor: COLORS.accent }}>
                             <User className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-xs sm:text-sm text-motif-deep group-hover:text-motif-deep transition-colors duration-200 truncate">
+                          <div className="font-semibold text-xs sm:text-sm truncate transition-colors duration-200" style={{ color: COLORS.deep }}>
                             {guest.Name}
                           </div>
                           {guest.Email && guest.Email !== "Pending" && (
-                            <div className="text-[10px] sm:text-xs text-motif-medium/80 truncate mt-0.5">
+                            <div className="text-[10px] sm:text-xs truncate mt-0.5" style={{ color: COLORS.medium }}>
                               {guest.Email}
                             </div>
                           )}
                         </div>
-                        <div className="text-motif-medium/70 group-hover:text-motif-deep group-hover:translate-x-1 transition-all duration-200 flex-shrink-0">
+                        <div className="group-hover:translate-x-1 transition-all duration-200 flex-shrink-0" style={{ color: COLORS.muted }}>
                           <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
@@ -557,8 +626,9 @@ export function GuestList() {
                 )}
                 {searchQuery && filteredGuests.length === 0 && (
                   <div 
-                    className="absolute z-[9999] w-full mt-1.5 sm:mt-2 bg-motif-cream/95 backdrop-blur-lg border-2 border-motif-deep/80 rounded-lg shadow-xl overflow-hidden" 
+                    className="absolute z-[9999] w-full mt-1.5 sm:mt-2 backdrop-blur-lg rounded-lg overflow-hidden" 
                     style={{ 
+                      ...DROPDOWN_STYLE,
                       position: 'absolute', 
                       top: '100%',
                       left: 0,
@@ -567,12 +637,12 @@ export function GuestList() {
                   >
                     <div className="p-2.5 sm:p-3 md:p-4">
                       <div className="flex items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
-                        <div className="bg-motif-deep p-1.5 sm:p-2 rounded-lg flex-shrink-0 shadow-sm">
+                        <div className="p-1.5 sm:p-2 rounded-lg flex-shrink-0 shadow-sm" style={{ backgroundColor: COLORS.accent }}>
                           <UserPlus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-xs sm:text-sm text-motif-deep mb-1">Not finding your name?</h4>
-                          <p className="text-[10px] sm:text-xs text-motif-medium leading-relaxed">
+                          <h4 className="font-semibold text-xs sm:text-sm mb-1" style={{ color: COLORS.deep }}>Not finding your name?</h4>
+                          <p className="text-[10px] sm:text-xs leading-relaxed" style={{ color: COLORS.medium }}>
                             We'd love to have you with us! Send a request to join the celebration.
                           </p>
                         </div>
@@ -582,7 +652,10 @@ export function GuestList() {
                           setRequestFormData({ ...requestFormData, Name: searchQuery })
                           setShowRequestModal(true)
                         }}
-                        className="w-full !bg-motif-deep hover:!bg-motif-deep/90 text-white py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center"
+                        className="w-full text-white py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center"
+                        style={{ backgroundColor: COLORS.accent }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = COLORS.accentHover }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = COLORS.accent }}
                       >
                         <UserPlus className="h-3 w-3 mr-1.5 sm:mr-2 inline" />
                         Request to Join
@@ -603,34 +676,35 @@ export function GuestList() {
           onClick={handleCloseModal}
         >
             <div 
-              className="relative w-full max-w-md sm:max-w-lg mx-1 sm:mx-2 md:mx-4 bg-motif-cream rounded-xl sm:rounded-2xl shadow-2xl border-2 border-motif-deep/80 overflow-hidden animate-in zoom-in-95 duration-300 max-h-[95vh] flex flex-col"
+              className="relative w-full max-w-md sm:max-w-lg mx-1 sm:mx-2 md:mx-4 rounded-xl sm:rounded-2xl overflow-hidden animate-in zoom-in-95 duration-300 max-h-[95vh] flex flex-col"
+              style={MODAL_STYLE}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="relative bg-motif-deep p-3 sm:p-4 md:p-5 lg:p-6 flex-shrink-0">
+              <div className="relative p-3 sm:p-4 md:p-5 lg:p-6 flex-shrink-0" style={{ backgroundColor: COLORS.accent }}>
                 <div className="relative flex items-start justify-between gap-1.5 sm:gap-2">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 mb-1 sm:mb-1.5 md:mb-2 lg:mb-3">
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-motif-cream/20 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Heart className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5 text-motif-cream" />
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(255, 252, 244, 0.2)" }}>
+                        <Heart className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5 text-white" />
                       </div>
-                      <h3 className={`${cinzel.className} text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-bold text-motif-cream truncate`}>
+                      <h3 className={`${cinzel.className} text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-bold text-white truncate`}>
                         You're Invited!
                       </h3>
                     </div>
-                    <p className={`${cormorant.className} text-motif-cream/95 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg leading-tight sm:leading-normal`}>
-                      Hello <span className="font-extrabold text-motif-cream">{selectedGuest?.Name}</span>, you are invited to our wedding!
+                    <p className={`${cormorant.className} text-white/95 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg leading-tight sm:leading-normal`}>
+                      Hello <span className="font-extrabold text-white">{selectedGuest?.Name}</span>, you are invited to our wedding!
                     </p>
-                    <p className={`${cormorant.className} text-motif-cream/90 text-[10px] sm:text-xs md:text-sm mt-1 sm:mt-1.5`}>
-                      We've reserved <span className="font-bold text-motif-cream">{selectedGuest?.AllowedGuests || 1}</span> {selectedGuest?.AllowedGuests === 1 ? 'seat' : 'seats'} for you.
+                    <p className={`${cormorant.className} text-white/90 text-[10px] sm:text-xs md:text-sm mt-1 sm:mt-1.5`}>
+                      We've reserved <span className="font-bold text-white">{selectedGuest?.AllowedGuests || 1}</span> {selectedGuest?.AllowedGuests === 1 ? 'seat' : 'seats'} for you.
                     </p>
                   </div>
                   {!hasResponded && (
                     <button
                       onClick={handleCloseModal}
-                      className="text-motif-deep/80 hover:text-motif-deep transition-colors p-0.5 sm:p-1 md:p-2 hover:bg-white/20 rounded-full flex-shrink-0"
+                      className="text-white/80 hover:text-white transition-colors p-0.5 sm:p-1 md:p-2 hover:bg-white/20 rounded-full flex-shrink-0"
                     >
-                      <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-motif-deep" />
+                      <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                     </button>
                   )}
                 </div>
@@ -639,18 +713,17 @@ export function GuestList() {
               {/* Modal Content */}
               <div className="p-2.5 sm:p-3 md:p-4 lg:p-5 xl:p-6 overflow-y-auto flex-1 min-h-0">
                 {hasResponded ? (
-                  // Thank you message for guests who already responded
                   <div className="text-center py-3 sm:py-4 md:py-6">
-                    <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-motif-deep rounded-full mb-2 sm:mb-3 md:mb-4">
+                    <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full mb-2 sm:mb-3 md:mb-4" style={{ backgroundColor: COLORS.accent }}>
                       <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-white" />
                     </div>
-                    <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-motif-deep mb-1.5 sm:mb-2 md:mb-3`}>
+                    <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-1.5 sm:mb-2 md:mb-3`} style={{ color: COLORS.deep }}>
                       Thank You for Responding!
                     </h4>
-                    <p className="text-motif-medium text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-3 md:mb-4 px-2">
+                    <p className="text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-3 md:mb-4 px-2" style={{ color: COLORS.medium }}>
                       We've received your RSVP and look forward to celebrating with you!
                     </p>
-                    <div className="bg-motif-cream/40 rounded-lg p-2.5 sm:p-3 md:p-4 border border-motif-deep/70 space-y-2 sm:space-y-2.5 md:space-y-3">
+                    <div className="rounded-lg p-2.5 sm:p-3 md:p-4 space-y-2 sm:space-y-2.5 md:space-y-3" style={INNER_BOX_STYLE}>
                       <div className="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 mb-1.5 sm:mb-2">
                         {selectedGuest?.RSVP === "Yes" && (
                           <>
@@ -670,18 +743,18 @@ export function GuestList() {
                         )}
                       </div>
                       {selectedGuest?.RSVP === "Yes" && (
-                        <div className="bg-motif-cream/60 rounded-lg p-2 sm:p-2.5 md:p-3 border border-motif-deep/80">
+                        <div className="rounded-lg p-2 sm:p-2.5 md:p-3" style={{ ...INNER_BOX_STYLE, background: COLORS.parchmentSoft }}>
                           <div className="text-center">
-                            <p className="text-[10px] sm:text-xs text-motif-medium mb-1 font-medium">Number of Guests</p>
-                            <p className="text-lg sm:text-xl md:text-2xl font-bold text-motif-deep">
+                            <p className="text-[10px] sm:text-xs mb-1 font-medium" style={{ color: COLORS.medium }}>Number of Guests</p>
+                            <p className="text-lg sm:text-xl md:text-2xl font-bold" style={{ color: COLORS.deep }}>
                               {selectedGuest.AllowedGuests || 1}
                             </p>
                           </div>
                         </div>
                       )}
                       {selectedGuest && selectedGuest.Message && selectedGuest.Message.trim() !== "" && (
-                        <div className="pt-1.5 sm:pt-2 border-t border-motif-deep/70">
-                          <p className="text-[10px] sm:text-xs text-motif-medium italic px-1">
+                        <div className="pt-1.5 sm:pt-2" style={{ borderTop: `1px solid ${COLORS.border}` }}>
+                          <p className="text-[10px] sm:text-xs italic px-1" style={{ color: COLORS.medium }}>
                             "{selectedGuest.Message}"
                           </p>
                         </div>
@@ -689,13 +762,15 @@ export function GuestList() {
                     </div>
                     <button
                       onClick={handleCloseModal}
-                      className="mt-3 sm:mt-4 md:mt-6 !bg-motif-deep hover:!bg-motif-deep/90 text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300"
+                      className="mt-3 sm:mt-4 md:mt-6 text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300"
+                      style={{ backgroundColor: COLORS.accent }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = COLORS.accentHover }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = COLORS.accent }}
                     >
                       Close
                     </button>
                   </div>
                 ) : (
-                  // RSVP Form for guests who haven't responded
                   <form
                     onSubmit={(e) => {
                       e.preventDefault()
@@ -705,8 +780,8 @@ export function GuestList() {
                   >
                     {/* Can you attend? */}
                     <div>
-                    <label className={`flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 ${cormorant.className}`}>
-                        <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className={`flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 ${cormorant.className}`} style={{ color: COLORS.deep }}>
+                        <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                         <span>Can you attend? *</span>
                       </label>
                       <div className="grid grid-cols-2 gap-1.5 sm:gap-2 md:gap-3">
@@ -715,23 +790,19 @@ export function GuestList() {
                           onClick={() =>
                             setFormData((prev) => ({ ...prev, RSVP: "Yes", Guest: "1" }))
                           }
-                          className={`relative p-2 sm:p-2.5 md:p-3 lg:p-4 rounded-lg border-2 transition-all duration-300 ${
+                          className="relative p-2 sm:p-2.5 md:p-3 lg:p-4 rounded-lg border-2 transition-all duration-300"
+                          style={
                             formData.RSVP === "Yes"
-                              ? "border-motif-deep bg-motif-deep/10 shadow-md scale-105"
-                              : "border-motif-deep/60 bg-motif-cream/60 hover:border-motif-deep/70 hover:shadow-sm"
-                          }`}
+                              ? { borderColor: COLORS.accent, backgroundColor: "rgba(184, 50, 50, 0.08)", boxShadow: "0 2px 8px rgba(120, 85, 35, 0.12)", transform: "scale(1.05)" }
+                              : { borderColor: COLORS.borderStrong, backgroundColor: COLORS.parchmentMuted }
+                          }
                         >
                           <div className="flex items-center justify-center gap-1.5 sm:gap-2">
                             <CheckCircle
-                              className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 ${
-                                formData.RSVP === "Yes" ? "text-motif-deep" : "text-motif-medium/60"
-                              }`}
+                              className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0"
+                              style={{ color: formData.RSVP === "Yes" ? COLORS.accent : COLORS.muted }}
                             />
-                            <span
-                              className={`text-xs sm:text-sm font-bold ${
-                                formData.RSVP === "Yes" ? "text-motif-deep" : "text-motif-deep"
-                              }`}
-                            >
+                            <span className="text-xs sm:text-sm font-bold" style={{ color: COLORS.deep }}>
                               Yes!
                             </span>
                           </div>
@@ -739,22 +810,23 @@ export function GuestList() {
                         <button
                           type="button"
                           onClick={() => setFormData((prev) => ({ ...prev, RSVP: "No" }))}
-                          className={`relative p-2 sm:p-2.5 md:p-3 lg:p-4 rounded-lg border-2 transition-all duration-300 ${
+                          className="relative p-2 sm:p-2.5 md:p-3 lg:p-4 rounded-lg border-2 transition-all duration-300"
+                          style={
                             formData.RSVP === "No"
-                              ? "border-red-500 bg-red-50 shadow-md scale-105"
-                              : "border-motif-deep/60 bg-motif-cream/60 hover:border-motif-deep/70 hover:shadow-sm"
-                          }`}
+                              ? { borderColor: "#ef4444", backgroundColor: "#fef2f2", boxShadow: "0 2px 8px rgba(120, 85, 35, 0.12)", transform: "scale(1.05)" }
+                              : { borderColor: COLORS.borderStrong, backgroundColor: COLORS.parchmentMuted }
+                          }
                         >
                           <div className="flex items-center justify-center gap-1.5 sm:gap-2">
                             <XCircle
                               className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 ${
-                                formData.RSVP === "No" ? "text-red-600" : "text-motif-medium/60"
+                                formData.RSVP === "No" ? "text-red-600" : ""
                               }`}
+                              style={formData.RSVP !== "No" ? { color: COLORS.muted } : undefined}
                             />
                             <span
-                              className={`text-xs sm:text-sm font-bold ${
-                                formData.RSVP === "No" ? "text-red-600" : "text-motif-deep"
-                              }`}
+                              className="text-xs sm:text-sm font-bold"
+                              style={{ color: formData.RSVP === "No" ? "#dc2626" : COLORS.deep }}
                             >
                               Sorry, No
                             </span>
@@ -763,27 +835,26 @@ export function GuestList() {
                       </div>
                     </div>
 
-                    {/* Who's Coming With You - Companion Names */}
                     {formData.RSVP === "Yes" && companions.length > 0 && (
                       <div className="space-y-2.5 sm:space-y-3">
-                        <label className={`flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep ${cormorant.className}`}>
-                          <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                        <label className={`flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold ${cormorant.className}`} style={{ color: COLORS.deep }}>
+                          <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                           <span>Who's Coming With You?</span>
                         </label>
-                        <p className="text-[10px] sm:text-xs text-motif-medium -mt-1 sm:-mt-1.5">
+                        <p className="text-[10px] sm:text-xs -mt-1 sm:-mt-1.5" style={{ color: COLORS.medium }}>
                           Please provide names and relationships for your <span className="font-semibold">{companions.length}</span> additional {companions.length === 1 ? 'guest' : 'guests'}
                         </p>
                         {companions.map((companion, index) => (
-                          <div key={index} className="bg-motif-cream/40 rounded-lg p-2 sm:p-2.5 md:p-3 border border-motif-deep/40 space-y-2 sm:space-y-2.5">
+                          <div key={index} className="rounded-lg p-2 sm:p-2.5 md:p-3 space-y-2 sm:space-y-2.5" style={INNER_BOX_STYLE}>
                             <div className="flex items-center gap-1.5 mb-1 sm:mb-1.5">
-                              <User className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-motif-deep" />
-                              <span className="text-[10px] sm:text-xs font-semibold text-motif-deep">
+                              <User className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: COLORS.accent }} />
+                              <span className="text-[10px] sm:text-xs font-semibold" style={{ color: COLORS.deep }}>
                                 Guest {index + 2}
                               </span>
                             </div>
                             <div className="space-y-1.5 sm:space-y-2">
                               <div>
-                                <label className="block text-[10px] sm:text-xs font-medium text-motif-deep mb-1">
+                                <label className="block text-[10px] sm:text-xs font-medium mb-1" style={{ color: COLORS.deep }}>
                                   Full Name
                                 </label>
                                 <input
@@ -795,11 +866,12 @@ export function GuestList() {
                                     setCompanions(newCompanions)
                                   }}
                                   placeholder={`Name of guest ${index + 2}`}
-                                  className="w-full px-2 sm:px-2.5 py-1.5 sm:py-2 border border-motif-deep/50 focus:border-motif-deep rounded text-[10px] sm:text-xs font-sans text-motif-deep placeholder:text-motif-medium/60 transition-all duration-300 focus:ring-1 focus:ring-motif-deep/20 bg-motif-cream"
+                                  className={SMALL_INPUT_CLASS}
+                                  style={inputStyle}
                                 />
                               </div>
                               <div>
-                                <label className="block text-[10px] sm:text-xs font-medium text-motif-deep mb-1">
+                                <label className="block text-[10px] sm:text-xs font-medium mb-1" style={{ color: COLORS.deep }}>
                                   Relationship with {selectedGuest?.Name || 'Primary Guest'}
                                 </label>
                                 <input
@@ -811,7 +883,8 @@ export function GuestList() {
                                     setCompanions(newCompanions)
                                   }}
                                   placeholder="e.g., Spouse, Friend, Child, Parent"
-                                  className="w-full px-2 sm:px-2.5 py-1.5 sm:py-2 border border-motif-deep/50 focus:border-motif-deep rounded text-[10px] sm:text-xs font-sans text-motif-deep placeholder:text-motif-medium/60 transition-all duration-300 focus:ring-1 focus:ring-motif-deep/20 bg-motif-cream"
+                                  className={SMALL_INPUT_CLASS}
+                                  style={inputStyle}
                                 />
                               </div>
                             </div>
@@ -820,12 +893,11 @@ export function GuestList() {
                       </div>
                     )}
 
-                    {/* Message to the couple */}
                     <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans flex-wrap">
-                      <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans flex-wrap" style={{ color: COLORS.deep }}>
+                      <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                         <span>Your Message to the Couple</span>
-                      <span className="text-[10px] sm:text-xs font-normal text-motif-deep/70">(Optional)</span>
+                      <span className="text-[10px] sm:text-xs font-normal" style={{ color: COLORS.muted }}>(Optional)</span>
                       </label>
                       <textarea
                         name="Message"
@@ -833,16 +905,16 @@ export function GuestList() {
                         onChange={handleFormChange}
                         placeholder="Share your excitement..."
                         rows={3}
-                      className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 resize-none bg-motif-cream"
+                      className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20 resize-none`}
+                      style={inputStyle}
                       />
                     </div>
 
-                    {/* Email */}
                     <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans flex-wrap">
-                        <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans flex-wrap" style={{ color: COLORS.deep }}>
+                        <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                         <span>Your Email Address</span>
-                        <span className="text-[10px] sm:text-xs font-normal text-motif-deep/70">(Optional)</span>
+                        <span className="text-[10px] sm:text-xs font-normal" style={{ color: COLORS.muted }}>(Optional)</span>
                       </label>
                       <input
                         type="email"
@@ -850,16 +922,19 @@ export function GuestList() {
                         value={formData.Email}
                         onChange={handleFormChange}
                         placeholder="your.email@example.com"
-                        className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 bg-motif-cream"
+                        className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20`}
+                        style={inputStyle}
                       />
                     </div>
 
-                    {/* Submit Button */}
                     <div className="pt-2 sm:pt-3">
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full !bg-motif-deep hover:!bg-motif-deep/90 text-white py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg disabled:opacity-70 flex items-center justify-center gap-1.5 sm:gap-2"
+                        className="w-full text-white py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg disabled:opacity-70 flex items-center justify-center gap-1.5 sm:gap-2"
+                        style={{ backgroundColor: COLORS.accent }}
+                        onMouseEnter={(e) => { if (!isLoading) e.currentTarget.style.backgroundColor = COLORS.accentHover }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = COLORS.accent }}
                       >
                         {isLoading ? (
                           <>
@@ -880,53 +955,47 @@ export function GuestList() {
 
               {/* Enhanced Success Overlay */}
               {success && (
-                <div className="absolute inset-0 bg-motif-deep/98 backdrop-blur-md flex items-center justify-center z-50 animate-in fade-in duration-300 p-2 sm:p-3 md:p-4">
+                <div className="absolute inset-0 backdrop-blur-md flex items-center justify-center z-50 animate-in fade-in duration-300 p-2 sm:p-3 md:p-4" style={{ backgroundColor: "rgba(184, 50, 50, 0.97)" }}>
                   <div className="text-center p-3 sm:p-4 md:p-5 lg:p-6 max-w-sm mx-auto">
-                    {/* Enhanced Icon Circle */}
                     <div className="relative inline-flex items-center justify-center mb-3 sm:mb-4">
-                      {/* Animated rings */}
-                      <div className="absolute inset-0 rounded-full border-2 border-motif-cream/20 animate-ping" />
-                      <div className="absolute inset-0 rounded-full border-2 border-motif-cream/30" />
-                      {/* Icon container */}
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-motif-cream rounded-full flex items-center justify-center shadow-xl">
-                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-motif-medium" strokeWidth={2.5} />
+                      <div className="absolute inset-0 rounded-full border-2 animate-ping" style={{ borderColor: "rgba(255, 252, 244, 0.2)" }} />
+                      <div className="absolute inset-0 rounded-full border-2" style={{ borderColor: "rgba(255, 252, 244, 0.3)" }} />
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center shadow-xl" style={{ backgroundColor: COLORS.parchmentSoft }}>
+                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10" style={{ color: COLORS.accent }} strokeWidth={2.5} />
                       </div>
                     </div>
                     
-                    {/* Title */}
-                    <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl ${cinzel.className} font-bold text-motif-medium mb-2 sm:mb-3">
+                    <h4 className={`text-base sm:text-lg md:text-xl lg:text-2xl ${cinzel.className} font-bold text-white mb-2 sm:mb-3`}>
                       RSVP Confirmed!
                     </h4>
                     
-                    {/* Message based on RSVP response */}
                     {formData.RSVP === "Yes" && (
                       <div className="space-y-1 sm:space-y-1.5 mb-2 sm:mb-3">
-                        <p className="text-motif-medium/95 text-xs sm:text-sm font-medium">
+                        <p className="text-white/95 text-xs sm:text-sm font-medium">
                           We're thrilled you'll be joining us!
                         </p>
-                        <p className="text-motif-medium/80 text-[10px] sm:text-xs">
+                        <p className="text-white/80 text-[10px] sm:text-xs">
                           Your response has been recorded
                         </p>
                       </div>
                     )}
                     {formData.RSVP === "No" && (
-                      <p className="text-motif-medium/90 text-xs sm:text-sm mb-2 sm:mb-3">
+                      <p className="text-white/90 text-xs sm:text-sm mb-2 sm:mb-3">
                         We'll miss you, but thank you for letting us know.
                       </p>
                     )}
                     {!formData.RSVP && (
-                      <p className="text-motif-medium/90 text-xs sm:text-sm mb-2 sm:mb-3">
+                      <p className="text-white/90 text-xs sm:text-sm mb-2 sm:mb-3">
                         Thank you for your response!
                       </p>
                     )}
                     
-                    {/* Subtle closing indicator */}
                     <div className="flex items-center justify-center gap-1 sm:gap-1.5 mt-2 sm:mt-3">
-                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-motif-medium/60 rounded-full animate-pulse" />
-                      <p className="text-motif-medium/70 text-[10px] sm:text-xs">
+                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full animate-pulse" style={{ backgroundColor: "rgba(255, 252, 244, 0.6)" }} />
+                      <p className="text-white/70 text-[10px] sm:text-xs">
                         This will close automatically
                       </p>
-                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-motif-medium/60 rounded-full animate-pulse" />
+                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full animate-pulse" style={{ backgroundColor: "rgba(255, 252, 244, 0.6)" }} />
                     </div>
                   </div>
                 </div>
@@ -954,24 +1023,24 @@ export function GuestList() {
             onClick={handleCloseRequestModal}
           >
             <div 
-              className="relative w-full max-w-md sm:max-w-lg mx-1 sm:mx-2 md:mx-4 bg-motif-cream rounded-xl sm:rounded-2xl shadow-2xl border-2 border-motif-deep/80 overflow-hidden animate-in zoom-in-95 duration-300 max-h-[95vh] flex flex-col"
+              className="relative w-full max-w-md sm:max-w-lg mx-1 sm:mx-2 md:mx-4 rounded-xl sm:rounded-2xl overflow-hidden animate-in zoom-in-95 duration-300 max-h-[95vh] flex flex-col"
+              style={MODAL_STYLE}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Modal Header with Gradient */}
-              <div className="relative bg-motif-deep p-3 sm:p-4 md:p-5 lg:p-6 flex-shrink-0">
+              <div className="relative p-3 sm:p-4 md:p-5 lg:p-6 flex-shrink-0" style={{ backgroundColor: COLORS.accent }}>
                 <div className="relative flex items-start justify-between gap-1.5 sm:gap-2">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 mb-1 sm:mb-1.5 md:mb-2 lg:mb-3">
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-motif-cream/20 rounded-full flex items-center justify-center backdrop-blur-sm flex-shrink-0">
-                        <UserPlus className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5 text-motif-cream" />
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center backdrop-blur-sm flex-shrink-0" style={{ backgroundColor: "rgba(255, 252, 244, 0.2)" }}>
+                        <UserPlus className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5 text-white" />
                       </div>
-                      <h3 className="text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl ${cinzel.className} font-bold text-motif-cream truncate">
+                      <h3 className={`text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl ${cinzel.className} font-bold text-white truncate`}>
                         Request to Join
                       </h3>
                     </div>
-                    <p className="text-motif-cream/95 text-[10px] sm:text-xs md:text-sm lg:text-base font-sans leading-tight sm:leading-normal">
+                    <p className="text-white/95 text-[10px] sm:text-xs md:text-sm lg:text-base font-sans leading-tight sm:leading-normal">
                       {requestFormData.Name ? (
-                        <>Hi <span className="font-extrabold text-motif-cream">{requestFormData.Name}</span> — want to celebrate with us? Send a request!</>
+                        <>Hi <span className="font-extrabold text-white">{requestFormData.Name}</span> — want to celebrate with us? Send a request!</>
                       ) : (
                         <>Want to celebrate with us? Send a request!</>
                       )}
@@ -979,14 +1048,13 @@ export function GuestList() {
                   </div>
                   <button
                     onClick={handleCloseRequestModal}
-                    className="text-motif-cream/80 hover:text-motif-cream transition-colors p-0.5 sm:p-1 md:p-1.5 lg:p-2 hover:bg-motif-deep/20 rounded-full flex-shrink-0"
+                    className="text-white/80 hover:text-white transition-colors p-0.5 sm:p-1 md:p-1.5 lg:p-2 hover:bg-white/20 rounded-full flex-shrink-0"
                   >
-                    <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-motif-cream" />
+                    <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                   </button>
                 </div>
               </div>
 
-              {/* Modal Content */}
               <div className="p-2.5 sm:p-3 md:p-4 lg:p-5 xl:p-6 overflow-y-auto flex-1 min-h-0">
                 <form
                   onSubmit={(e) => {
@@ -995,10 +1063,9 @@ export function GuestList() {
                   }}
                   className="space-y-2.5 sm:space-y-3 md:space-y-4"
                 >
-                  {/* Name */}
                   <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans">
-                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans" style={{ color: COLORS.deep }}>
+                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                       <span>Full Name *</span>
                     </label>
                     <input
@@ -1008,16 +1075,16 @@ export function GuestList() {
                       onChange={(e) => setRequestFormData({ ...requestFormData, Name: e.target.value })}
                       required
                       placeholder="Enter your full name"
-                      className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 bg-motif-cream"
+                      className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20`}
+                      style={inputStyle}
                     />
                   </div>
 
-                  {/* Email */}
                   <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans flex-wrap">
-                      <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans flex-wrap" style={{ color: COLORS.deep }}>
+                      <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                       <span>Email Address</span>
-                      <span className="text-[10px] sm:text-xs font-normal text-motif-deep/70">(Optional)</span>
+                      <span className="text-[10px] sm:text-xs font-normal" style={{ color: COLORS.muted }}>(Optional)</span>
                     </label>
                     <input
                       type="email"
@@ -1025,16 +1092,16 @@ export function GuestList() {
                       value={requestFormData.Email}
                       onChange={(e) => setRequestFormData({ ...requestFormData, Email: e.target.value })}
                       placeholder="your.email@example.com"
-                      className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 bg-motif-cream"
+                      className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20`}
+                      style={inputStyle}
                     />
                   </div>
 
-                  {/* Phone */}
                   <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans flex-wrap">
-                      <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans flex-wrap" style={{ color: COLORS.deep }}>
+                      <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                       <span>Phone Number</span>
-                      <span className="text-[10px] sm:text-xs font-normal text-motif-deep/70">(Optional)</span>
+                      <span className="text-[10px] sm:text-xs font-normal" style={{ color: COLORS.muted }}>(Optional)</span>
                     </label>
                     <input
                       type="tel"
@@ -1042,14 +1109,14 @@ export function GuestList() {
                       value={requestFormData.Phone}
                       onChange={(e) => setRequestFormData({ ...requestFormData, Phone: e.target.value })}
                       placeholder="+1 (555) 123-4567"
-                      className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 bg-motif-cream"
+                      className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20`}
+                      style={inputStyle}
                     />
                   </div>
 
-                  {/* Number of Guests */}
                   <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans">
-                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans" style={{ color: COLORS.deep }}>
+                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                       <span>Number of Guests *</span>
                     </label>
                     <input
@@ -1060,16 +1127,16 @@ export function GuestList() {
                       min="1"
                       required
                       placeholder="How many guests?"
-                      className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 bg-motif-cream"
+                      className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20`}
+                      style={inputStyle}
                     />
                   </div>
 
-                  {/* Message */}
                   <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-motif-deep mb-1.5 sm:mb-2 font-sans flex-wrap">
-                      <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-motif-deep flex-shrink-0" />
+                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 font-sans flex-wrap" style={{ color: COLORS.deep }}>
+                      <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" style={{ color: COLORS.accent }} />
                       <span>Message</span>
-                        <span className="text-[10px] sm:text-xs font-normal text-motif-deep/70">(Optional)</span>
+                        <span className="text-[10px] sm:text-xs font-normal" style={{ color: COLORS.muted }}>(Optional)</span>
                     </label>
                     <textarea
                       name="Message"
@@ -1077,16 +1144,19 @@ export function GuestList() {
                       onChange={(e) => setRequestFormData({ ...requestFormData, Message: e.target.value })}
                       placeholder="Share why you'd like to join..."
                       rows={3}
-                        className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-motif-deep/60 focus:border-motif-deep rounded-lg text-xs sm:text-sm font-sans text-motif-deep placeholder:text-motif-medium/70 transition-all duration-300 focus:ring-2 focus:ring-motif-deep/20 resize-none bg-motif-cream"
+                      className={`${INPUT_CLASS} px-2.5 sm:px-3 py-1.5 sm:py-2 focus:ring-2 focus:ring-[#B83232]/20 resize-none`}
+                      style={inputStyle}
                     />
                   </div>
 
-                  {/* Submit Button */}
                   <div className="pt-2 sm:pt-3">
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full !bg-motif-deep hover:!bg-motif-deep/90 text-white py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg disabled:opacity-70 flex items-center justify-center gap-1.5 sm:gap-2"
+                      className="w-full text-white py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg disabled:opacity-70 flex items-center justify-center gap-1.5 sm:gap-2"
+                      style={{ backgroundColor: COLORS.accent }}
+                      onMouseEnter={(e) => { if (!isLoading) e.currentTarget.style.backgroundColor = COLORS.accentHover }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = COLORS.accent }}
                     >
                       {isLoading ? (
                         <>
@@ -1104,43 +1174,36 @@ export function GuestList() {
                 </form>
               </div>
 
-              {/* Enhanced Success Overlay */}
               {requestSuccess && (
-                <div className="absolute inset-0 bg-motif-medium/98 backdrop-blur-md flex items-center justify-center z-50 animate-in fade-in duration-300 p-2 sm:p-3 md:p-4">
+                <div className="absolute inset-0 backdrop-blur-md flex items-center justify-center z-50 animate-in fade-in duration-300 p-2 sm:p-3 md:p-4" style={{ backgroundColor: "rgba(184, 50, 50, 0.97)" }}>
                   <div className="text-center p-3 sm:p-4 md:p-5 lg:p-6 max-w-sm mx-auto">
-                    {/* Enhanced Icon Circle */}
                     <div className="relative inline-flex items-center justify-center mb-3 sm:mb-4">
-                      {/* Animated rings */}
-                      <div className="absolute inset-0 rounded-full border-2 border-[#8B3036]/20 animate-ping" />
-                      <div className="absolute inset-0 rounded-full border-2 border-[#8B3036]/30" />
-                      {/* Icon container */}
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-white rounded-full flex items-center justify-center shadow-xl">
-                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-motif-medium" strokeWidth={2.5} />
+                      <div className="absolute inset-0 rounded-full border-2 animate-ping" style={{ borderColor: "rgba(255, 252, 244, 0.2)" }} />
+                      <div className="absolute inset-0 rounded-full border-2" style={{ borderColor: "rgba(255, 252, 244, 0.3)" }} />
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center shadow-xl" style={{ backgroundColor: COLORS.parchmentSoft }}>
+                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10" style={{ color: COLORS.accent }} strokeWidth={2.5} />
                       </div>
                     </div>
                     
-                    {/* Title */}
-                    <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-serif font-bold text-[#8B3036] mb-2 sm:mb-3">
+                    <h4 className={`text-base sm:text-lg md:text-xl lg:text-2xl ${cinzel.className} font-bold text-white mb-2 sm:mb-3`}>
                       Request Sent!
                     </h4>
                     
-                    {/* Message */}
                     <div className="space-y-1 sm:space-y-1.5 mb-2 sm:mb-3">
-                      <p className="text-[#8B3036]/95 text-xs sm:text-sm font-medium">
+                      <p className="text-white/95 text-xs sm:text-sm font-medium">
                         We've received your request
                       </p>
-                      <p className="text-[#8B3036]/85 text-[10px] sm:text-xs">
+                      <p className="text-white/85 text-[10px] sm:text-xs">
                         We'll review it and get back to you soon
                       </p>
                     </div>
                     
-                    {/* Subtle closing indicator */}
                     <div className="flex items-center justify-center gap-1 sm:gap-1.5 mt-2 sm:mt-3">
-                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#8B3036]/60 rounded-full animate-pulse" />
-                      <p className="text-[#8B3036]/70 text-[10px] sm:text-xs">
+                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full animate-pulse" style={{ backgroundColor: "rgba(255, 252, 244, 0.6)" }} />
+                      <p className="text-white/70 text-[10px] sm:text-xs">
                         This will close automatically
                       </p>
-                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#8B3036]/60 rounded-full animate-pulse" />
+                      <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full animate-pulse" style={{ backgroundColor: "rgba(255, 252, 244, 0.6)" }} />
                     </div>
                   </div>
                 </div>
