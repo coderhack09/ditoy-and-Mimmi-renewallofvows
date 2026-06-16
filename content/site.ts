@@ -29,8 +29,8 @@ export const siteConfig = {
   },
   details: {
     rsvp: {
-      deadline: "August 15, 2026",
-      contact: "Ivy",
+      deadline: "August 1, 2026",
+      contact: "Ivelyn",
       phone: "to follow",
     },
   },
