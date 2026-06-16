@@ -98,6 +98,7 @@ function mapStaticSponsors(): PrincipalSponsor[] {
 const ROLE_CATEGORY_ORDER = [
   "OFFICIATING MINISTER",
   "The Couple",
+  "Children",
   "Parents of the Groom",
   "Parents of the Bride",
   "Family of the Groom",
@@ -105,6 +106,9 @@ const ROLE_CATEGORY_ORDER = [
   "Matron of Honor",
   "Best Man",
   "Maid of Honor",
+  "Maids of Honor",
+  "Witnesses Male",
+  "Witnesses Female",
   "Candle Sponsors",
   "Veil Sponsors",
   "Cord Sponsors",
@@ -116,6 +120,7 @@ const ROLE_CATEGORY_ORDER = [
   "Bible Bearer",
   "Coin Bearer",
   "Flower Girls",
+  "Bearers of Love",
 ]
 
 const HIDDEN_ROLE_CATEGORIES = new Set<string>([])
@@ -693,6 +698,98 @@ export function Entourage() {
                     )
                   }
                   // Skip rendering for "Matron of Honor" and "Maid of Honor" since they're already rendered above
+                  return null
+                }
+
+                // Special handling for Maids of Honor - two column layout
+                if (category === "Maids of Honor") {
+                  return (
+                    <div key="MaidsOfHonor">
+                      {categoryIndex > 0 && (
+                        <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
+                          <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
+                        </div>
+                      )}
+                      <TwoColumnLayout singleTitle="Maids of Honor" centerContent={true}>
+                        {(() => {
+                          if (members.length === 2) {
+                            return (
+                              <>
+                                <div className="px-1.5 sm:px-2 md:px-2.5">
+                                  <NameItem member={members[0]} align="right" />
+                                </div>
+                                <div className="px-1.5 sm:px-2 md:px-2.5">
+                                  <NameItem member={members[1]} align="left" />
+                                </div>
+                              </>
+                            )
+                          }
+                          const half = Math.ceil(members.length / 2)
+                          const left = members.slice(0, half)
+                          const right = members.slice(half)
+                          const maxLen = Math.max(left.length, right.length)
+                          const rows = []
+                          for (let i = 0; i < maxLen; i++) {
+                            const l = left[i]
+                            const r = right[i]
+                            rows.push(
+                              <React.Fragment key={`maids-row-${i}`}>
+                                <div className="px-1.5 sm:px-2 md:px-2.5">
+                                  {l ? <NameItem member={l} align="right" /> : <div className="py-0.5" />}
+                                </div>
+                                <div className="px-1.5 sm:px-2 md:px-2.5">
+                                  {r ? <NameItem member={r} align="left" /> : <div className="py-0.5" />}
+                                </div>
+                              </React.Fragment>
+                            )
+                          }
+                          return rows
+                        })()}
+                      </TwoColumnLayout>
+                    </div>
+                  )
+                }
+
+                // Special handling for Witnesses Male and Witnesses Female - two columns, male left / female right
+                if (category === "Witnesses Male" || category === "Witnesses Female") {
+                  const witnessesMale = grouped["Witnesses Male"] || []
+                  const witnessesFemale = grouped["Witnesses Female"] || []
+
+                  if (category === "Witnesses Male") {
+                    if (witnessesMale.length === 0 && witnessesFemale.length === 0) return null
+
+                    return (
+                      <div key="Witnesses">
+                        {categoryIndex > 0 && (
+                          <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
+                            <div className="w-full max-w-md h-px" style={{ background: SEPARATOR_GRADIENT }}></div>
+                          </div>
+                        )}
+                        <TwoColumnLayout singleTitle="Witnesses">
+                          {(() => {
+                            const maxLen = Math.max(witnessesMale.length, witnessesFemale.length)
+                            const rows = []
+                            for (let i = 0; i < maxLen; i++) {
+                              const left = witnessesMale[i]
+                              const right = witnessesFemale[i]
+                              rows.push(
+                                <React.Fragment key={`witness-row-${i}`}>
+                                  <div key={`witness-male-${i}`} className="px-1.5 sm:px-2 md:px-2.5">
+                                    {left ? <NameItem member={left} align="right" /> : <div className="py-0.5" />}
+                                  </div>
+                                  <div key={`witness-female-${i}`} className="px-1.5 sm:px-2 md:px-2.5">
+                                    {right ? <NameItem member={right} align="left" /> : <div className="py-0.5" />}
+                                  </div>
+                                </React.Fragment>
+                              )
+                            }
+                            return rows
+                          })()}
+                        </TwoColumnLayout>
+                      </div>
+                    )
+                  }
+
                   return null
                 }
 
