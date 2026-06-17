@@ -24,12 +24,12 @@ const COLORS = {
 } as const
 
 const galleryItems = [
-  { image: "/couple/couple3.jpg", text: " " },
   { image: "/couple/couple6.png", text: " " },
   { image: "/couple/couple5.png", text: " " },
-  { image: "/couple/couple1.webp", text: " " },
-  { image: "/couple/couple2.webp", text: " " },
-  { image: "/couple/couple4.webp", text: " " },
+  { image: "/couple/couple3.jpg", text: " " },
+  // { image: "/couple/couple1.webp", text: " " },
+  // { image: "/couple/couple2.webp", text: " " },
+  // { image: "/couple/couple4.webp", text: " " },
 ]
 
 export function Gallery() {
