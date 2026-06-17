@@ -251,13 +251,13 @@ export function Gallery() {
                   </p> */}
                 </div>
 
-                {/* Tablet/Desktop: existing grid */}
-                <div className="hidden sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 lg:gap-6">
+                {/* Tablet/Desktop: centered gallery row */}
+                <div className="hidden sm:flex flex-wrap justify-center gap-4 md:gap-5 lg:gap-6">
                   {galleryItems.map((item, index) => (
                     <button
                       key={item.image + index}
                       type="button"
-                      className="group relative w-full overflow-hidden rounded-xl backdrop-blur-sm transition-all duration-300"
+                      className="group relative w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1.34rem)] lg:w-[300px] xl:w-[320px] max-w-[320px] overflow-hidden rounded-xl backdrop-blur-sm transition-all duration-300"
                       style={{ backgroundColor: "rgba(250,244,232,0.92)", border: `1px solid ${COLORS.border}` }}
                       onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.borderHover }}
                       onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border }}
