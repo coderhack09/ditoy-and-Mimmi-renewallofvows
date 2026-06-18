@@ -32,8 +32,6 @@ interface Guest {
   updatedAt?: string
 }
 
-const CARDS_PER_VIEW = 4
-
 // Vintage palette — matches guest-list / entourage sections
 const COLORS = {
   deep: "#1C1C1E",
@@ -76,9 +74,6 @@ export function BookOfGuests() {
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
   const [previousTotal, setPreviousTotal] = useState(0)
   const [showIncrease, setShowIncrease] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [justEntered, setJustEntered] = useState(false)
 
   // Helper function to get initials from name
   const getInitials = (name: string): string => {
@@ -151,17 +146,6 @@ export function BookOfGuests() {
     }
   }
 
-  // Get visible guests (max 4 cards) for carousel
-  const getVisibleGuests = () => {
-    if (confirmedGuests.length <= CARDS_PER_VIEW) return confirmedGuests
-    const visible: Guest[] = []
-    for (let i = 0; i < CARDS_PER_VIEW; i++) {
-      const index = (currentIndex + i) % confirmedGuests.length
-      visible.push(confirmedGuests[index])
-    }
-    return visible
-  }
-
   useEffect(() => {
     // Initial fetch
     fetchGuests()
@@ -186,24 +170,6 @@ export function BookOfGuests() {
       window.removeEventListener("rsvpUpdated", handleRsvpUpdate)
     }
   }, [totalGuests])
-
-  // Auto-rotate carousel every 5 seconds when more than 4 guests
-  useEffect(() => {
-    if (confirmedGuests.length <= CARDS_PER_VIEW) return
-    const interval = setInterval(() => {
-      setIsTransitioning(true)
-      setTimeout(() => {
-        setCurrentIndex((prev) => {
-          const next = prev + CARDS_PER_VIEW
-          return next >= confirmedGuests.length ? 0 : next
-        })
-        setIsTransitioning(false)
-        setJustEntered(true)
-        setTimeout(() => setJustEntered(false), 1100)
-      }, 600)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [confirmedGuests.length])
 
   return (
     <div
@@ -322,35 +288,16 @@ export function BookOfGuests() {
           </div>
         </div>
 
-        {/* Guest List Display - 4 cards with carousel */}
+        {/* Guest List Display */}
         {confirmedGuests.length > 0 && (
           <div className="max-w-5xl mx-auto px-2 sm:px-4 md:px-6">
-            <div
-              className="relative overflow-hidden"
-              style={{
-                perspective: "1200px",
-                perspectiveOrigin: "center 85%",
-                transformStyle: "preserve-3d",
-              }}
-            >
-              <div
-                className={`space-y-2 sm:space-y-3 md:space-y-4 ${isTransitioning ? "animate-guest-roll-out" : ""}`}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                {getVisibleGuests().map((guest, index) => (
-                  <div
-                    key={`${guest.id}-${currentIndex}-${index}`}
-                    className={`relative group rounded-xl sm:rounded-2xl p-2.5 sm:p-4 md:p-6 transition-all duration-300 hover:shadow-xl ${justEntered ? "animate-guest-roll-in" : ""}`}
-                    style={{
-                      ...CARD_STYLE,
-                      ...(justEntered
-                        ? {
-                            animationDelay: `${index * 120}ms`,
-                            backfaceVisibility: "hidden",
-                          }
-                        : {}),
-                    }}
-                  >
+            <div className="space-y-2 sm:space-y-3 md:space-y-4">
+              {confirmedGuests.map((guest) => (
+                <div
+                  key={guest.id}
+                  className="relative group rounded-xl sm:rounded-2xl p-2.5 sm:p-4 md:p-6 transition-all duration-300 hover:shadow-xl"
+                  style={CARD_STYLE}
+                >
                   <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-2.5 md:mb-3">
                     <div className="relative flex-shrink-0">
                       <div
@@ -475,38 +422,6 @@ export function BookOfGuests() {
                   </div>
                 </div>
               ))}
-              </div>
-
-              {/* Carousel indicators — warm brown */}
-              {confirmedGuests.length > CARDS_PER_VIEW && (
-                <div className="flex items-center justify-center gap-2 mt-4 sm:mt-6">
-                  {Array.from({ length: Math.ceil(confirmedGuests.length / CARDS_PER_VIEW) }).map((_, idx) => {
-                    const pageIndex = Math.floor(currentIndex / CARDS_PER_VIEW)
-                    const isActive = pageIndex === idx
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => {
-                          setIsTransitioning(true)
-                          setTimeout(() => {
-                            setCurrentIndex(idx * CARDS_PER_VIEW)
-                            setIsTransitioning(false)
-                            setJustEntered(true)
-                            setTimeout(() => setJustEntered(false), 1100)
-                          }, 600)
-                        }}
-                        className="h-2 rounded-full transition-all duration-300 hover:opacity-90"
-                        style={{
-                          width: isActive ? "1.75rem" : "0.5rem",
-                          backgroundColor: isActive ? COLORS.accent : COLORS.border,
-                        }}
-                        aria-label={`Go to page ${idx + 1}`}
-                      />
-                    )
-                  })}
-                </div>
-              )}
             </div>
           </div>
         )}
